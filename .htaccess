@@ -1,0 +1,6 @@
+Options -MultiViews
+RewriteEngine On
+RewriteRule ^.well-known/ - [L,NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
+
