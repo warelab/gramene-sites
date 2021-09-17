@@ -3,16 +3,11 @@
   "version": "1.0.0",
   "description": "Front end of gramene main and subsites",
   "scripts": {
-    "build-maize": "SUBSITE=maize parcel build --no-scope-hoist --dist-dir maize src/maize.html && mv maize/maize.html maize/index.html",
-    "build-grapevine": "SUBSITE=grapevine parcel build --no-scope-hoist --dist-dir grapevine src/grapevine.html && mv grapevine/grapevine.html grapevine/index.html",
-    "build-main": "SUBSITE=main parcel build --no-scope-hoist --dist-dir main src/index.html",
-    "build-sorghum": "SUBSITE=sorghum parcel build --no-scope-hoist --dist-dir sorghum src/sorghum.html && mv sorghum/sorghum.html sorghum/index.html",
-    "build-rice": "SUBSITE=rice parcel build --no-scope-hoist --dist-dir rice src/rice.html && mv rice/rice.html rice/index.html",
-    "start-maize": "SUBSITE=maize parcel src/maize.html",
-    "start-grapevine": "SUBSITE=grapevine parcel  src/grapevine.html",
-    "start-main": "SUBSITE=main parcel src/index.html",
-    "start-sorghum": "SUBSITE=sorghum parcel src/sorghum.html",
-    "start-rice": "SUBSITE=rice parcel src/rice.html"
+    "maize": "SUBSITE=maize parcel src/maize.html",
+    "grapevine": "SUBSITE=grapevine parcel  src/grapevine.html",
+    "main": "SUBSITE=main parcel src/main.html",
+    "sorghum": "SUBSITE=sorghum parcel src/sorghum.html",
+    "rice": "SUBSITE=rice parcel src/rice.html"
   },
   "repository": {
     "type": "git",
@@ -21,10 +16,11 @@
   "author": "Andrew Olson",
   "license": "ISC",
   "dependencies": {
+    "argparse": "^2.0.1",
     "axios": "^0.21.4",
     "formik": "^3.0.0-next.8",
     "gramene-mdview": "^1.1.8",
-    "gramene-search": "^1.2.3",
+    "gramene-search": "^1.2.4",
     "money-clip": "^3.0.5",
     "querystringify": "^2.2.0",
     "react": "^17.0.2",
@@ -40,6 +36,8 @@
     "@babel/core": "latest",
     "@babel/preset-env": "latest",
     "@babel/preset-react": "latest",
+    "@parcel/config-default": "^2.0.0-rc.0",
+    "@parcel/core": "^2.0.0-rc.0",
     "@parcel/transformer-image": "^2.0.0-rc.0",
     "@parcel/transformer-less": "^2.0.0-rc.0",
     "parcel": "^2.0.0-rc.0"
