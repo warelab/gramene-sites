@@ -1,0 +1,51 @@
+{
+  "name": "gramene-sites",
+  "version": "1.0.0",
+  "description": "Front end of gramene main and subsites",
+  "scripts": {
+    "build-maize": "SUBSITE=maize parcel build --no-scope-hoist --dist-dir maize src/maize.html && mv maize/maize.html maize/index.html",
+    "build-grapevine": "SUBSITE=grapevine parcel build --no-scope-hoist --dist-dir grapevine src/grapevine.html && mv grapevine/grapevine.html grapevine/index.html",
+    "build-main": "SUBSITE=main parcel build --no-scope-hoist --dist-dir main src/index.html",
+    "build-sorghum": "SUBSITE=sorghum parcel build --no-scope-hoist --dist-dir sorghum src/sorghum.html && mv sorghum/sorghum.html sorghum/index.html",
+    "build-rice": "SUBSITE=rice parcel build --no-scope-hoist --dist-dir rice src/rice.html && mv rice/rice.html rice/index.html",
+    "start-maize": "SUBSITE=maize parcel src/maize.html",
+    "start-grapevine": "SUBSITE=grapevine parcel  src/grapevine.html",
+    "start-main": "SUBSITE=main parcel src/index.html",
+    "start-sorghum": "SUBSITE=sorghum parcel src/sorghum.html",
+    "start-rice": "SUBSITE=rice parcel src/rice.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warelab/gramene-sites.git"
+  },
+  "author": "Andrew Olson",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "formik": "^3.0.0-next.8",
+    "gramene-mdview": "^1.1.8",
+    "gramene-search": "^1.2.3",
+    "money-clip": "^3.0.5",
+    "querystringify": "^2.2.0",
+    "react": "^17.0.2",
+    "react-bootstrap": "^1.6.3",
+    "react-debounce-input": "^3.2.5",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.3.0",
+    "redux-bundler": "^21.0.0",
+    "redux-bundler-react": "^1.2.0",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@babel/core": "latest",
+    "@babel/preset-env": "latest",
+    "@babel/preset-react": "latest",
+    "@parcel/transformer-image": "^2.0.0-rc.0",
+    "@parcel/transformer-less": "^2.0.0-rc.0",
+    "parcel": "^2.0.0-rc.0"
+  },
+  "bugs": {
+    "url": "https://github.com/warelab/gramene-sites/issues"
+  },
+  "homepage": "https://github.com/warelab/gramene-sites#readme"
+}
