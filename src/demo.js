@@ -16,15 +16,7 @@ import {
 } from "react-router-dom";
 import MDView from 'gramene-mdview';
 
-const cache = getConfiguredCache({
-  maxAge: 100 * 60 * 60,
-  version: 1
-});
-// const subsite = 'main';
 const subsite = process.env.SUBSITE;
-// const subsite = 'grapevine';
-// const subsite = 'sorghum';
-// const subsite = 'rice';
 
 const subsitelut = {
   main: 0,
@@ -37,6 +29,7 @@ const panSites = [
   {
     id: 'main',
     name: 'Gramene Main',
+    version: 'main64',
     url: 'https://www.gramene.org',
     ensemblURL: 'https://ensembl.gramene.org',
     ensemblSite: 'https://ensembl.gramene.org',
@@ -48,6 +41,7 @@ const panSites = [
   {
     id: 'maize',
     name: 'Maize',
+    version: 'maize1',
     url: 'https://maize-pangenome.gramene.org',
     ensemblURL: 'https://maize-pangenome-ensembl.gramene.org',
     ensemblSite: 'https://maize-pangenome-ensembl.gramene.org/genome_browser/index.html',
@@ -67,6 +61,7 @@ const panSites = [
   {
     id: 'sorghum',
     name: 'Sorghumbase',
+    version: 'sorghum1',
     url: 'https://www.sorghumbase.org',
     ensemblURL: 'https://ensembl.sorghumbase.org',
     ensemblSite: 'https://ensembl.sorghumbase.org',
@@ -78,6 +73,7 @@ const panSites = [
   {
     id: 'grapevine',
     name: 'Grapevine',
+    version: 'grapevine1',
     url: 'https://vitis.gramene.org',
     ensemblURL: 'https://vitis-ensembl.gramene.org',
     ensemblSite: 'https://vitis-ensembl.gramene.org/genome_browser/index.html',
@@ -95,6 +91,7 @@ const panSites = [
   {
     id: 'rice',
     name: 'Rice',
+    version: 'rice1',
     url: 'https://oge.gramene.org',
     ensemblStie: 'https://ensembl-oge.gramene.org',
     ensemblRest: 'https://data.gramene.org/ensembl',
@@ -104,6 +101,11 @@ const panSites = [
   },
 ];
 const initialState = panSites[subsitelut[subsite]];
+
+const cache = getConfiguredCache({
+  maxAge: 100 * 60 * 60,
+  version: initialState.version
+});
 
 const config = {
   name: 'config',
