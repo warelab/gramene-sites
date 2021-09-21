@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Front end of gramene main and subsites",
   "scripts": {
-    "maize": "SUBSITE=maize parcel src/maize.html",
-    "grapevine": "SUBSITE=grapevine parcel  src/grapevine.html",
-    "main": "SUBSITE=main parcel src/main.html",
-    "sorghum": "SUBSITE=sorghum parcel src/sorghum.html",
-    "rice": "SUBSITE=rice parcel src/rice.html"
+    "tidy": "rm -rf dist .parcel-cache && mkdir dist && ln -s ../src/static dist/static",
+    "maize": "npm run tidy && SUBSITE=maize parcel src/maize.html",
+    "grapevine": "npm run tidy && SUBSITE=grapevine parcel  src/grapevine.html",
+    "main": "npm run tidy && SUBSITE=main parcel src/main.html",
+    "sorghum": "npm run tidy && SUBSITE=sorghum parcel src/sorghum.html",
+    "rice": "npm run tidy && SUBSITE=rice parcel src/rice.html"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "@parcel/core": "^2.0.0-rc.0",
     "@parcel/transformer-image": "^2.0.0-rc.0",
     "@parcel/transformer-less": "^2.0.0-rc.0",
+    "@parcel/transformer-svg-react": "^2.0.0-rc.0",
     "parcel": "^2.0.0-rc.0"
   },
   "bugs": {

@@ -33,7 +33,7 @@ const panSites = [
     url: 'https://www.gramene.org',
     ensemblURL: 'https://ensembl.gramene.org',
     ensemblSite: 'https://ensembl.gramene.org',
-    ensemblRest: 'https://data.gramene.org/ensembl',
+    ensemblRest: 'https://data.gramene.org/ensembl64',
     grameneData: 'https://data.gramene.org/v64',
     targetTaxonId: 3702,
     alertText: 'Main site'
@@ -284,11 +284,11 @@ const demo = (store) => (
       <div>
         <Navbar bg="light" expand="lg" sticky='top'>
           <Navbar.Brand href="/">
-            <img
-              src={`/static/images/${subsite}_logo.svg`}
+            <object
+              data={`/static/images/${subsite}_logo.svg`}
               height="80"
               className="d-inline-block align-top"
-              alt="Gene Search"
+              title="Gene Search"
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
