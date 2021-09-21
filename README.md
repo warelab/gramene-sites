@@ -5,6 +5,13 @@ Install dependencies
 ```shell
 npm install
 ```
+This hack is necessary to get Parcel to transpile imported node modules correctly.
+
+Edit <code>node_modules/@parcel/core/lib/summarizeRequest.js</code>
+
+Change <code>return !filePath.includes(NODE_MODULES);</code>
+to <code>return true;</code>
+
 
 Start a site in development mode
 ```shell
