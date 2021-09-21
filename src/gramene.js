@@ -16,7 +16,7 @@ import {
   Link
 } from "react-router-dom";
 import MDView from 'gramene-mdview';
-import {keyBy} from 'lodash';
+import { keyBy } from 'lodash';
 
 const subsite = process.env.SUBSITE;
 const panSiteIdx = keyBy(panSites, 'id');
@@ -47,20 +47,6 @@ const getStore = composeBundles(
   createCacheBundle(cache.set)
 );
 
-const GeneSearchUI = (store) => (
-  <Provider store={store}>
-    <div className="row no-margin no-padding">
-      <div className="col-md-2 no-padding">
-        <Status/>
-        <Filters/>
-        <Views/>
-      </div>
-      <div className="col-md-10 no-padding">
-        <Results/>
-      </div>
-    </div>
-  </Provider>
-);
 const SearchViews = props => (
     <div className="row no-margin no-padding">
       <div className="col-md-2 no-padding">
@@ -110,41 +96,12 @@ const SearchBar = connect(
   'selectGrameneSuggestionsReady',
   SearchBarCmp
 );
-
-const SuggestionsCmp = props => {
-  if (props.suggestionsQuery) {
-    const spinner = <img src="/static/images/dna_spinner.svg"/>;
-
-    let genesStatus = props.grameneSuggestionsStatus === 'loading' ? spinner : props.grameneSuggestionsStatus;
-    return (
-      <div className="search-suggestions">
-        <Tab.Container id="controlled-search-tabs" activeKey={'gramene'}>
-          <Row>
-            <Col>
-              <Nav variant="tabs">
-                <Nav.Item>
-                  <Nav.Link eventKey="gramene">
-                    <div className="suggestions-tab">Genes {genesStatus}</div>
-                  </Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Tab.Content>
-                <Tab.Pane eventKey="gramene">
-                  <GrameneSuggestions/>
-                </Tab.Pane>
-              </Tab.Content>
-            </Col>
-          </Row>
-        </Tab.Container>
-      </div>
-    );
-  }
-  return null;
-};
+const SuggestionsCmp = props => (
+      props.suggestionsQuery &&
+          <div className="search-suggestions">
+            <GrameneSuggestions/>
+          </div>
+)
 
 const Suggestions = connect(
   'selectSuggestionsQuery',
@@ -152,21 +109,10 @@ const Suggestions = connect(
   SuggestionsCmp
 );
 
-const SearchUI_ = (store) => (
-  <Provider store={store}>
-    <div>
-      <SearchBar/>
-      <Suggestions/>
-    </div>
-  </Provider>
-);
-
 const SearchMenu = props => (
   <div id="searchbar-parent" style={{width:'500px'}}>
     <div id="searchbar">
-      {/*<Form inline>*/}
         <SearchBar/>
-      {/*</Form>*/}
     </div>
   </div>
 )
@@ -197,53 +143,53 @@ const Guides = props => (
       heading='Guides'
     />
 )
+const GrameneMenu = props => (
+    <Navbar bg="light" expand="lg" sticky='top'>
+      <Navbar.Brand href="/">
+        <object
+            data={`/static/images/${subsite}_logo.svg`}
+            height="80"
+            className="d-inline-block align-top"
+            title="Gene Search"
+        />
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Switch>
+            <Route exact path="/" component={SearchMenu} />
+            <Route>
+              <Link className="nav-link" to="/">Search</Link>
+            </Route>
+          </Switch>
+          <Nav.Link href={initialState.ensemblSite}>
+            <img style={{height:'25px', verticalAlign:'bottom'}}
+                 src={`/static/images/e_bang.png`}
+                 alt={"ensembl"}/>
+            Genome browser
+          </Nav.Link>
+          <Link className="nav-link" to="/news">News</Link>
+          {/*<Link className="nav-link" to="/genomes">Genomes</Link>*/}
+          <Link className="nav-link" to="/guides">Guides</Link>
+          <Link className="nav-link" to={() => ({
+            pathname: '/feedback',
+            state: { search: document.location.href }
+          })}>Feedback</Link>
+          <NavDropdown id={"gramene-sites"} title={"Gramene Sites"}>
+            {panSites.filter(site => site.id !== subsite).map((site,idx) =>
+                <NavDropdown.Item key={idx} href={site.url}>{site.name}</NavDropdown.Item>
+            )}
+          </NavDropdown>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+)
 
-const demo = (store) => (
+const Gramene = (store) => (
   <Provider store={store}>
     <Router>
       <div>
-        <Navbar bg="light" expand="lg" sticky='top'>
-          <Navbar.Brand href="/">
-            <object
-              data={`/static/images/${subsite}_logo.svg`}
-              height="80"
-              className="d-inline-block align-top"
-              title="Gene Search"
-            />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Switch>
-                <Route exact path="/" component={SearchMenu} />
-                <Route>
-                  <Link className="nav-link" to="/">Search</Link>
-                </Route>
-              </Switch>
-              <Nav.Link href={initialState.ensemblSite}>
-                <img style={{height:'25px', verticalAlign:'bottom'}}
-                     src={`/static/images/e_bang.png`}/>Genome browser</Nav.Link>
-              <Link className="nav-link" to="/news">
-              News
-              </Link>
-              {/*<Link className="nav-link" to="/genomes">*/}
-              {/*  Genomes*/}
-              {/*</Link>*/}
-              <Link className="nav-link" to="/guides">
-                Guides
-              </Link>
-              <Link className="nav-link" to={location => ({
-                pathname: '/feedback',
-                state: { search: document.location.href }
-              })}>Feedback</Link>
-              <NavDropdown id={"gramene-sites"} title={"Gramene Sites"}>
-                {panSites.filter(site => site.id !== subsite).map((site,idx) =>
-                    <NavDropdown.Item key={idx} href={site.url}>{site.name}</NavDropdown.Item>
-                )}
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+        <GrameneMenu/>
         <Route exact path="/" component={Suggestions} />
         <Switch>
           <Route path="/feedback" component={Feedback} />
@@ -263,12 +209,6 @@ cache.getAll().then(initialData => {
     console.log('starting with locally cached data:', initialData)
   }
   const store = getStore(initialData);
-  let element = document.getElementById('demo');
-  element && render(demo(store), element);
-
-  // let element = document.getElementById('searchbar');
-  // element && render(SearchUI(store), element);
-  //
-  // element = document.getElementById('gene-search-ui');
-  // element && render(GeneSearchUI(store), element);
+  let element = document.getElementById('gramene');
+  element && render(Gramene(store), element);
 });
