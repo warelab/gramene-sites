@@ -7,6 +7,7 @@ import { DebounceInput } from 'react-debounce-input'
 import { Alert, Navbar, Nav, NavDropdown, Tab, Row, Col } from 'react-bootstrap'
 import { Status, Filters, Results, Views, suggestions as GrameneSuggestions, bundles } from 'gramene-search';
 import Feedback from "./Feedback";
+import panSites from '../conf';
 import UIbundle from './bundles/UIbundle';
 import {
   BrowserRouter as Router,
@@ -15,92 +16,11 @@ import {
   Link
 } from "react-router-dom";
 import MDView from 'gramene-mdview';
+import {keyBy} from 'lodash';
 
 const subsite = process.env.SUBSITE;
-
-const subsitelut = {
-  main: 0,
-  maize: 1,
-  sorghum: 2,
-  grapevine: 3,
-  rice: 4
-}
-const panSites = [
-  {
-    id: 'main',
-    name: 'Gramene Main',
-    version: 'main64',
-    url: 'https://www.gramene.org',
-    ensemblURL: 'https://ensembl.gramene.org',
-    ensemblSite: 'https://ensembl.gramene.org',
-    ensemblRest: 'https://data.gramene.org/ensembl64',
-    grameneData: 'https://data.gramene.org/v64',
-    targetTaxonId: 3702,
-    alertText: 'Main site'
-  },
-  {
-    id: 'maize',
-    name: 'Maize',
-    version: 'maize1',
-    url: 'https://maize-pangenome.gramene.org',
-    ensemblURL: 'https://maize-pangenome-ensembl.gramene.org',
-    ensemblSite: 'https://maize-pangenome-ensembl.gramene.org/genome_browser/index.html',
-    ensemblRest: 'https://data.gramene.org/pansite-ensembl',
-    grameneData: 'https://data.gramene.org/maizepan1',
-    targetTaxonId: 4577,
-    not_downtime: 'The search interface will be undergoing maintenance on Tuesday, July 20 from 3:00 - 4:00 PM EDT',
-    renderAlert: () => (
-        <Alert variant='primary'>
-          Hufford et. al., 2021. &nbsp;
-          <a href='https://www.science.org/doi/abs/10.1126/science.abg5289' target='_blank'>
-            <i>De novo</i> assembly, annotation, and comparative analysis of 26 diverse maize genomes.
-          </a>&nbsp;Science, Vol 373, Issue 6555, pp. 655-662.
-        </Alert>
-    )
-  },
-  {
-    id: 'sorghum',
-    name: 'Sorghumbase',
-    version: 'sorghum1',
-    url: 'https://www.sorghumbase.org',
-    ensemblURL: 'https://ensembl.sorghumbase.org',
-    ensemblSite: 'https://ensembl.sorghumbase.org',
-    ensemblRest: 'https://data.sorghumbase.org/ensembl2',
-    grameneData: 'https://data.sorghumbase.org/sorghum2',
-    targetTaxonId: 4588,
-    alertText: 'Click the search icon in the menu bar or type / to search'
-  },
-  {
-    id: 'grapevine',
-    name: 'Grapevine',
-    version: 'grapevine1',
-    url: 'https://vitis.gramene.org',
-    ensemblURL: 'https://vitis-ensembl.gramene.org',
-    ensemblSite: 'https://vitis-ensembl.gramene.org/genome_browser/index.html',
-    ensemblRest: 'https://data.gramene.org/pansite-ensembl',
-    grameneData: 'https://data.gramene.org/vitis1',
-    curation: {
-      url: 'http://curate.gramene.org/grapevine?gene=',
-      taxa: {
-        29760: 1
-      }
-    },
-    targetTaxonId: 29760,
-    alertText: 'Grapevine site'
-  },
-  {
-    id: 'rice',
-    name: 'Rice',
-    version: 'rice1',
-    url: 'https://oge.gramene.org',
-    ensemblStie: 'https://ensembl-oge.gramene.org',
-    ensemblRest: 'https://data.gramene.org/ensembl',
-    grameneData: 'https://data.gramene.org/v63',
-    targetTaxonId: 3702,
-    alertText: 'Rice site'
-  },
-];
-const initialState = panSites[subsitelut[subsite]];
+const panSiteIdx = keyBy(panSites, 'id');
+const initialState = panSiteIdx[subsite];
 
 const cache = getConfiguredCache({
   maxAge: 100 * 60 * 60,

@@ -4,11 +4,11 @@
   "description": "Front end of gramene main and subsites",
   "scripts": {
     "tidy": "rm -rf dist .parcel-cache && mkdir dist && ln -s ../src/static dist/static",
-    "maize": "npm run tidy && SUBSITE=maize parcel src/maize.html",
-    "grapevine": "npm run tidy && SUBSITE=grapevine parcel  src/grapevine.html",
-    "main": "npm run tidy && SUBSITE=main parcel src/main.html",
-    "sorghum": "npm run tidy && SUBSITE=sorghum parcel src/sorghum.html",
-    "rice": "npm run tidy && SUBSITE=rice parcel src/rice.html"
+    "maize": "npm run tidy && SUBSITE=maize parcel html/maize.html",
+    "grapevine": "npm run tidy && SUBSITE=grapevine parcel html/grapevine.html",
+    "main": "npm run tidy && SUBSITE=main parcel html/main.html",
+    "sorghum": "npm run tidy && SUBSITE=sorghum parcel html/sorghum.html",
+    "rice": "npm run tidy && SUBSITE=rice parcel html/rice.html"
   },
   "repository": {
     "type": "git",

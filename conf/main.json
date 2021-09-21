@@ -1,0 +1,12 @@
+{
+  "id": "main",
+  "name": "Gramene Main",
+  "version": "main64",
+  "url": "https://www.gramene.org",
+  "ensemblURL": "https://ensembl.gramene.org",
+  "ensemblSite": "https://ensembl.gramene.org",
+  "ensemblRest": "https://data.gramene.org/ensembl64",
+  "grameneData": "https://data.gramene.org/v64",
+  "targetTaxonId": 3702,
+  "alertText": "Main site"
+}
