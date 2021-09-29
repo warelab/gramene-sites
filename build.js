@@ -19,7 +19,7 @@ const mode = args.mode || "production";
 
 (async () => {
     let bundler = new Parcel({
-        entries: `src/${site}.html`,
+        entries: `html/${site}.html`,
         defaultConfig: '@parcel/config-default',
         mode: mode,
         defaultTargetOptions: {
@@ -33,7 +33,9 @@ const mode = args.mode || "production";
     });
 
     try {
+        console.log("await bundler.run()");
         let {bundleGraph, buildTime} = await bundler.run();
+        console.log("bundleGraph.getBundles()");
         let bundles = bundleGraph.getBundles();
         console.log(`✨ Built ${bundles.length} bundles in ${buildTime}ms!`);
         fs.rename(`${site}/${site}.html`,`${site}/index.html`, () => {
