@@ -8,5 +8,5 @@
   "ensemblRest": "https://data.gramene.org/ensembl64",
   "grameneData": "https://data.gramene.org/v64",
   "targetTaxonId": 3702,
-  "alertText": "Main site"
+  "downtime": "Main site"
 }

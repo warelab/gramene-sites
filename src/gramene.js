@@ -4,9 +4,11 @@ import { render } from 'react-dom'
 import { composeBundles, createCacheBundle } from "redux-bundler";
 import { getConfiguredCache } from 'money-clip';
 import { DebounceInput } from 'react-debounce-input'
-import { Alert, Navbar, Nav, NavDropdown, Tab, Row, Col } from 'react-bootstrap'
+import { Alert, Navbar, Nav, NavDropdown, Tab, Row, Col, FormControl, InputGroup, Button } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Status, Filters, Results, Views, suggestions as GrameneSuggestions, bundles } from 'gramene-search';
 import Feedback from "./Feedback";
+import HelpModal from './HelpModal';
 import panSites from '../conf';
 import UIbundle from './bundles/UIbundle';
 import {
@@ -20,7 +22,7 @@ import { keyBy } from 'lodash';
 
 const subsite = process.env.SUBSITE;
 const panSiteIdx = keyBy(panSites, 'id');
-const initialState = panSiteIdx[subsite];
+const initialState = Object.assign({helpIsOn:false}, panSiteIdx[subsite]);
 
 const cache = getConfiguredCache({
   maxAge: 100 * 60 * 60,
@@ -31,9 +33,20 @@ const config = {
   name: 'config',
   getReducer: () => {
     return (state = initialState, {type, payload}) => {
-      return state;
+        let newState;
+        switch (type) {
+            case 'GRAMENE_HELP_TOGGLED':
+                newState = Object.assign({},state);
+                newState.helpIsOn = !newState.helpIsOn;
+                return newState;
+            default:
+                return state;
+        }
     }
   },
+    doToggleGrameneHelp: () => ({dispatch})  => {
+        dispatch({type: 'GRAMENE_HELP_TOGGLED', payload: null})
+    },
   selectGrameneAPI: state => state.config.grameneData,
   selectTargetTaxonId: state => state.config.targetTaxonId,
   selectCuration: state => state.config.curation,
@@ -47,6 +60,17 @@ const getStore = composeBundles(
   createCacheBundle(cache.set)
 );
 
+const AlertCmp = ({configuration}) => (
+    <div className={"col-md-12 no-padding"}>
+    { configuration.downtime && <Alert variant='danger'>{configuration.downtime}</Alert> }
+    </div>
+);
+
+const Alerter = connect(
+    'selectConfiguration',
+    AlertCmp
+);
+
 const SearchViews = props => (
     <div className="row no-margin no-padding">
       <div className="col-md-2 no-padding">
@@ -57,7 +81,7 @@ const SearchViews = props => (
         </div>
       </div>
       <div className="col-md-10 no-padding">
-        <Results/>
+          <Results/>
       </div>
     </div>
 );
@@ -75,24 +99,32 @@ const handleKey = (e, props) => {
 };
 
 const SearchBarCmp = props =>
-  <DebounceInput
-    minLength={0}
-    debounceTimeout={300}
-    onChange={e => props.doChangeSuggestionsQuery(e.target.value)}
-    onKeyDown={e => handleKey(e, props)}
-    // onKeyUp={e => handleKey(e.key,props)}
-    className="form-control"
-    value={props.suggestionsQuery || ''}
-    placeholder="Search for genes, species, pathways, ontology terms, domains..."
-    id="search-input"
-    autoComplete="off"
-    spellCheck="false"
-  />;
+    <div>
+        <InputGroup>
+            <DebounceInput
+                minLength={0}
+                debounceTimeout={300}
+                onChange={e => props.doChangeSuggestionsQuery(e.target.value)}
+                onKeyDown={e => handleKey(e, props)}
+                // onKeyUp={e => handleKey(e.key,props)}
+                className="form-control"
+                value={props.suggestionsQuery || ''}
+                placeholder="Search for genes by id, name, pathway, domain, etc."
+                id="search-input"
+                autoComplete="off"
+                spellCheck="false"
+                style={{borderBottomRightRadius:0, borderTopRightRadius:0}}
+            />
+            <Button variant="success" style={{borderBottomLeftRadius:0, borderTopLeftRadius:0}} onClick={props.doToggleGrameneHelp}><strong>?</strong></Button>
+        </InputGroup>
+        <HelpModal/>
+    </div>
 
 const SearchBar = connect(
   'selectSuggestionsQuery',
   'doChangeSuggestionsQuery',
   'doClearSuggestions',
+  'doToggleGrameneHelp',
   'selectGrameneSuggestionsReady',
   SearchBarCmp
 );
@@ -190,6 +222,7 @@ const Gramene = (store) => (
     <Router>
       <div>
         <GrameneMenu/>
+          <Alerter/>
         <Route exact path="/" component={Suggestions} />
         <Switch>
           <Route path="/feedback" component={Feedback} />
