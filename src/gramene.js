@@ -7,7 +7,8 @@ import { DebounceInput } from 'react-debounce-input'
 import { Alert, Navbar, Nav, NavDropdown, Tab, Row, Col, FormControl, InputGroup, Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Status, Filters, Results, Views, suggestions as GrameneSuggestions, bundles } from 'gramene-search';
-import Feedback from "./Feedback";
+import Feedback from './Feedback';
+import Welcome from './Welcome';
 import HelpModal from './HelpModal';
 import panSites from '../conf';
 import UIbundle from './bundles/UIbundle';
@@ -84,6 +85,15 @@ const SearchViews = props => (
           <Results/>
       </div>
     </div>
+);
+
+const MainViewCmp = props => {
+    return props.grameneFilters.rightIdx > 1 ? <SearchViews/> : <Welcome/>;
+}
+
+const MainView = connect(
+    'selectGrameneFilters',
+    MainViewCmp
 );
 
 const handleKey = (e, props) => {
@@ -178,12 +188,15 @@ const Guides = props => (
 const GrameneMenu = props => (
     <Navbar bg="light" expand="lg" sticky='top'>
       <Navbar.Brand href="/">
-        <object
-            data={`/static/images/${subsite}_logo.svg`}
-            height="80"
-            className="d-inline-block align-top"
-            title="Gene Search"
-        />
+          <img src={`/static/images/${subsite}_logo.svg`}
+               height={80}
+          />
+      {/*        <object*/}
+      {/*            data={`/static/images/${subsite}_logo.svg`}*/}
+      {/*            height="80"*/}
+      {/*            className="d-inline-block align-top"*/}
+      {/*            title="Gene Search"*/}
+      {/*        />*/}
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -229,7 +242,7 @@ const Gramene = (store) => (
           <Route path="/news" component={News} />
           {/*<Route path="/genomes" component={Genomes} />*/}
           <Route path="/guides" component={Guides} />
-          <Route path="/" component={SearchViews} />
+          <Route path="/" component={MainView} />
         </Switch>
       </div>
     </Router>
