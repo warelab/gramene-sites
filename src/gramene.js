@@ -9,9 +9,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Status, Filters, Results, Views, suggestions as GrameneSuggestions, bundles } from 'gramene-search';
 import Feedback from './Feedback';
 import Welcome from './Welcome';
+import StaticSocialButtons from './StaticSocialButtons';
 import HelpModal from './HelpModal';
 import panSites from '../conf';
 import UIbundle from './bundles/UIbundle';
+import drupalBundles from './bundles/Drupal';
 import {
   BrowserRouter as Router,
   Switch,
@@ -55,7 +57,7 @@ const config = {
 };
 
 const getStore = composeBundles(
-  ...bundles,
+  ...bundles, ...drupalBundles,
   UIbundle,
   config,
   createCacheBundle(cache.set)
@@ -187,6 +189,8 @@ const Guides = props => (
 )
 const GrameneMenu = props => (
     <Navbar bg="light" expand="lg" sticky='top'>
+        <div style={{width:'100%',borderBottomColor:'#c7c7c7',borderBottomStyle:'solid'}}>
+            <Navbar className="header" bg="light" expand="lg">
       <Navbar.Brand href="/">
           <img src={`/static/images/${subsite}_logo.svg`}
                height={80}
@@ -227,7 +231,25 @@ const GrameneMenu = props => (
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
+            </Navbar>
+        </div>
     </Navbar>
+)
+
+const Footer = props => (
+        <Navbar fixed="bottom" bg="light">
+            <div style={{width:"100%",borderTopColor:"#c7c7c7", borderTopStyle:"solid"}}>
+                <Navbar bg="light">
+                    <Nav className="mr-auto">
+                        <Link className="nav-link" to="/cite">Cite</Link>
+                        <Link className="nav-link" to="/personal-data-privacy">Privacy</Link>
+                        <Link className="nav-link" to="/funding">Funding</Link>
+                    </Nav>
+                    <hr/>
+                    <StaticSocialButtons/>
+                </Navbar>
+            </div>
+        </Navbar>
 )
 
 const Gramene = (store) => (
@@ -242,8 +264,11 @@ const Gramene = (store) => (
           <Route path="/news" component={News} />
           {/*<Route path="/genomes" component={Genomes} />*/}
           <Route path="/guides" component={Guides} />
+          <Route path="/node/:nid" component={Welcome} />
+          <Route path="/:stub" component={Welcome} />
           <Route path="/" component={MainView} />
         </Switch>
+        <Footer/>
       </div>
     </Router>
   </Provider>

@@ -7,7 +7,7 @@ const examples = [
     subsite: {
       maize:1,
       sorghum:1,
-      main:1,
+      main:1
     },
     text: "What are the orthologs of Arabidopsis thaliana's PAD4 gene in Andropogoneae?",
     filters: {
@@ -68,6 +68,42 @@ const examples = [
           fq_field: 'taxonomy__ancestors',
           fq_value: 71275,
           name: 'rosids',
+          category: 'Taxonomy',
+          leftIdx:3,
+          rightIdx:4,
+          negate: false,
+          marked: false
+        }
+      ]
+    }
+  },
+  {
+    subsite: {
+      oryza:1
+    },
+    text: "What are the orthologs of Arabidopsis thaliana's PAD4 gene in oryza?",
+    filters: {
+      status: 'init',
+      rows: 20,
+      operation: 'AND',
+      negate: false,
+      leftIdx: 0,
+      rightIdx: 5,
+      children: [
+        {
+          fq_field: 'homology__all_orthologs',
+          fq_value: 'AT3G52430',
+          name: 'Orthologs of PAD4',
+          category: 'Gene Tree',
+          leftIdx:1,
+          rightIdx:2,
+          negate: false,
+          marked: false
+        },
+        {
+          fq_field: 'taxonomy__ancestors',
+          fq_value: 4527,
+          name: 'oryza',
           category: 'Taxonomy',
           leftIdx:3,
           rightIdx:4,

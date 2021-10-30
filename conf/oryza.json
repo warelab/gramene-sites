@@ -1,0 +1,12 @@
+{
+  "id": "oryza",
+  "name": "Oryza",
+  "version": "oryza_v3",
+  "url": "https://oryza.gramene.org",
+  "ensemblURL": "https://oryza-ensembl.gramene.org",
+  "ensemblSite": "https://oryza-ensembl.gramene.org",
+  "ensemblRest": "https://data.gramene.org/pansite-ensembl",
+  "grameneData": "https://data.gramene.org/oryza_v3",
+  "targetTaxonId": 3702,
+  "alertText": "Rice site"
+}
