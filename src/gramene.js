@@ -75,7 +75,7 @@ const Alerter = connect(
 );
 
 const SearchViews = props => (
-    <div className="row no-margin no-padding">
+    <div className="row no-margin no-padding" style={{backgroundColor:"#fff"}}>
       <div className="col-md-2 no-padding">
         <div className="gramene-sidebar">
           <Status/>

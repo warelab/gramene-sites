@@ -8,5 +8,6 @@
   "ensemblRest": "https://data.gramene.org/pansite-ensembl",
   "grameneData": "https://data.gramene.org/oryza_v3",
   "targetTaxonId": 3702,
-  "alertText": "Rice site"
+  "alertText": "Rice site",
+  "portals": ['browser']
 }

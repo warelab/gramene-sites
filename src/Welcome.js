@@ -2,6 +2,8 @@ import React from "react";
 import {connect} from 'redux-bundler-react'
 import {Alert, Container, Row, Col, Card, CardDeck, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import Portals from './Portals'
+import '../styles/welcome.less'
 
 function AlertDismissibleExample({config}) {
     const [show, setShow] = React.useState(true);
@@ -34,6 +36,7 @@ const DrupalCmp = props => {
             <p>browser doesn't support iframes</p>
         </iframe>
     }
+    return null;
 }
 
 const Drupal = connect(
@@ -45,7 +48,7 @@ const Drupal = connect(
 const NewsFeedCmp = props => {
     if (props.drupalFeed) {
         return (
-            <ul className={"posts list-unstyled"} style={{overflow:'auto'}}>
+            <ul className={"posts list-unstyled"} style={{overflow:'auto', height:"600px", paddingBottom:"15px"}}>
                 {props.drupalFeed.map((post,idx) =>
                     <li key={idx}>
                         <Link
@@ -70,11 +73,8 @@ const NewsFeed = connect(
     NewsFeedCmp
 );
 
-const Portals = props =>
-    <h4>Portals</h4>
-
 const Welcome = props => (
-    <div style={{backgroundColor:"#f6f6f6"}}>
+    <div>
         <Container fluid style={{padding: '40px'}}>
             <Row>
                 <Col lg={2}/>

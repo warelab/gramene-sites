@@ -1,3 +1,6 @@
+body {
+    background-color: #f6f6f6 !important;
+}
 .subsite-header {
     background-color: #fcfeec;
     height: 45px;
@@ -48,4 +51,14 @@
 }
 .posts li:not(:last-child) {
     font-size: 9pt;
+}
+.posts a {
+    color: #557B74;
+}
+.posts a:hover {
+    color: #335952;
+}
+
+.gramene-tool {
+
 }
