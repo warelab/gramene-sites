@@ -1,13 +1,13 @@
 {
   "id": "oryza",
-  "name": "Oryza",
+  "name": "Gramene Oryza",
   "version": "oryza_v3",
   "url": "https://oryza.gramene.org",
   "ensemblURL": "https://oryza-ensembl.gramene.org",
-  "ensemblSite": "https://oryza-ensembl.gramene.org",
+  "ensemblSite": "https://oryza-ensembl.gramene.org/genome_browser/index.html",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl",
   "grameneData": "https://data.gramene.org/oryza_v3",
   "targetTaxonId": 3702,
-  "alertText": "Rice site",
-  "portals": ['browser']
+  "downtime": "Documentation and BLAST databases for this site are being updated to reflect the new data now available.",
+  "portals": ['browser','blast']
 }

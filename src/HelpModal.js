@@ -1,13 +1,13 @@
 import React from "react";
-import { connect } from 'redux-bundler-react'
+import {connect} from 'redux-bundler-react'
 import {Modal, Container, Row, Card, CardDeck} from 'react-bootstrap'
 
 const examples = [
   {
     subsite: {
-      maize:1,
-      sorghum:1,
-      main:1
+      maize: 1,
+      sorghum: 1,
+      main: 1
     },
     text: "What are the orthologs of Arabidopsis thaliana's PAD4 gene in Andropogoneae?",
     filters: {
@@ -23,8 +23,8 @@ const examples = [
           fq_value: 'AT3G52430',
           name: 'Orthologs of PAD4',
           category: 'Gene Tree',
-          leftIdx:1,
-          rightIdx:2,
+          leftIdx: 1,
+          rightIdx: 2,
           negate: false,
           marked: false
         },
@@ -33,8 +33,8 @@ const examples = [
           fq_value: 147429,
           name: 'Andropogoneae',
           category: 'Taxonomy',
-          leftIdx:3,
-          rightIdx:4,
+          leftIdx: 3,
+          rightIdx: 4,
           negate: false,
           marked: false
         }
@@ -43,7 +43,7 @@ const examples = [
   },
   {
     subsite: {
-      grapevine:1
+      grapevine: 1
     },
     text: "What are the orthologs of Arabidopsis thaliana's PAD4 gene in rosids?",
     filters: {
@@ -59,8 +59,8 @@ const examples = [
           fq_value: 'AT3G52430',
           name: 'Orthologs of PAD4',
           category: 'Gene Tree',
-          leftIdx:1,
-          rightIdx:2,
+          leftIdx: 1,
+          rightIdx: 2,
           negate: false,
           marked: false
         },
@@ -69,8 +69,8 @@ const examples = [
           fq_value: 71275,
           name: 'rosids',
           category: 'Taxonomy',
-          leftIdx:3,
-          rightIdx:4,
+          leftIdx: 3,
+          rightIdx: 4,
           negate: false,
           marked: false
         }
@@ -79,7 +79,7 @@ const examples = [
   },
   {
     subsite: {
-      oryza:1
+      oryza: 1
     },
     text: "What are the orthologs of Arabidopsis thaliana's PAD4 gene in oryza?",
     filters: {
@@ -95,8 +95,8 @@ const examples = [
           fq_value: 'AT3G52430',
           name: 'Orthologs of PAD4',
           category: 'Gene Tree',
-          leftIdx:1,
-          rightIdx:2,
+          leftIdx: 1,
+          rightIdx: 2,
           negate: false,
           marked: false
         },
@@ -105,8 +105,8 @@ const examples = [
           fq_value: 4527,
           name: 'oryza',
           category: 'Taxonomy',
-          leftIdx:3,
-          rightIdx:4,
+          leftIdx: 3,
+          rightIdx: 4,
           negate: false,
           marked: false
         }
@@ -115,67 +115,67 @@ const examples = [
   }
 ];
 const HelpDemo = ({configuration, doToggleGrameneHelp, doReplaceGrameneFilters}) => (
-    <Modal
-        show={configuration.helpIsOn}
-        onHide={doToggleGrameneHelp}
-        size='xl'
-        fullscreen='true'
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>Search Features</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Container fluid style={{padding: '40px'}}>
-          <Row>
-            <CardDeck style={{width:'100%'}}>
-              <Card style={{'backgroundColor':'#f3f6f5', 'borderColor':'#DDE5E3'}}>
-                <Card.Body>
-                  <Card.Title>Suggestions</Card.Title>
-                  <Card.Text>Matching terms are provided as you type:</Card.Text>
-                  <div className='gene-search-pic-sugg'/>
-                </Card.Body>
-              </Card>
-              <Card style={{'backgroundColor':'#f3f6f5', 'borderColor':'#DDE5E3'}}>
-                <Card.Body>
-                  <Card.Title>Visualization</Card.Title>
-                  <Card.Text>See the distribution of results across all genomes:</Card.Text>
-                  <div className='gene-search-pic-results'/>
-                </Card.Body>
-              </Card>
-              <Card style={{'backgroundColor':'#f3f6f5', 'borderColor':'#DDE5E3'}}>
-                <Card.Body>
-                  <Card.Title>Gene tree view</Card.Title>
-                  <Card.Text>Explore evolutionary history of a gene family:</Card.Text>
-                  <div className='gene-search-pic-genetree'/>
-                </Card.Body>
-              </Card>
-            </CardDeck>
-          </Row>
-          <Row>
-            <h4>For Example</h4>
-          </Row>
-          <Row>
-            <small>
-              You can ask sophisticated questions about the genes:<br/>
-              <ul>
-                {examples.filter(e => !!e.subsite[configuration.id]).map((e,idx) => (
-                    <li key={idx}><a onClick={() => {
-                      doToggleGrameneHelp();
-                      doReplaceGrameneFilters(e.filters)
-                    }}>{e.text}</a></li>
-                ))}
-              </ul>
-            </small>
-          </Row>
-        </Container>
-      </Modal.Body>
-    </Modal>
+  <Modal
+    show={configuration.helpIsOn}
+    onHide={doToggleGrameneHelp}
+    size='xl'
+    fullscreen='true'
+  >
+    <Modal.Header closeButton>
+      <Modal.Title>Search Features</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <Container fluid style={{padding: '40px'}}>
+        <Row>
+          <CardDeck style={{width: '100%'}}>
+            <Card style={{'backgroundColor': '#f3f6f5', 'borderColor': '#DDE5E3'}}>
+              <Card.Body>
+                <Card.Title>Suggestions</Card.Title>
+                <Card.Text>Matching terms are provided as you type:</Card.Text>
+                <div className='gene-search-pic-sugg'/>
+              </Card.Body>
+            </Card>
+            <Card style={{'backgroundColor': '#f3f6f5', 'borderColor': '#DDE5E3'}}>
+              <Card.Body>
+                <Card.Title>Visualization</Card.Title>
+                <Card.Text>See the distribution of results across all genomes:</Card.Text>
+                <div className='gene-search-pic-results'/>
+              </Card.Body>
+            </Card>
+            <Card style={{'backgroundColor': '#f3f6f5', 'borderColor': '#DDE5E3'}}>
+              <Card.Body>
+                <Card.Title>Gene tree view</Card.Title>
+                <Card.Text>Explore evolutionary history of a gene family:</Card.Text>
+                <div className='gene-search-pic-genetree'/>
+              </Card.Body>
+            </Card>
+          </CardDeck>
+        </Row>
+        <Row>
+          <h4>For Example</h4>
+        </Row>
+        <Row>
+          <small>
+            You can ask sophisticated questions about the genes:<br/>
+            <ul>
+              {examples.filter(e => !!e.subsite[configuration.id]).map((e, idx) => (
+                <li key={idx}><a onClick={() => {
+                  doToggleGrameneHelp();
+                  doReplaceGrameneFilters(e.filters)
+                }}>{e.text}</a></li>
+              ))}
+            </ul>
+          </small>
+        </Row>
+      </Container>
+    </Modal.Body>
+  </Modal>
 
 );
 
 export default connect(
-    'selectConfiguration',
-    'doToggleGrameneHelp',
-    'doReplaceGrameneFilters',
-    HelpDemo
+  'selectConfiguration',
+  'doToggleGrameneHelp',
+  'doReplaceGrameneFilters',
+  HelpDemo
 );

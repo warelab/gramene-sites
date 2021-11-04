@@ -46,7 +46,7 @@ body {
 .posts li:last-child {}
 .posts li:last-child::before {
     display: block;
-    content: "For older news";
+    content: "For more news";
     padding-top: 20px;
 }
 .posts li:not(:last-child) {
