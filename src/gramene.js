@@ -65,12 +65,14 @@ const getStore = composeBundles(
 );
 
 const AlertCmp = ({configuration}) => (
-  <Alerts
-    org='warelab'
-    repo='release-notes'
-    path='alerts'
-    site={configuration.id}
-  />
+  <div className={"col-md-12 no-padding"}>
+    <Alerts
+      org='warelab'
+      repo='release-notes'
+      path='alerts'
+      site={configuration.id}
+    />
+  </div>
 );
 
 const Alerter = connect(
