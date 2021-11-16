@@ -21,6 +21,7 @@ import {
   NavLink
 } from "react-router-dom";
 import MDView from 'gramene-mdview';
+import Alerts from 'gramene-alerts';
 import {keyBy} from 'lodash';
 
 const subsite = process.env.SUBSITE;
@@ -64,9 +65,12 @@ const getStore = composeBundles(
 );
 
 const AlertCmp = ({configuration}) => (
-  <div className={"col-md-12 no-padding"}>
-    {configuration.downtime && <Alert variant='danger'>{configuration.downtime}</Alert>}
-  </div>
+  <Alerts
+    org='warelab'
+    repo='release-notes'
+    path='alerts'
+    site={configuration.id}
+  />
 );
 
 const Alerter = connect(

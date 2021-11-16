@@ -14,5 +14,5 @@
     }
   },
   "targetTaxonId": 29760,
-  "portals": ['browser','blast']
+  "portals": ['browser']
 }

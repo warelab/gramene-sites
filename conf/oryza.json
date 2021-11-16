@@ -8,6 +8,5 @@
   "ensemblRest": "https://data.gramene.org/pansite-ensembl",
   "grameneData": "https://data.gramene.org/oryza_v3",
   "targetTaxonId": 3702,
-  "downtime": "Documentation and BLAST databases for this site are being updated to reflect the new data now available.",
   "portals": ['browser','blast']
 }
