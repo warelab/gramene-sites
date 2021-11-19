@@ -4,9 +4,10 @@
   "version": "main64",
   "url": "https://www.gramene.org",
   "ensemblURL": "https://ensembl.gramene.org",
-  "ensemblSite": "https://ensembl.gramene.org",
+  "ensemblSite": "https://ensembl.gramene.org/genome_browser/index.html",
   "ensemblRest": "https://data.gramene.org/ensembl64",
   "grameneData": "https://data.gramene.org/v64",
   "targetTaxonId": 3702,
-  "downtime": "Main site"
+  "not downtime": "This is where an alert message about the site can appear",
+  "portals": ['browser','reactome','tools','atlas','blast','mart','trackhub','outreach','downloads','archive']
 }

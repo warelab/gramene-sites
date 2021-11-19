@@ -1,10 +1,10 @@
 import React from 'react'
-import { Formik } from 'formik'
+import {Formik} from 'formik'
 import * as Yup from 'yup'
-import { Container, Form, Col, Button } from 'react-bootstrap'
+import {Container, Form, Col, Button} from 'react-bootstrap'
 import axios from 'axios'
 
-const categories = ['Bug','Enhancement','Help Needed','Data','Uncategorized'];
+const categories = ['Bug', 'Enhancement', 'Help Needed', 'Data', 'Uncategorized'];
 const schema = Yup.object().shape({
   name: Yup.string().min(2, 'Too short').max(50, 'Too long').required('Required'),
   category: Yup.string().oneOf(categories).required('Required'),
@@ -39,14 +39,14 @@ const Feedback = (props) => (
       }}
     >
       {({
-        handleSubmit,
-        handleChange,
-        handleBlur,
-        values,
-        touched,
-        isValid,
-        errors
-      }) => (
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          values,
+          touched,
+          isValid,
+          errors
+        }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Row>
             <Form.Group as={Col} md="4" controlId="validationFormik01">
@@ -58,7 +58,7 @@ const Feedback = (props) => (
                 onChange={handleChange}
                 isValid={touched.name && !errors.name}
               />
-              <Form.Control.Feedback type="invalid" style={{display:'block'}}>{errors.name}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" style={{display: 'block'}}>{errors.name}</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -71,7 +71,7 @@ const Feedback = (props) => (
                 onChange={handleChange}
                 isValid={touched.email && !errors.email}
               />
-              <Form.Control.Feedback type="invalid" style={{display:'block'}}>{errors.email}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" style={{display: 'block'}}>{errors.email}</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -85,11 +85,11 @@ const Feedback = (props) => (
                 isValid={touched.category && !errors.category}
               >
                 <option>Select a Category</option>
-                {categories.map((cat,idx) => (
+                {categories.map((cat, idx) => (
                   <option key={idx}>{cat}</option>
                 ))}
               </Form.Control>
-              <Form.Control.Feedback type="invalid" style={{display:'block'}}>{errors.category}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" style={{display: 'block'}}>{errors.category}</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
@@ -102,21 +102,21 @@ const Feedback = (props) => (
                 onChange={handleChange}
                 isValid={touched.subject && !errors.subject}
               />
-              <Form.Control.Feedback type="invalid" style={{display:'block'}}>{errors.subject}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" style={{display: 'block'}}>{errors.subject}</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Form.Row>
             <Form.Group as={Col} md="4" controlId="validationFormik04">
               <Form.Label>Your message</Form.Label>
               <Form.Control
-                style={{height:'15rem', width:'40rem'}}
+                style={{height: '15rem', width: '40rem'}}
                 as="textarea"
                 name="content"
                 value={values.content}
                 onChange={handleChange}
                 isValid={touched.content && !errors.content}
               />
-              <Form.Control.Feedback type="invalid" style={{display:'block'}}>{errors.content}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" style={{display: 'block'}}>{errors.content}</Form.Control.Feedback>
             </Form.Group>
           </Form.Row>
           <Button type="submit">Submit feedback</Button>

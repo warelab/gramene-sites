@@ -1,6 +1,6 @@
 {
   "id": "grapevine",
-  "name": "Grapevine",
+  "name": "Gramene Grapevine",
   "version": "grapevine1",
   "url": "https://vitis.gramene.org",
   "ensemblURL": "https://vitis-ensembl.gramene.org",
@@ -14,5 +14,5 @@
     }
   },
   "targetTaxonId": 29760,
-  "alertText": "Grapevine site"
+  "portals": ['browser']
 }

@@ -8,7 +8,7 @@
     "grapevine": "npm run tidy && SUBSITE=grapevine parcel html/grapevine.html",
     "main": "npm run tidy && SUBSITE=main parcel html/main.html",
     "sorghum": "npm run tidy && SUBSITE=sorghum parcel html/sorghum.html",
-    "rice": "npm run tidy && SUBSITE=rice parcel html/rice.html"
+    "oryza": "npm run tidy && SUBSITE=oryza parcel html/oryza.html"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,9 @@
     "argparse": "^2.0.1",
     "axios": "^0.21.4",
     "formik": "^3.0.0-next.8",
-    "gramene-mdview": "^1.1.8",
-    "gramene-search": "^1.2.8",
+    "gramene-alerts": "^1.0.0",
+    "gramene-mdview": "^1.1.9",
+    "gramene-search": "^1.2.17",
     "lodash": "^4.17.21",
     "money-clip": "^3.0.5",
     "querystringify": "^2.2.0",
@@ -29,9 +30,11 @@
     "react-bootstrap": "^1.6.3",
     "react-debounce-input": "^3.2.5",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-router-dom": "^5.3.0",
     "redux-bundler": "^21.0.0",
     "redux-bundler-react": "^1.2.0",
+    "xml-js": "^1.6.11",
     "yup": "^0.32.9"
   },
   "devDependencies": {

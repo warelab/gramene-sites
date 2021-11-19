@@ -1,29 +1,32 @@
 import React from 'react'
-import { Provider, connect } from 'redux-bundler-react'
-import { render } from 'react-dom'
-import { composeBundles, createCacheBundle } from "redux-bundler";
-import { getConfiguredCache } from 'money-clip';
-import { DebounceInput } from 'react-debounce-input'
-import { Alert, Navbar, Nav, NavDropdown, Tab, Row, Col, FormControl, InputGroup, Button } from 'react-bootstrap'
+import {Provider, connect} from 'redux-bundler-react'
+import {render} from 'react-dom'
+import {composeBundles, createCacheBundle} from "redux-bundler";
+import {getConfiguredCache} from 'money-clip';
+import {DebounceInput} from 'react-debounce-input'
+import {Alert, Navbar, Nav, NavDropdown, Tab, Row, Col, FormControl, InputGroup, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Status, Filters, Results, Views, suggestions as GrameneSuggestions, bundles } from 'gramene-search';
+import {Status, Filters, Results, Views, suggestions as GrameneSuggestions, bundles} from 'gramene-search';
 import Feedback from './Feedback';
 import Welcome from './Welcome';
+import StaticSocialButtons from './StaticSocialButtons';
 import HelpModal from './HelpModal';
 import panSites from '../conf';
 import UIbundle from './bundles/UIbundle';
+import drupalBundles from './bundles/Drupal';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  NavLink
 } from "react-router-dom";
 import MDView from 'gramene-mdview';
-import { keyBy } from 'lodash';
+import Alerts from 'gramene-alerts';
+import {keyBy} from 'lodash';
 
 const subsite = process.env.SUBSITE;
 const panSiteIdx = keyBy(panSites, 'id');
-const initialState = Object.assign({helpIsOn:false}, panSiteIdx[subsite]);
+const initialState = Object.assign({helpIsOn: false}, panSiteIdx[subsite]);
 
 const cache = getConfiguredCache({
   maxAge: 100 * 60 * 60,
@@ -34,20 +37,20 @@ const config = {
   name: 'config',
   getReducer: () => {
     return (state = initialState, {type, payload}) => {
-        let newState;
-        switch (type) {
-            case 'GRAMENE_HELP_TOGGLED':
-                newState = Object.assign({},state);
-                newState.helpIsOn = !newState.helpIsOn;
-                return newState;
-            default:
-                return state;
-        }
+      let newState;
+      switch (type) {
+        case 'GRAMENE_HELP_TOGGLED':
+          newState = Object.assign({}, state);
+          newState.helpIsOn = !newState.helpIsOn;
+          return newState;
+        default:
+          return state;
+      }
     }
   },
-    doToggleGrameneHelp: () => ({dispatch})  => {
-        dispatch({type: 'GRAMENE_HELP_TOGGLED', payload: null})
-    },
+  doToggleGrameneHelp: () => ({dispatch}) => {
+    dispatch({type: 'GRAMENE_HELP_TOGGLED', payload: null})
+  },
   selectGrameneAPI: state => state.config.grameneData,
   selectTargetTaxonId: state => state.config.targetTaxonId,
   selectCuration: state => state.config.curation,
@@ -55,45 +58,50 @@ const config = {
 };
 
 const getStore = composeBundles(
-  ...bundles,
+  ...bundles, ...drupalBundles,
   UIbundle,
   config,
   createCacheBundle(cache.set)
 );
 
 const AlertCmp = ({configuration}) => (
-    <div className={"col-md-12 no-padding"}>
-    { configuration.downtime && <Alert variant='danger'>{configuration.downtime}</Alert> }
-    </div>
+  <div className={"col-md-12 no-padding"}>
+    <Alerts
+      org='warelab'
+      repo='release-notes'
+      path='alerts'
+      site={configuration.id}
+    />
+  </div>
 );
 
 const Alerter = connect(
-    'selectConfiguration',
-    AlertCmp
+  'selectConfiguration',
+  AlertCmp
 );
 
 const SearchViews = props => (
-    <div className="row no-margin no-padding">
-      <div className="col-md-2 no-padding">
-        <div className="gramene-sidebar">
-          <Status/>
-          <Filters/>
-          {/*<Views/>*/}
-        </div>
-      </div>
-      <div className="col-md-10 no-padding">
-          <Results/>
+  <div className="row no-margin no-padding" style={{backgroundColor: "#fff"}}>
+    <div className="col-md-2 no-padding">
+      <div className="gramene-sidebar">
+        <Status/>
+        <Filters/>
+        {/*<Views/>*/}
       </div>
     </div>
+    <div className="col-md-10" style={{paddingBottom: '100px'}}>
+      <Results/>
+    </div>
+  </div>
 );
 
 const MainViewCmp = props => {
-    return props.grameneFilters.rightIdx > 1 ? <SearchViews/> : <Welcome/>;
+  return props.grameneFilters.rightIdx > 1 ? <SearchViews/> : <Welcome/>;
 }
 
 const MainView = connect(
-    'selectGrameneFilters',
-    MainViewCmp
+  'selectGrameneFilters',
+  MainViewCmp
 );
 
 const handleKey = (e, props) => {
@@ -109,26 +117,27 @@ const handleKey = (e, props) => {
 };
 
 const SearchBarCmp = props =>
-    <div>
-        <InputGroup>
-            <DebounceInput
-                minLength={0}
-                debounceTimeout={300}
-                onChange={e => props.doChangeSuggestionsQuery(e.target.value)}
-                onKeyDown={e => handleKey(e, props)}
-                // onKeyUp={e => handleKey(e.key,props)}
-                className="form-control"
-                value={props.suggestionsQuery || ''}
-                placeholder="Search for genes by id, name, pathway, domain, etc."
-                id="search-input"
-                autoComplete="off"
-                spellCheck="false"
-                style={{borderBottomRightRadius:0, borderTopRightRadius:0}}
-            />
-            <Button variant="success" style={{borderBottomLeftRadius:0, borderTopLeftRadius:0}} onClick={props.doToggleGrameneHelp}><strong>?</strong></Button>
-        </InputGroup>
-        <HelpModal/>
-    </div>
+  <div>
+    <InputGroup>
+      <DebounceInput
+        minLength={0}
+        debounceTimeout={300}
+        onChange={e => props.doChangeSuggestionsQuery(e.target.value)}
+        onKeyDown={e => handleKey(e, props)}
+        // onKeyUp={e => handleKey(e.key,props)}
+        className="form-control"
+        value={props.suggestionsQuery || ''}
+        placeholder="Search for genes by id, name, pathway, domain, etc."
+        id="search-input"
+        autoComplete="off"
+        spellCheck="false"
+        style={{borderBottomRightRadius: 0, borderTopRightRadius: 0}}
+      />
+      <Button variant="success" style={{borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
+              onClick={props.doToggleGrameneHelp}><strong>?</strong></Button>
+    </InputGroup>
+    <HelpModal/>
+  </div>
 
 const SearchBar = connect(
   'selectSuggestionsQuery',
@@ -139,10 +148,10 @@ const SearchBar = connect(
   SearchBarCmp
 );
 const SuggestionsCmp = props => (
-      props.suggestionsQuery &&
-          <div className="search-suggestions">
-            <GrameneSuggestions/>
-          </div>
+  props.suggestionsQuery &&
+  <div className="search-suggestions">
+    <GrameneSuggestions/>
+  </div>
 )
 
 const Suggestions = connect(
@@ -152,82 +161,109 @@ const Suggestions = connect(
 );
 
 const SearchMenu = props => (
-  <div id="searchbar-parent" style={{width:'500px'}}>
+  <div id="searchbar-parent" style={{width: '500px'}}>
     <div id="searchbar">
-        <SearchBar/>
+      <SearchBar/>
     </div>
   </div>
 )
 
 const News = props => (
-  <MDView
-    org='warelab'
-    repo='release-notes'
-    path={subsite}
-    heading='News'
-  />
-)
-
-const Genomes = props => (
-    <MDView
-        org='warelab'
-        repo='release-notes'
-        path={subsite+'-genomes'}
-        heading='Genomes'
-    />
-)
-
-const Guides = props => (
+  <div style={{paddingBottom: '100px'}}>
     <MDView
       org='warelab'
       repo='release-notes'
-      path={subsite+'-guides'}
-      heading='Guides'
+      path={subsite}
+      heading='News'
     />
+  </div>
+)
+
+const Genomes = props => (
+  <div style={{paddingBottom: '100px'}}>
+    <MDView
+      org='warelab'
+      repo='release-notes'
+      path={subsite + '-genomes'}
+      heading='Genomes'
+    />
+  </div>
+)
+
+const Guides = props => (
+  <div style={{paddingBottom: '100px'}}>
+    <MDView
+      org='warelab'
+      repo='release-notes'
+      path={subsite + '-guides'}
+      heading='Guides'
+      ifEmpty='A user guide is being developed.'
+    />
+  </div>
 )
 const GrameneMenu = props => (
-    <Navbar bg="light" expand="lg" sticky='top'>
-      <Navbar.Brand href="/">
+  <Navbar bg="light" expand="lg" sticky='top'>
+    <div style={{width: '100%', borderBottomColor: '#c7c7c7', borderBottomStyle: 'solid'}}>
+      <Navbar className="header" bg="light" expand="lg">
+        <Navbar.Brand href="/">
           <img src={`/static/images/${subsite}_logo.svg`}
                height={80}
           />
-      {/*        <object*/}
-      {/*            data={`/static/images/${subsite}_logo.svg`}*/}
-      {/*            height="80"*/}
-      {/*            className="d-inline-block align-top"*/}
-      {/*            title="Gene Search"*/}
-      {/*        />*/}
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <Switch>
-            <Route exact path="/" component={SearchMenu} />
-            <Route>
-              <Link className="nav-link" to="/">Search</Link>
-            </Route>
-          </Switch>
-          <Nav.Link href={initialState.ensemblSite}>
-            <img style={{height:'25px', verticalAlign:'bottom'}}
-                 src={`/static/images/e_bang.png`}
-                 alt={"ensembl"}/>
-            Genome browser
-          </Nav.Link>
-          <Link className="nav-link" to="/news">News</Link>
-          {/*<Link className="nav-link" to="/genomes">Genomes</Link>*/}
-          <Link className="nav-link" to="/guides">Guides</Link>
-          <Link className="nav-link" to={() => ({
-            pathname: '/feedback',
-            state: { search: document.location.href }
-          })}>Feedback</Link>
-          <NavDropdown id={"gramene-sites"} title={"Gramene Sites"}>
-            {panSites.filter(site => site.id !== subsite).map((site,idx) =>
+          {/*        <object*/}
+          {/*            data={`/static/images/${subsite}_logo.svg`}*/}
+          {/*            height="80"*/}
+          {/*            className="d-inline-block align-top"*/}
+          {/*            title="Gene Search"*/}
+          {/*        />*/}
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Switch>
+              <Route exact path="/" component={SearchMenu}/>
+              <Route>
+                <NavLink className="nav-link" to="/">Search</NavLink>
+              </Route>
+            </Switch>
+            <Nav.Link href={initialState.ensemblSite}>
+              <img style={{height: '25px', verticalAlign: 'bottom'}}
+                   src={`/static/images/e_bang.png`}
+                   alt={"ensembl"}/>
+              Genome browser
+            </Nav.Link>
+            <NavLink className="nav-link" to="/news">News</NavLink>
+            {/*<NavLink className="nav-link" to="/genomes">Genomes</NavLink>*/}
+            <NavLink className="nav-link" to="/guides">Guides</NavLink>
+            <NavLink className="nav-link" to={() => ({
+              pathname: '/feedback',
+              state: {search: document.location.href}
+            })}>Feedback</NavLink>
+            <NavDropdown id={"gramene-sites"} title={"Gramene Sites"}>
+              {panSites.filter(site => site.id !== subsite).map((site, idx) =>
                 <NavDropdown.Item key={idx} href={site.url}>{site.name}</NavDropdown.Item>
-            )}
-          </NavDropdown>
+              )}
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
+  </Navbar>
+)
+
+const Footer = props => (
+  <Navbar fixed="bottom" bg="light">
+    <div style={{width: "100%", borderTopColor: "#c7c7c7", borderTopStyle: "solid"}}>
+      <Navbar bg="light">
+        <Nav className="mr-auto">
+          <NavLink className="nav-link" to="/cite">Cite</NavLink>
+          <NavLink className="nav-link" to="/personal-data-privacy">Privacy</NavLink>
+          <NavLink className="nav-link" to="/funding">Funding</NavLink>
         </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+        <hr/>
+        <StaticSocialButtons/>
+      </Navbar>
+    </div>
+  </Navbar>
 )
 
 const Gramene = (store) => (
@@ -235,15 +271,18 @@ const Gramene = (store) => (
     <Router>
       <div>
         <GrameneMenu/>
-          <Alerter/>
-        <Route exact path="/" component={Suggestions} />
+        <Alerter/>
+        <Route exact path="/" component={Suggestions}/>
         <Switch>
-          <Route path="/feedback" component={Feedback} />
-          <Route path="/news" component={News} />
+          <Route path="/feedback" component={Feedback}/>
+          <Route path="/news" component={News}/>
           {/*<Route path="/genomes" component={Genomes} />*/}
-          <Route path="/guides" component={Guides} />
-          <Route path="/" component={MainView} />
+          <Route path="/guides" component={Guides}/>
+          <Route path="/node/:nid" component={Welcome}/>
+          <Route path="/:stub" component={Welcome}/>
+          <Route path="/" component={MainView}/>
         </Switch>
+        <Footer/>
       </div>
     </Router>
   </Provider>
@@ -251,7 +290,7 @@ const Gramene = (store) => (
 
 cache.getAll().then(initialData => {
   if (initialData) {
-    if (initialData.hasOwnProperty('searchUI')) initialData.searchUI.suggestions_query="";
+    if (initialData.hasOwnProperty('searchUI')) initialData.searchUI.suggestions_query = "";
     console.log('starting with locally cached data:', initialData)
   }
   const store = getStore(initialData);
