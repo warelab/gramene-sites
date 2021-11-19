@@ -44,6 +44,9 @@ const mode = args.mode || "production";
     fs.copyFile('.htaccess', `${site}/.htaccess`, () => {
       console.log(`copied .htaccess into ${site}/`)
     });
+    fs.copyFile('robots.txt', `${site}/robots.txt`, () => {
+      console.log(`copied robots.txt into ${site}/`)
+    });
     fs.symlink(`../src/static`, `./${site}/static`, () => {
       console.log('synlinked static content');
     })
