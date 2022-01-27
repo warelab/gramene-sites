@@ -17,7 +17,7 @@ const drupalFeed = createAsyncResourceBundle({
         const slug = post.link._text.replace(/.*news\.gramene\.org\//, '');
         const targetSites = slug.split('__');
         if (targetSites.length === 1) {
-          return (site === "main");
+          return (site === "main" || targetSites[0] === "all");
         }
         const filtered = targetSites.filter(targetSite => targetSite === site);
         return filtered.length === 1;

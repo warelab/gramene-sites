@@ -2,15 +2,20 @@ import React from "react";
 import {connect} from 'redux-bundler-react'
 import {Alert, Container, Row, Col, Card, CardDeck, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import { Timeline } from 'react-twitter-widgets'
 import Portals from './Portals'
+import closest from 'component-closest';
 import '../styles/welcome.less'
 
 function AlertDismissibleExample({config}) {
-  const [show, setShow] = React.useState(true);
+  const [hide, setShow] = React.useState(localStorage.getItem('gramene-alerted') || '');
 
-  if (show) {
+  if (hide !== 'yes') {
     return (
-      <Alert variant="success" onClose={() => setShow(false)} dismissible>
+      <Alert variant="success" onClose={() => {
+        setShow('yes');
+        localStorage.setItem('gramene-alerted', 'yes');
+      }} dismissible>
         <Alert.Heading>Welcome to {config.name}</Alert.Heading>
         <hr/>
         <p>
@@ -23,6 +28,79 @@ function AlertDismissibleExample({config}) {
   return null; //<Button onClick={() => setShow(true)}>Show Alert</Button>;
 }
 
+class DrupalPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.iframeRef = React.createRef();
+    this.state = {
+    }
+  }
+
+  componentDidMount() {
+    window.scrollTo(0,0);
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    window.scrollTo(0,0);
+  }
+
+  initListener() {
+    let iframe = this.iframeRef.current;
+    let iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    if (typeof iframeDoc.addEventListener !== "undefined") {
+      iframeDoc.addEventListener("click", this.iframeClickHandler.bind(this), true);
+    } else if (typeof iframeDoc.attachEvent !== "undefined") {
+      iframeDoc.attachEvent("onclick", this.iframeClickHandler.bind(this));
+    }
+  }
+
+  iframeClickHandler(e) {
+    let target = e.target;
+    target = closest(target, 'a');
+    let href = target.getAttribute('href');
+    let drupalLink;
+    let matches = href.match(/(node\/\d+)$/);
+    if (!matches) {
+      matches = href.match(/gramene\.org\/(.+)/);
+      if (matches && this.props.drupalAliases[matches[1]] && matches[1] ) {
+        drupalLink = matches[1];
+      }
+    }
+    else {
+      drupalLink = matches[1];
+    }
+    if (drupalLink) {
+      e.preventDefault();
+      window.history.pushState({},undefined, `/${drupalLink}`)
+    }
+    // else {
+    //   if (!href.match(/^#/)) {
+    //     ReactGA.outboundLink({
+    //       label: href
+    //     }, function () {
+    //       console.log('have fun at', href);
+    //     });
+    //   }
+    // }
+  }
+
+  render() {
+    let nid = this.props.nid;
+    if (!nid && this.props.drupalAliases && this.props.stub) {
+      if (!this.props.drupalAliases[this.props.stub]) {
+        return <code>node for '{this.props.stub}' not found</code>
+      }
+      nid = JSON.stringify(this.props.drupalAliases[this.props.stub]).replace(/"/g, "");
+    }
+    if (nid) {
+      const src = `/ww?nid=${+nid}`;
+      return <iframe src={src} frameBorder="0" width="100%" height="650px" ref={this.iframeRef} onLoad={this.initListener.bind(this)}>
+        <p>browser doesn't support iframes</p>
+      </iframe>
+    }
+    return null;
+  }
+}
+
 const DrupalCmp = props => {
   let nid = props.nid;
   if (!nid && props.drupalAliases && props.stub) {
@@ -32,7 +110,7 @@ const DrupalCmp = props => {
     nid = JSON.stringify(props.drupalAliases[props.stub]).replace(/"/g, "");
   }
   if (nid) {
-    const src = `https://news.gramene.org/ww?nid=${+nid}` // nid is a string that includes quotation marks
+    const src = `https://news.gramene.org/ww?nid=${+nid}`;
     return <iframe src={src} frameBorder="0" width="100%" height="650px">
       <p>browser doesn't support iframes</p>
     </iframe>
@@ -43,26 +121,30 @@ const DrupalCmp = props => {
 const Drupal = connect(
   'selectConfiguration',
   'selectDrupalAliases',
-  DrupalCmp
+  DrupalPage///Cmp
 );
 
 const NewsFeedCmp = props => {
   if (props.drupalFeed) {
     return (
-      <ul className={"posts list-unstyled"} style={{overflow: 'auto', height: "600px", paddingBottom: "15px"}}>
-        {props.drupalFeed.map((post, idx) =>
-          <li key={idx}>
-            <Link
-              to={post.link._text.replace(/.*news\.gramene\.org/, '')}>
-              {post.title._text}
-            </Link><br/>
-            <span>{post.pubDate._text.replace(/\s\d\d:\d\d:\d\d.*/, '')}</span>
-          </li>
-        )}
-        <li key="newslink">
-          <a href="//news.gramene.org/blog">Gramene news blog</a>
-        </li>
-      </ul>
+      <div style={{backgroundColor:'white', padding:'0px', marginBottom:'20px', borderRadius:'5px'}}>
+        <h4 style={{padding:'10px',marginBottom:'0px'}}>Latest News</h4>
+        <ul className={"posts list-unstyled"} style={{overflow: 'auto', minHeight: "200px", height: "215px", padding: "10px", marginBottom: '0px'
+        ,borderBottomStyle:'solid', borderBottomColor:'gray', borderBottomWidth:'thin',borderTopStyle:'solid',borderTopColor:'gray',borderTopWidth:'thin'}}>
+          {props.drupalFeed.map((post, idx) =>
+            <li key={idx}>
+              <Link
+                to={post.link._text.replace(/.*news\.gramene\.org/, '')}>
+                {post.title._text}
+              </Link><br/>
+              <span>{post.pubDate._text.replace(/\s\d\d:\d\d:\d\d.*/, '')}</span>
+            </li>
+          )}
+        </ul>
+        <div style={{padding:"10px",fontSize:"small"}}>
+          Read more at <a href="//news.gramene.org/blog">Gramene news</a>
+        </div>
+      </div>
     )
   } else {
     return null;
@@ -76,25 +158,30 @@ const NewsFeed = connect(
 const Welcome = props => (
   <div>
     <Container fluid style={{padding: '40px'}}>
-      <Row>
-        <Col lg={2}/>
-        <Col lg={8}>
-          <AlertDismissibleExample config={props.configuration}/>
-        </Col>
-      </Row>
       <Row style={{paddingBottom:'50px'}}>
-        <Col lg={2}/>
+        <Col lg={1}>
+        </Col>
         <Col lg={6}>
+          <AlertDismissibleExample config={props.configuration}/>
           {props.match
             ? <Drupal stub={props.match.params.stub} nid={props.match.params.nid}/>
             : <Portals/>
           }
         </Col>
-        <Col lg={2}>
-          <h4>Latest News</h4>
+        <Col lg={3}>
           <NewsFeed/>
+          <Timeline
+            dataSource={{
+              sourceType: 'profile',
+              screenName: 'GrameneDatabase'
+            }}
+            options={{
+              height: '400px',
+              width: '405px'
+            }}
+          />
         </Col>
-        <Col lg={2}/>
+        <Col lg={1}/>
       </Row>
     </Container>
   </div>

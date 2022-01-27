@@ -42,21 +42,16 @@ body {
 }
 .posts li {
     padding-bottom: 10px;
-}
-.posts li:last-child {}
-.posts li:last-child::before {
-    display: block;
-    content: "For more news";
-    padding-top: 20px;
-}
-.posts li:not(:last-child) {
     font-size: 9pt;
+}
+.posts li:hover {
+    background-color: #f4eaa4;
 }
 .posts a {
     color: #557B74;
 }
 .posts a:hover {
-    color: #335952;
+    text-decoration: none;
 }
 
 .gramene-tool {
