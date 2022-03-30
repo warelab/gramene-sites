@@ -9,5 +9,7 @@
   "grameneData": "https://devdata.gramene.org/sorghum_v2",
   "targetTaxonId": 4588,
   "alertText": "Click the search icon in the menu bar or type / to search",
-  "portals": ['browser','blast']
+  "portals": ['browser','blast'],
+  "showNews": true,
+  "showGuides": true
 }

@@ -5,6 +5,82 @@ import {Modal, Container, Row, Card, CardDeck} from 'react-bootstrap'
 const examples = [
   {
     subsite: {
+      main: 1
+    },
+    text: "ARR-B Transcription Factors in Brassicaceae",
+    filters: {
+      status :'init',
+      operation: 'AND',
+      negate: false,
+      marked: false,
+      leftIdx: 0,
+      rightIdx: 11,
+      children: [
+        {
+          fq_field: 'domains__ancestors',
+          fq_value:1005,
+          name:'SANT/Myb',
+          category:'InterPro Domain',
+          leftIdx:1,
+          rightIdx:2,
+          negate:false,
+          showMenu:false,
+          marked:false
+        },
+        {
+          fq_field:'domains__ancestors',
+          fq_value:17930,
+          name:'Myb_dom',
+          category:'InterPro Domain',
+          leftIdx:3,
+          rightIdx:4,
+          negate:false,
+          showMenu:false,
+          marked:false
+        },
+        {
+          fq_field:'domains__ancestors',
+          fq_value:1789,
+          name:'Sig_transdc_resp-reg_receiver',
+          category:'InterPro Domain',
+          leftIdx:5,
+          rightIdx:6,
+          negate:false,
+          showMenu:false,
+          marked:false
+        },
+        {
+          fq_field:'domains__ancestors',
+          fq_value:41723,
+          name:'CCT',
+          category:'InterPro Domain',
+          leftIdx:7,
+          rightIdx:8,
+          negate:true,
+          showMenu:false,
+          marked:false,
+          parentIdx:0
+        },
+        {
+          fq_field: 'taxonomy__ancestors',
+          fq_value: 3700,
+          name: 'Brassicaceae',
+          category: 'Taxonomy',
+          leftIdx: 9,
+          rightIdx: 10,
+          negate: false,
+          showMenu: false,
+          marked: false
+        }
+      ],
+      showMarked:false,
+      showMenu:false,
+      searchOffset:0,
+      rows:20
+    }
+  },
+  {
+    subsite: {
       maize: 1,
       sorghum: 1,
       main: 1

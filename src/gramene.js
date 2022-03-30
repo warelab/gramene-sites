@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Status, Filters, Results, Views, suggestions as GrameneSuggestions, bundles} from 'gramene-search';
 import Feedback from './Feedback';
 import Welcome from './Welcome';
+import { PortalsDropdown } from './Portals'
 import StaticSocialButtons from './StaticSocialButtons';
 import HelpModal from './HelpModal';
 import panSites from '../conf';
@@ -168,29 +169,39 @@ const SearchMenu = props => (
   </div>
 )
 
-const News = props => (
+const NewsCmp = ({configuration}) => (
   <div style={{paddingBottom: '100px'}}>
     <MDView
       org='warelab'
       repo='release-notes'
       path={subsite}
       heading='News'
+      date={configuration.date}
     />
   </div>
 )
+const News = connect(
+  'selectConfiguration',
+  NewsCmp
+);
 
-const Genomes = props => (
+const GenomesCmp = ({configuration}) => (
   <div style={{paddingBottom: '100px'}}>
     <MDView
       org='warelab'
       repo='release-notes'
       path={subsite + '-genomes'}
       heading='Genomes'
+      date={configuration.date}
     />
   </div>
 )
+const Genomes = connect(
+  'selectConfiguration',
+  GenomesCmp
+);
 
-const Guides = props => (
+const GuidesCmp = ({configuration}) => (
   <div style={{paddingBottom: '100px'}}>
     <MDView
       org='warelab'
@@ -198,10 +209,16 @@ const Guides = props => (
       path={subsite + '-guides'}
       heading='Guides'
       ifEmpty='A user guide is being developed.'
+      date={configuration.date}
     />
   </div>
 )
-const GrameneMenu = props => (
+const Guides = connect(
+  'selectConfiguration',
+  GuidesCmp
+);
+
+const GrameneMenuCmp = ({configuration}) => (
   <Navbar bg="light" expand="lg" sticky='top'>
     <div style={{width: '100%', borderBottomColor: '#c7c7c7', borderBottomStyle: 'solid'}}>
       <Navbar className="header" bg="light" expand="lg">
@@ -231,9 +248,9 @@ const GrameneMenu = props => (
                    alt={"ensembl"}/>
               Genome browser
             </Nav.Link>
-            <NavLink className="nav-link" to="/news">News</NavLink>
+            { configuration.showNews && <NavLink className="nav-link" to="/news">News</NavLink> }
             {/*<NavLink className="nav-link" to="/genomes">Genomes</NavLink>*/}
-            <NavLink className="nav-link" to="/guides">Guides</NavLink>
+            { configuration.showGuides && <NavLink className="nav-link" to="/guides">Guides</NavLink> }
             <NavLink className="nav-link" to={() => ({
               pathname: '/feedback',
               state: {search: document.location.href}
@@ -250,6 +267,12 @@ const GrameneMenu = props => (
   </Navbar>
 )
 
+const GrameneMenu = connect(
+  'selectConfiguration',
+  GrameneMenuCmp
+);
+
+
 const Footer = props => (
   <Navbar fixed="bottom" bg="light">
     <div style={{width: "100%", borderTopColor: "#c7c7c7", borderTopStyle: "solid"}}>
@@ -258,13 +281,14 @@ const Footer = props => (
           <NavLink className="nav-link" to="/cite">Cite</NavLink>
           <NavLink className="nav-link" to="/personal-data-privacy">Privacy</NavLink>
           <NavLink className="nav-link" to="/funding">Funding</NavLink>
+          <PortalsDropdown/>
         </Nav>
         <hr/>
         <StaticSocialButtons/>
       </Navbar>
     </div>
   </Navbar>
-)
+);
 
 const Gramene = (store) => (
   <Provider store={store}>

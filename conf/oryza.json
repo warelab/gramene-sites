@@ -30,5 +30,10 @@
     }
   },
   "targetTaxonId": 3702,
-  "portals": ["browser","blast"]
+  "portals": ['browser','blast'],
+  "portals2": ['browser','reactome','climtools','blast','atlas','trackhub'],
+  "showNews": true,
+  "showGuides": true,
+  "date": "2022-03-30"
+
 }

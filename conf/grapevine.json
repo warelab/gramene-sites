@@ -14,5 +14,9 @@
     }
   },
   "targetTaxonId": 29760,
-  "portals": ['browser']
+  "portals": ['browser'],
+  "portals2": ['browser','reactome','climtools','atlas','trackhub'],
+  "showNews": true,
+  "showGuides": true,
+  "date": "2022-03-30"
 }

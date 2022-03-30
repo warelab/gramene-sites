@@ -3,7 +3,7 @@ import {connect} from 'redux-bundler-react'
 import {Alert, Container, Row, Col, Card, CardDeck, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { Timeline } from 'react-twitter-widgets'
-import Portals from './Portals'
+import { Portals } from './Portals'
 import closest from 'component-closest';
 import '../styles/welcome.less'
 
@@ -158,17 +158,17 @@ const NewsFeed = connect(
 const Welcome = props => (
   <div>
     <Container fluid style={{padding: '40px'}}>
-      <Row style={{paddingBottom:'50px'}}>
-        <Col lg={1}>
+      <Row style={{paddingBottom:'50px'}} lg={12} xl={12} md={12}>
+        <Col xxl={1} xl={1} lg={0}>
         </Col>
-        <Col lg={6}>
+        <Col xxl={6} xl={7} lg={9}>
           <AlertDismissibleExample config={props.configuration}/>
           {props.match
             ? <Drupal stub={props.match.params.stub} nid={props.match.params.nid}/>
             : <Portals/>
           }
         </Col>
-        <Col lg={3}>
+        <Col xxl={3} xl={3} lg={3}>
           <NewsFeed/>
           <Timeline
             dataSource={{
@@ -181,7 +181,7 @@ const Welcome = props => (
             }}
           />
         </Col>
-        <Col lg={1}/>
+        <Col xxl={2} xl={1} lg={0}/>
       </Row>
     </Container>
   </div>

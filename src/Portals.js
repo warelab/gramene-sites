@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "redux-bundler-react";
-import {ListGroup, Row, Col, Card} from "react-bootstrap";
+import {ListGroup, Row, Col, Card, NavDropdown} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {FiExternalLink} from 'react-icons/fi'
 
@@ -67,6 +67,12 @@ const tools = {
     description: "Legacy tools and data (markers, Cyc pathways, etc)",
     drupalLink: "/archive",
     imgSrc: "static/images/welcome/archive.jpg"
+  },
+  climtools: {
+    title: "CLIMtools",
+    description: "Environment x Genome Associations",
+    link: "https://www.gramene.org/CLIMtools",
+    imgSrc: "static/images/welcome/climtools.png"
   }
 };
 
@@ -100,8 +106,23 @@ const GrameneTool = ({title, description, imgSrc, link, drupalLink, ensemblPath,
   );
 };
 
+const GrameneToolLink = ({title, description, imgSrc, link, drupalLink, ensemblPath, isExternal, ensemblURL}) => {
+  let external;
+  if (isExternal) {
+    external = <small title="This link opens a page from an external site"><FiExternalLink/></small>;
+  }
+  if (!link) {
+    if (drupalLink) {
+      link = drupalLink;
+    }
+    if (ensemblPath) {
+      link = ensemblURL + ensemblPath;
+    }
+  }
+  return <NavDropdown.Item href={link}><img style={{width: "32px"}} src={imgSrc}/>&nbsp;&nbsp;{title}</NavDropdown.Item>
+};
 
-const Portals = props => (
+const PortalsCmp = props => (
   <div className="tools-wrapper">
     <h3>Portals</h3>
     <Row xs={1} md={2} className="g-4">
@@ -112,7 +133,25 @@ const Portals = props => (
   </div>
 );
 
-export default connect(
+export const Portals = connect(
   'selectConfiguration',
-  Portals
+  PortalsCmp
 );
+
+const PortalsDropdownCmp = ({configuration}) => {
+  if (configuration.portals2) {
+    return (
+      <NavDropdown id={'portals-dropdown'} title={'Links'} className={"dropup"}>
+        { configuration.portals2.map((portal, idx) =>
+          <GrameneToolLink {...tools[portal]} key={idx} ensemblURL={configuration.ensemblURL}/>
+        )}
+      </NavDropdown>
+    )
+  }
+}
+
+export const PortalsDropdown = connect(
+  'selectConfiguration',
+  PortalsDropdownCmp
+);
+

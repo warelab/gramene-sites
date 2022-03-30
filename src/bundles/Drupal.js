@@ -17,7 +17,10 @@ const drupalFeed = createAsyncResourceBundle({
         const slug = post.link._text.replace(/.*news\.gramene\.org\//, '');
         const targetSites = slug.split('__');
         if (targetSites.length === 1) {
-          return (site === "main" || targetSites[0] === "all");
+          return (site === "main");
+        }
+        if (targetSites[0] === "all") {
+          return true;
         }
         const filtered = targetSites.filter(targetSite => targetSite === site);
         return filtered.length === 1;
@@ -37,7 +40,7 @@ drupalFeed.reactDrupalFeed = createSelector(
 const drupalAliases = createAsyncResourceBundle({
   name: 'DrupalAliases',
   actionBaseType: 'DRUPAL_ALIASES',
-  persiste: false,
+  persist: false,
   getPromise: ({store}) => {
     return fetch('https://gramene.org/aliases')
       .then(res => res.json())

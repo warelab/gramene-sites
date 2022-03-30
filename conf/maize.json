@@ -8,6 +8,9 @@
   "ensemblRest": "https://data.gramene.org/pansite-ensembl",
   "grameneData": "https://data.gramene.org/maizepan1",
   "targetTaxonId": 4577,
-  "not_downtime": "The search interface will be undergoing maintenance on Tuesday, July 20 from 3:00 - 4:00 PM EDT",
-  "portals": ['browser','blast']
+  "portals": ['browser','blast'],
+  "portals2": ['browser','reactome','climtools','blast','atlas','trackhub'],
+  "showNews": true,
+  "showGuides": true,
+  "date": "2022-03-30"
 }

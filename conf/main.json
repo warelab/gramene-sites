@@ -1,13 +1,16 @@
 {
   "id": "main",
   "name": "Gramene Main",
-  "version": "main64",
-  "url": "https://www.gramene.org",
-  "ensemblURL": "https://ensembl.gramene.org",
-  "ensemblSite": "https://ensembl.gramene.org/genome_browser/index.html",
-  "ensemblRest": "https://data.gramene.org/ensembl64",
-  "grameneData": "https://data.gramene.org/v64",
+  "version": "65",
+  "url": "https://dev.gramene.org",
+  "ensemblURL": "https://ensembl-dev.gramene.org",
+  "ensemblSite": "https://ensembl-dev.gramene.org/genome_browser/index.html",
+  "ensemblRest": "https://data.gramene.org/ensembl65",
+  "grameneData": "https://data.gramene.org/v65",
   "targetTaxonId": 3702,
-  "not downtime": "This is where an alert message about the site can appear",
-  "portals": ['browser','reactome','tools','atlas','blast','mart','trackhub','outreach','downloads','archive']
+  "portals": ['browser','reactome','blast','climtools','tools','atlas','mart'],
+  "portals2": ['browser','reactome','climtools','blast','mart','tools','atlas','trackhub','outreach','downloads','archive'],
+  "showNews": true,
+  "showGuides": false,
+  "date": "2022-04-28"
 }
