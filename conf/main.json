@@ -1,6 +1,6 @@
 {
   "id": "main",
-  "name": "Gramene Main",
+  "name": "Gramene",
   "version": "65",
   "url": "https://dev.gramene.org",
   "ensemblURL": "https://ensembl-dev.gramene.org",
@@ -8,9 +8,12 @@
   "ensemblRest": "https://data.gramene.org/ensembl65",
   "grameneData": "https://data.gramene.org/v65",
   "targetTaxonId": 3702,
-  "portals": ['browser','reactome','blast','climtools','tools','atlas','mart'],
+  "portals": ['browser','reactome','blast','climtools','tools','atlas','mart','downloads'],
   "portals2": ['browser','reactome','climtools','blast','mart','tools','atlas','trackhub','outreach','downloads','archive'],
+  "showInMenu": true,
   "showNews": true,
   "showGuides": false,
+  "showFeed": true,
+  "showTweets": true,
   "date": "2022-04-28"
 }

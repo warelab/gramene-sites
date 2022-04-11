@@ -169,8 +169,8 @@ const Welcome = props => (
           }
         </Col>
         <Col xxl={3} xl={3} lg={3}>
-          <NewsFeed/>
-          <Timeline
+          {props.configuration.showFeed && <NewsFeed/>}
+          {props.configuration.showTweets && <Timeline
             dataSource={{
               sourceType: 'profile',
               screenName: 'GrameneDatabase'
@@ -179,7 +179,7 @@ const Welcome = props => (
               height: '400px',
               width: '405px'
             }}
-          />
+          />}
         </Col>
         <Col xxl={2} xl={1} lg={0}/>
       </Row>

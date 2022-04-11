@@ -256,7 +256,7 @@ const GrameneMenuCmp = ({configuration}) => (
               state: {search: document.location.href}
             })}>Feedback</NavLink>
             <NavDropdown id={"gramene-sites"} title={"Gramene Sites"}>
-              {panSites.filter(site => site.id !== subsite).map((site, idx) =>
+              {panSites.filter(site => site.id !== subsite && site.showInMenu).map((site, idx) =>
                 <NavDropdown.Item key={idx} href={site.url}>{site.name}</NavDropdown.Item>
               )}
             </NavDropdown>

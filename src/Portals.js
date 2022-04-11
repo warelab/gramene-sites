@@ -9,7 +9,7 @@ const tools = {
   browser: {
     title: "Genome Browser",
     description: "Browse genomes with annotations, variation and comparative tools",
-    ensemblPath: "/genome_browser/index.html",
+    ensemblPath: "/index.html",
     imgSrc: "static/images/welcome/ensemblgramene.png"
   },
   reactome: {

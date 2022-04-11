@@ -10,6 +10,9 @@
   "targetTaxonId": 4588,
   "alertText": "Click the search icon in the menu bar or type / to search",
   "portals": ['browser','blast'],
+  "showInMenu": true,
   "showNews": true,
-  "showGuides": true
+  "showGuides": true,
+  "showFeed": true,
+  "showTweets": true
 }

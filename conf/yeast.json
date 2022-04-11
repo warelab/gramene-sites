@@ -1,0 +1,19 @@
+{
+  "id": "yeast",
+  "name": "Gramene Yeast",
+  "version": "yeast_v1",
+  "url": "https://yeast.gramene.org",
+  "ensemblURL": "https://yeast-ensembl.gramene.org",
+  "ensemblSite": "https://yeast-ensembl.gramene.org/index.html",
+  "ensemblRest": "https://data.gramene.org/pansite-ensembl",
+  "grameneData": "https://data.gramene.org/yeast_v1",
+  "targetTaxonId": 3702,
+  "portals": ['browser'],
+  "portals2": ['browser','reactome','climtools','blast','atlas','trackhub'],
+  "showNews": false,
+  "showGuides": false,
+  "showFeed": false,
+  "showTweets": false,
+  "showInMenu": false,
+  "date": "2022-03-30"
+}
