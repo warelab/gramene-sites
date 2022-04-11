@@ -3,7 +3,7 @@ const fs = require('fs');
 const ParcelCore = require("@parcel/core");
 const {default: Parcel} = ParcelCore;
 
-const sites = ['main', 'maize', 'grapevine', 'sorghum', 'oryza'];
+const sites = ['main', 'maize', 'grapevine', 'sorghum', 'oryza','yeast'];
 
 const parser = new ArgumentParser({
   description: "build a gramene site"
