@@ -33,7 +33,7 @@ const UIbundle = {
     dispatch({
       type: 'BATCH_ACTIONS', actions: [
         ...clearSuggestions,
-        {type: 'SUGGESTIONS_QUERY_CHANGED', payload: {query: query.trim()}}
+        {type: 'SUGGESTIONS_QUERY_CHANGED', payload: {query: query.trim().replace(/:/g,'\\:')}}
       ]
     });
   },
