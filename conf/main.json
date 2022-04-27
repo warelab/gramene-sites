@@ -1,7 +1,7 @@
 {
   "id": "main",
   "name": "Gramene",
-  "version": "65",
+  "version": "v65",
   "url": "https://dev.gramene.org",
   "ensemblURL": "https://ensembl-dev.gramene.org",
   "ensemblSite": "https://ensembl-dev.gramene.org/genome_browser/index.html",

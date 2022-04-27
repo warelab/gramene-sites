@@ -1,14 +1,14 @@
 {
   "id": "oryza",
   "name": "Gramene Oryza",
-  "version": "oryza_v3",
+  "version": "v4",
   "url": "https://oryza.gramene.org",
   "ensemblURL": "https://oryza-ensembl.gramene.org",
   "ensemblSite": "https://oryza-ensembl.gramene.org/genome_browser/index.html",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl",
-  "grameneData": "https://data.gramene.org/oryza_v3",
+  "grameneData": "https://data.gramene.org/oryza_v4",
   "curation": {
-    "url": "http://curate.gramene.org/oryza_v3?since=4479&gene=",
+    "url": "http://curate.gramene.org/oryza_v4?since=4479&gene=",
     "taxa": {
       "39947": "Oryza sativa Japonica",
       "1736659": "Oryza sativa aus cA1 var. N22",

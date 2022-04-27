@@ -1,7 +1,7 @@
 {
   "id": "maize",
   "name": "Gramene Maize",
-  "version": "maize1",
+  "version": "v2",
   "url": "https://maize-pangenome.gramene.org",
   "ensemblURL": "https://maize-pangenome-ensembl.gramene.org",
   "ensemblSite": "https://maize-pangenome-ensembl.gramene.org/genome_browser/index.html",

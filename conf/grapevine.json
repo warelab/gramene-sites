@@ -1,12 +1,12 @@
 {
   "id": "grapevine",
   "name": "Gramene Grapevine",
-  "version": "grapevine1",
+  "version": "v3",
   "url": "https://vitis.gramene.org",
   "ensemblURL": "https://vitis-ensembl.gramene.org",
   "ensemblSite": "https://vitis-ensembl.gramene.org/genome_browser/index.html",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl",
-  "grameneData": "https://data.gramene.org/vitis1",
+  "grameneData": "https://data.gramene.org/grapevine_v3",
   "curation": {
     "url": "http://curate.gramene.org/grapevine?gene=",
     "taxa": {
@@ -14,7 +14,7 @@
     }
   },
   "targetTaxonId": 29760,
-  "portals": ['browser'],
+  "portals": ['browser','blast'],
   "portals2": ['browser','reactome','climtools','atlas','trackhub'],
   "showInMenu": true,
   "showNews": true,

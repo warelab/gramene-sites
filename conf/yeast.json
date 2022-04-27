@@ -1,7 +1,7 @@
 {
   "id": "yeast",
   "name": "Gramene Yeast",
-  "version": "yeast_v1",
+  "version": "v1",
   "url": "https://yeast.gramene.org",
   "ensemblURL": "https://yeast-ensembl.gramene.org",
   "ensemblSite": "https://yeast-ensembl.gramene.org/index.html",

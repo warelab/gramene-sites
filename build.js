@@ -9,9 +9,11 @@ const parser = new ArgumentParser({
   description: "build a gramene site"
 });
 parser.add_argument('site', {help: sites.join(', ')});
+parser.add_argument('version', {help: 'site version'})
 parser.add_argument('-m', '--mode', {help: 'development or production?'});
 const args = parser.parse_args();
 const site = args.site;
+const version = args.version;
 if (!sites.includes(site)) {
   console.error(`INVALID SITE NAME: "${site}"\nChoose one of these: ${sites.join(', ')}`);
 }
@@ -24,7 +26,8 @@ const mode = args.mode || "production";
     mode: mode,
     defaultTargetOptions: {
       distDir: site,
-      shouldScopeHoist: false
+      shouldScopeHoist: false,
+      publicUrl: `/${site}/${version}`
     },
     env: {
       NODE_ENV: mode,

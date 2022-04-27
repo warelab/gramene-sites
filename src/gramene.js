@@ -16,7 +16,7 @@ import panSites from '../conf';
 import UIbundle from './bundles/UIbundle';
 import drupalBundles from './bundles/Drupal';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
   NavLink
@@ -31,7 +31,7 @@ const initialState = Object.assign({helpIsOn: false}, panSiteIdx[subsite]);
 
 const cache = getConfiguredCache({
   maxAge: 100 * 60 * 60,
-  version: initialState.version
+  version: `${initialState.id}_${initialState.version}`
 });
 
 const config = {
@@ -223,7 +223,7 @@ const GrameneMenuCmp = ({configuration}) => (
     <div style={{width: '100%', borderBottomColor: '#c7c7c7', borderBottomStyle: 'solid'}}>
       <Navbar className="header" bg="light" expand="lg">
         <Navbar.Brand href="/">
-          <img src={`/static/images/${subsite}_logo.svg`}
+          <img src={`static/images/${subsite}_logo.svg`}
                height={80}
           />
           {/*        <object*/}
@@ -244,7 +244,7 @@ const GrameneMenuCmp = ({configuration}) => (
             </Switch>
             <Nav.Link href={initialState.ensemblSite}>
               <img style={{height: '25px', verticalAlign: 'bottom'}}
-                   src={`/static/images/e_bang.png`}
+                   src={`static/images/e_bang.png`}
                    alt={"ensembl"}/>
               Genome browser
             </Nav.Link>
@@ -292,7 +292,7 @@ const Footer = props => (
 
 const Gramene = (store) => (
   <Provider store={store}>
-    <Router>
+    <BrowserRouter basename={`/${initialState.id}/${initialState.version}`}>
       <div>
         <GrameneMenu/>
         <Alerter/>
@@ -308,7 +308,7 @@ const Gramene = (store) => (
         </Switch>
         <Footer/>
       </div>
-    </Router>
+    </BrowserRouter>
   </Provider>
 )
 
