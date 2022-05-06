@@ -6,9 +6,9 @@
 <path transform="matrix(1,0,0,-1,0,540)" d="M 0 .00001206994 L 959.76 .00001206994 L 959.76 540 L 0 540 Z "/>
 </clipPath>
 <g clip-path="url(#cp12)">
-<path transform="matrix(1,0,0,-1,0,540)" d="M 0 540 L 959.76 540 L 959.76 .00001206994 L 0 .00001206994 Z " fill="#ffffff"/>
+<path transform="matrix(1,0,0,-1,0,540)" d="M 0 540 L 959.76 540 L 959.76 .00001206994 L 0 .00001206994 Z " fill="#ffffff" fill-opacity="0"/>
 </g>
-<path transform="matrix(1,0,0,-1,0,540)" d="M 0 540 L 960 540 L 960 .0000140816 L 0 .0000140816 Z " fill="#f8fbfb"/>
+<path transform="matrix(1,0,0,-1,0,540)" d="M 0 540 L 960 540 L 960 .0000140816 L 0 .0000140816 Z " fill="#f8fbfb" fill-opacity="0"/>
 <mask id="ma13">
 <g transform="matrix(.24000001,0,0,.24000003,0,68.879978)">
 <use xlink:href="#im14" x="0" y="0" width="3999" height="1783"/>

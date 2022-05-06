@@ -42,7 +42,7 @@ const drupalAliases = createAsyncResourceBundle({
   actionBaseType: 'DRUPAL_ALIASES',
   persist: false,
   getPromise: ({store}) => {
-    return fetch('https://gramene.org/aliases')
+    return fetch('https://gramene.org/urls')
       .then(res => res.json())
   }
 });

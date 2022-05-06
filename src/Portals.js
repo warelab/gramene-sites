@@ -1,14 +1,16 @@
 import React from "react";
 import {connect} from "redux-bundler-react";
-import {ListGroup, Row, Col, Card, NavDropdown} from "react-bootstrap";
+import {ListGroup, Row, Col, Card, NavDropdown, Tabs, Tab} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {FiExternalLink} from 'react-icons/fi'
+import panSites from '../conf';
+import {NavLink} from 'react-router-dom';
 
 
 const tools = {
   browser: {
     title: "Genome Browser",
-    description: "Browse genomes with annotations, variation and comparative tools",
+    description: "Genome annotations, variation and comparative tools",
     ensemblPath: "/index.html",
     imgSrc: "static/images/welcome/ensemblgramene.png"
   },
@@ -19,14 +21,14 @@ const tools = {
     imgSrc: "static/images/welcome/plantReactome.svg"
   },
   tools: {
-    title: "Tools",
-    description: "Tools for processing both our data and yours",
+    title: "Ensembl Tools",
+    description: "Tools for fetching and searching genomic data",
     ensemblPath: "/tools.html",
     imgSrc: "static/images/welcome/tools.png"
   },
   atlas: {
-    title: "Plant Expression ATLAS",
-    description: "Browse plant expression results at EBI ATLAS",
+    title: "Plant Expression Atlas",
+    description: "Browse plant expression results at EBI",
     link: "//www.ebi.ac.uk/gxa/plant/experiments",
     imgSrc: "static/images/welcome/ExpressionAtlas.png",
     isExternal: true
@@ -39,7 +41,7 @@ const tools = {
   },
   mart: {
     title: "Gramene Mart",
-    description: "An advanced query interface powered by BioMart",
+    description: "An advanced genomic query interface powered by BioMart",
     ensemblPath: "/biomart/martview",
     imgSrc: "static/images/welcome/Biomart250.png"
   },
@@ -53,26 +55,32 @@ const tools = {
   outreach: {
     title: "Outreach and Training",
     description: "Education resources and webinars",
-    drupalLink: "/outreach",
+    drupalLink: "outreach",
     imgSrc: "static/images/welcome/noun_553934.png"
   },
   downloads: {
     title: "Bulk Downloads",
     description: "FTP download of our data",
-    drupalLink: "/ftp-download",
+    drupalLink: "ftp-download",
     imgSrc: "static/images/welcome/download.png"
   },
   archive: {
     title: "Archive",
     description: "Legacy tools and data (markers, Cyc pathways, etc)",
-    drupalLink: "/archive",
+    drupalLink: "archive",
     imgSrc: "static/images/welcome/archive.jpg"
   },
   climtools: {
     title: "CLIMtools",
-    description: "Environment x Genome Associations",
+    description: "Environment x Genome x Phenotype Associations in A. thaliana",
     link: "https://www.gramene.org/CLIMtools",
     imgSrc: "static/images/welcome/climtools.png"
+  },
+  pansites: {
+    title: "Plant Pan Genomes",
+    description: "Gramene-powered sites focused on specific crops",
+    link: "pansites",
+    imgSrc: "static/images/welcome/pangenomes.svg"
   }
 };
 
@@ -87,6 +95,27 @@ const GrameneTool = ({title, description, imgSrc, link, drupalLink, ensemblPath,
     }
     if (ensemblPath) {
       link = ensemblURL + ensemblPath;
+    }
+  }
+  else {
+    if (link === 'pansites') {
+      return (
+        <NavLink to="/pansites" style={{textDecoration:'none'}}>
+          <Col>
+            <Row className="gramene-tool">
+              <Col md="auto">
+                <img style={{width: "96px"}} src={imgSrc} alt={title}/>
+              </Col>
+              <Col>
+                <h5 style={{color:'#212529'}}>
+                  {title}{external}
+                </h5>
+                <p className="gramene-tool-desc">{description}</p>
+              </Col>
+            </Row>
+          </Col>
+        </NavLink>
+      )
     }
   }
   return (
@@ -124,12 +153,30 @@ const GrameneToolLink = ({title, description, imgSrc, link, drupalLink, ensemblP
 
 const PortalsCmp = props => (
   <div className="tools-wrapper">
-    <h3>Portals</h3>
-    <Row xs={1} md={2} className="g-4">
-      {props.configuration.portals.map((portal, idx) =>
-        <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL}/>
-      )}
-    </Row>
+    {props.location && props.location.pathname === '/pansites' && <h3>Plant Pan Genome sites</h3>}
+    {props.location && props.location.pathname === '/pansites' ?
+      <Row xs={1} md={2} className="g-4">
+        {panSites.filter(site => site.id !== props.configuration.id && site.showInMenu).map((site, idx) =>
+          <Col key={idx} onClick={() => window.location.href = site.url}>
+            <Row className="gramene-tool">
+              <Col md="auto">
+                <img style={{width:"165px"}} src={`static/images/${site.id}_logo.svg`}/>
+              </Col>
+              <Col>
+                {/*<h5>{site.name}&nbsp;{site.version}</h5>*/}
+                <p className="gramene-tool-desc">{site.description}</p>
+              </Col>
+            </Row>
+          </Col>
+        )}
+      </Row>
+      :
+      <Row xs={1} md={2} className="g-4">
+        {props.configuration.portals.map((portal, idx) =>
+          <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL}/>
+        )}
+      </Row>
+    }
   </div>
 );
 

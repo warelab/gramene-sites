@@ -26,8 +26,9 @@ import Alerts from 'gramene-alerts';
 import {keyBy} from 'lodash';
 
 const subsite = process.env.SUBSITE;
+const baseURL = process.env.DEPLOY === 'dev' ? `/${subsite}/${process.env.VERSION}` : `/`;
 const panSiteIdx = keyBy(panSites, 'id');
-const initialState = Object.assign({helpIsOn: false}, panSiteIdx[subsite]);
+const initialState = Object.assign({helpIsOn: false, linkSet: 'Portals'}, panSiteIdx[subsite]);
 
 const cache = getConfiguredCache({
   maxAge: 100 * 60 * 60,
@@ -119,7 +120,7 @@ const handleKey = (e, props) => {
 
 const SearchBarCmp = props =>
   <div>
-    <InputGroup>
+    <InputGroup size='sm'>
       <DebounceInput
         minLength={0}
         debounceTimeout={300}
@@ -134,7 +135,7 @@ const SearchBarCmp = props =>
         spellCheck="false"
         style={{borderBottomRightRadius: 0, borderTopRightRadius: 0}}
       />
-      <Button variant="success" style={{borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
+      <Button size='sm' variant="success" style={{borderBottomLeftRadius: 0, borderTopLeftRadius: 0}}
               onClick={props.doToggleGrameneHelp}><strong>?</strong></Button>
     </InputGroup>
     <HelpModal/>
@@ -162,7 +163,7 @@ const Suggestions = connect(
 );
 
 const SearchMenu = props => (
-  <div id="searchbar-parent" style={{width: '500px'}}>
+  <div id="searchbar-parent" style={{width: '400px', alignSelf:'center'}}>
     <div id="searchbar">
       <SearchBar/>
     </div>
@@ -222,16 +223,12 @@ const GrameneMenuCmp = ({configuration}) => (
   <Navbar bg="light" expand="lg" sticky='top'>
     <div style={{width: '100%', borderBottomColor: '#c7c7c7', borderBottomStyle: 'solid'}}>
       <Navbar className="header" bg="light" expand="lg">
-        <Navbar.Brand href="/">
-          <img src={`static/images/${subsite}_logo.svg`}
-               height={80}
-          />
-          {/*        <object*/}
-          {/*            data={`/static/images/${subsite}_logo.svg`}*/}
-          {/*            height="80"*/}
-          {/*            className="d-inline-block align-top"*/}
-          {/*            title="Gene Search"*/}
-          {/*        />*/}
+        <Navbar.Brand>
+          <a href="/">
+            <img src={`static/images/${subsite}_logo.svg`}
+                 height={80}
+            />
+          </a>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
@@ -255,11 +252,11 @@ const GrameneMenuCmp = ({configuration}) => (
               pathname: '/feedback',
               state: {search: document.location.href}
             })}>Feedback</NavLink>
-            <NavDropdown id={"gramene-sites"} title={"Gramene Sites"}>
-              {panSites.filter(site => site.id !== subsite && site.showInMenu).map((site, idx) =>
-                <NavDropdown.Item key={idx} href={site.url}>{site.name}</NavDropdown.Item>
-              )}
-            </NavDropdown>
+            {/*<NavDropdown id={"gramene-sites"} title={"Gramene Sites"}>*/}
+            {/*  {panSites.filter(site => site.id !== subsite && site.showInMenu).map((site, idx) =>*/}
+            {/*    <NavDropdown.Item key={idx} href={site.url}>{site.name}</NavDropdown.Item>*/}
+            {/*  )}*/}
+            {/*</NavDropdown>*/}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -282,6 +279,11 @@ const Footer = props => (
           <NavLink className="nav-link" to="/personal-data-privacy">Privacy</NavLink>
           <NavLink className="nav-link" to="/funding">Funding</NavLink>
           <PortalsDropdown/>
+          <NavDropdown id={"gramene-sites"} title={"Gramene Sites"} className={"dropup"}>
+            {panSites.filter(site => site.id !== subsite && site.showInMenu).map((site, idx) =>
+              <NavDropdown.Item key={idx} href={site.url}>{site.name}</NavDropdown.Item>
+            )}
+          </NavDropdown>
         </Nav>
         <hr/>
         <StaticSocialButtons/>
@@ -292,7 +294,7 @@ const Footer = props => (
 
 const Gramene = (store) => (
   <Provider store={store}>
-    <BrowserRouter basename={`/${initialState.id}/${initialState.version}`}>
+    <BrowserRouter basename={baseURL}>
       <div>
         <GrameneMenu/>
         <Alerter/>
@@ -302,6 +304,7 @@ const Gramene = (store) => (
           <Route path="/news" component={News}/>
           {/*<Route path="/genomes" component={Genomes} />*/}
           <Route path="/guides" component={Guides}/>
+          <Route path="/pansites" component={Welcome}/>
           <Route path="/node/:nid" component={Welcome}/>
           <Route path="/:stub" component={Welcome}/>
           <Route path="/" component={MainView}/>

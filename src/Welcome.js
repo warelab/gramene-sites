@@ -72,15 +72,6 @@ class DrupalPage extends React.Component {
       e.preventDefault();
       window.history.pushState({},undefined, `/${drupalLink}`)
     }
-    // else {
-    //   if (!href.match(/^#/)) {
-    //     ReactGA.outboundLink({
-    //       label: href
-    //     }, function () {
-    //       console.log('have fun at', href);
-    //     });
-    //   }
-    // }
   }
 
   render() {
@@ -101,27 +92,10 @@ class DrupalPage extends React.Component {
   }
 }
 
-const DrupalCmp = props => {
-  let nid = props.nid;
-  if (!nid && props.drupalAliases && props.stub) {
-    if (!props.drupalAliases[props.stub]) {
-      return <code>node for '{props.stub}' not found</code>
-    }
-    nid = JSON.stringify(props.drupalAliases[props.stub]).replace(/"/g, "");
-  }
-  if (nid) {
-    const src = `https://news.gramene.org/ww?nid=${+nid}`;
-    return <iframe src={src} frameBorder="0" width="100%" height="650px">
-      <p>browser doesn't support iframes</p>
-    </iframe>
-  }
-  return null;
-}
-
 const Drupal = connect(
   'selectConfiguration',
   'selectDrupalAliases',
-  DrupalPage///Cmp
+  DrupalPage
 );
 
 const NewsFeedCmp = props => {
@@ -163,9 +137,9 @@ const Welcome = props => (
         </Col>
         <Col xxl={6} xl={7} lg={9}>
           <AlertDismissibleExample config={props.configuration}/>
-          {props.match
+          {props.match && (props.match.params.stub || props.match.params.nid)
             ? <Drupal stub={props.match.params.stub} nid={props.match.params.nid}/>
-            : <Portals/>
+            : <Portals location={props.location}/>
           }
         </Col>
         <Col xxl={3} xl={3} lg={3}>
