@@ -16,5 +16,48 @@
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
-  "date": "2022-03-30"
+  "date": "2022-03-30",
+  "slides": [
+    {
+      "img": "static/images/welcome/maize/NAM.png",
+      "label": "NAM founder inbreds",
+      "text": "This site includes full genome sequences of the NAM founder lines and comparative genomic analyses of protein-coding gene families.",
+      "credit": "McMullen et al. Science (2009)"
+    },
+    {
+      "img": "static/images/welcome/maize/lox-suggestions.png",
+      "label": "Type-ahead search",
+      "text": "Click in the search box and start typing to find matching terms. Select a suggested term to define a search filter. Add more filters at any time by searching for another search term."
+    },
+    {
+      "img": "static/images/welcome/maize/lox-homologs.png",
+      "label": "Search results for homologs of lox1",
+      "text": "The taxo(ge)nomic distribution of search results highlights positions of genes on the assembled chromosomes. Drag-select regions to refine the search."
+    },
+    {
+      "img": "static/images/welcome/maize/lox-expression.png",
+      "label": "Expression: EBI Atlas view",
+      "text": "This view depicts baseline gene expression data for a whole plant (top anatogram on the left of the results box) and for the plant’s reproductive organs (bottom anatogram). Experiments are organized by study on the left side, and by tissue or developmental stage on the top of the graph."
+    },
+    {
+      "img": "static/images/welcome/maize/lox-align-overview.png",
+      "label": "Homology: Alignment overview",
+      "text": "The homology tab displays an interactive gene tree visualization. The alignment overview mode shows a zoomed-out view of the multiple sequence alignment, coded by Interpro domain."
+    },
+    {
+      "img": "static/images/welcome/maize/lox-malign.png",
+      "label": "Homology: Multiple sequence alignment",
+      "text": "The multiple sequence alignment mode lets you zoom in to explore differences among the sequences in a gene family."
+    },
+    {
+      "img": "static/images/welcome/maize/lox-neighborhood.png",
+      "label": "Homology: Neighborhood Conservation view",
+      "text": "This view presents the target gene in the middle with a vertical red line connecting the homologs from each genome in the tree plus 10 flanking genes upstream and downstream color-coded by gene family. This allows you to identify structural variants and Presence/Absence variants in the region in question."
+    },
+    {
+      "img": "static/images/welcome/maize/lox-pathways.png",
+      "label": "Pathways: Plant Reactome view",
+      "text": "From the literature, we know that lox9 is part of the jasmonic acid (JA) biosynthesis pathway. Accordingly, the Pathways panel shows that this gene product catalyzes a reaction in two pathways, JA biosynthesis, and 13-LOX/13-HPL."
+    }
+  ]
 }

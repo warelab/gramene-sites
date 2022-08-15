@@ -1,22 +1,76 @@
 import React from "react";
 import {connect} from 'redux-bundler-react'
-import {Alert, Container, Row, Col, Card, CardDeck, Button} from 'react-bootstrap'
+import {Alert, Container, Row, Col, Card, Button, Collapse, Carousel} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import { Timeline } from 'react-twitter-widgets'
 import { Portals } from './Portals'
 import closest from 'component-closest';
 import '../styles/welcome.less'
 
+function WelcomeBanner({config}) {
+  const key = `gramene-${config.name}-${config.version}-alerted`;
+  const [hide, setShow] = React.useState(localStorage.getItem(key) || '');
+  const show = hide === "yes" ? "no" : "yes";
+  const haveSlides = config.slides.length > 0;
+  return (
+    <>
+      <Alert variant="success">
+        <Alert.Heading>
+          Welcome to {config.name} <span style={{fontSize:"smaller"}}><Link to="/News">release {config.version.replace('v','')}</Link></span>
+          {haveSlides && <Button onClick={() => {
+            setShow(show);
+            localStorage.setItem(key, show)
+          }}
+                                 variant="secondary"
+                                 size="sm"
+                                 style={{float: "right"}}
+          >{show === "no" ? "Show" : "Hide"} Slideshow</Button>
+          }
+        </Alert.Heading>
+        {config.description}
+      </Alert>
+      <Collapse in={ show === "yes" }>
+        <Carousel interval={5000} fade={true}>
+          {config.slides.map((slide, idx) =>
+            <Carousel.Item key={idx} style={{ backgroundColor: '#557b74'}}>
+              <Card bg="dark" text="white" style={{
+                width: '70%',
+                marginLeft: '15%',
+                marginRight: '15%',
+                marginTop: '10px',
+                marginBottom: '5%',
+                padding: '5px'
+              }}>
+                <Card.Img variant="top" src={slide.img}/>
+                <Card.Body>
+                  <Card.Title>{slide.label}</Card.Title>
+                  <Card.Text>{slide.text}</Card.Text>
+                </Card.Body>
+                {slide.credit &&
+                  <Card.Footer>
+                    <i>{slide.credit}</i>
+                  </Card.Footer>
+                }
+              </Card>
+            </Carousel.Item>
+          )}
+        </Carousel>
+      </Collapse>
+    </>
+  )
+}
+
 function AlertDismissibleExample({config}) {
-  const [hide, setShow] = React.useState(localStorage.getItem('gramene-alerted') || '');
+  const key = `gramene-${config.name}-${config.version}-alerted`;
+  const [hide, setShow] = React.useState(localStorage.getItem(key) || '');
 
   if (hide !== 'yes') {
     return (
       <Alert variant="success" onClose={() => {
         setShow('yes');
-        localStorage.setItem('gramene-alerted', 'yes');
+        localStorage.setItem(key, 'yes');
       }} dismissible>
-        <Alert.Heading>Welcome to {config.name}</Alert.Heading>
+        <Alert.Heading>Welcome to {config.name} <span style={{fontSize:"smaller"}}><Link to="/News">release {config.version.replace('v','')}</Link></span></Alert.Heading>
         <hr/>
         <p>
           <b>Gramene</b> is a <i>curated, open-source, integrated</i> data resource for comparative functional
@@ -136,7 +190,8 @@ const Welcome = props => (
         <Col xxl={1} xl={1} lg={0}>
         </Col>
         <Col xxl={6} xl={7} lg={9}>
-          <AlertDismissibleExample config={props.configuration}/>
+          {/*<AlertDismissibleExample config={props.configuration}/>*/}
+          <WelcomeBanner config={props.configuration}/>
           {props.match && (props.match.params.stub || props.match.params.nid)
             ? <Drupal stub={props.match.params.stub} nid={props.match.params.nid}/>
             : <Portals location={props.location}/>

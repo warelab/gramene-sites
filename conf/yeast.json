@@ -1,6 +1,7 @@
 {
   "id": "yeast",
   "name": "Gramene Yeast",
+  "description": "Pan genome browser for yeast varieties",
   "version": "v1",
   "url": "https://yeast.gramene.org",
   "ensemblURL": "https://yeast-ensembl.gramene.org",
@@ -15,5 +16,6 @@
   "showFeed": false,
   "showTweets": false,
   "showInMenu": false,
-  "date": "2022-03-30"
+  "date": "2022-03-30",
+  "slides": []
 }

@@ -18,7 +18,7 @@ body {
     max-height: 600px;
     overflow-y: scroll;
     border-bottom: solid;
-    z-index: 1;
+    z-index: 5;
 }
 .search-suggestions .nav-link.disabled {
     color: #6c757d;

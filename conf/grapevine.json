@@ -9,12 +9,12 @@
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-87",
   "grameneData": "https://data.gramene.org/grapevine_v3",
   "curation": {
-    "url": "http://curate.gramene.org/grapevine?gene=",
+    "url": "http://curate.gramene.org/grapevine_v3?since=71275&gene=",
     "taxa": {
-      "29760": 1
+      "297600000": 1
     }
   },
-  "targetTaxonId": 29760,
+  "targetTaxonId": 297600000,
   "portals": ['browser','blast','pansites'],
   "portals2": ['pansites','browser','reactome','climtools','atlas','trackhub'],
   "showInMenu": true,
@@ -22,5 +22,6 @@
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
-  "date": "2022-03-30"
+  "date": "2022-06-30",
+  "slides": []
 }

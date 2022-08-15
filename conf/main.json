@@ -9,12 +9,13 @@
   "ensemblRest": "https://data.gramene.org/ensembl65",
   "grameneData": "https://data.gramene.org/v65",
   "targetTaxonId": 3702,
-  "portals": ['browser','reactome','pansites','blast','climtools','atlas','mart','tools','downloads'],
+  "portals": ['browser','reactome','pansites','blast','climtools','atlas','mart','tools','downloads','archive'],
   "portals2": ['pansites','browser','reactome','climtools','blast','mart','tools','atlas','trackhub','outreach','downloads','archive'],
   "showInMenu": true,
   "showNews": true,
   "showGuides": false,
   "showFeed": true,
   "showTweets": true,
-  "date": "2022-04-28"
+  "date": "2022-04-28",
+  "slides": []
 }
