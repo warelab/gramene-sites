@@ -1,13 +1,13 @@
 {
   "id": "main",
   "name": "Gramene",
-  "version": "v65",
+  "version": "v66",
   "description": "Comparative plant genomics for crops and model organisms",
   "url": "https://www.gramene.org",
   "ensemblURL": "https://ensembl.gramene.org",
   "ensemblSite": "https://ensembl.gramene.org",
-  "ensemblRest": "https://data.gramene.org/ensembl65",
-  "grameneData": "https://data.gramene.org/v65",
+  "ensemblRest": "https://data.gramene.org/ensembl66",
+  "grameneData": "https://data.gramene.org/v66",
   "targetTaxonId": 3702,
   "portals": ['browser','reactome','pansites','blast','climtools','atlas','mart','tools','downloads','archive'],
   "portals2": ['pansites','browser','reactome','climtools','blast','mart','tools','atlas','trackhub','outreach','downloads','archive'],
@@ -16,6 +16,6 @@
   "showGuides": false,
   "showFeed": true,
   "showTweets": true,
-  "date": "2022-04-28",
+  "date": "2023-01-02",
   "slides": []
 }

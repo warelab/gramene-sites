@@ -81,6 +81,12 @@ const tools = {
     description: "Gramene-powered sites focused on specific crops",
     link: "pansites",
     imgSrc: "static/images/welcome/pangenomes.svg"
+  },
+  curated: {
+    title: "Curated Gene Function",
+    description: "Genes described in the literature",
+    link: "?fq_field=capabilities&fq_value=pubs&category=Curated&name=publication",
+    imgSrc: "static/images/welcome/curated.png"
   }
 };
 

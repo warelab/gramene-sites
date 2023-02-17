@@ -1,13 +1,13 @@
 {
   "id": "sorghum",
   "name": "Sorghumbase",
-  "version": "uncc_test1",
+  "version": "v5",
   "description": "Genomic resources for the sorghum research community",
   "url": "https://www.sorghumbase.org",
-  "ensemblURL": "https://ensembl.sorghumbase.org",
-  "ensemblSite": "https://ensembl.sorghumbase.org",
+  "ensemblURL": "https://ensembl-dev.sorghumbase.org",
+  "ensemblSite": "https://ensembl-dev.sorghumbase.org",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-87",
-  "grameneData": "https://data.sorghumbase.org/uncc_test1",
+  "grameneData": "https://data.sorghumbase.org/sorghum_v5",
   "targetTaxonId": 4588,
   "curation": {
     "url": "http://curate.gramene.org/uncc_test1?since=4479&gene=",

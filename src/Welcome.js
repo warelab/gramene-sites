@@ -2,10 +2,19 @@ import React from "react";
 import {connect} from 'redux-bundler-react'
 import {Alert, Container, Row, Col, Card, Button, Collapse, Carousel} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import { Timeline } from 'react-twitter-widgets'
 import { Portals } from './Portals'
 import closest from 'component-closest';
 import '../styles/welcome.less'
+// var loadjs = require('loadjs');
+// loadjs(['https://platform.twitter.com/widgets.js'], 'twitter');
+//
+// var haveTwitter = false;
+// var Timeline = null;
+// loadjs.ready('twitter', function() {
+//   /* twitter loaded */
+//   haveTwitter = true;
+//   Timeline = require('react-twitter-widgets').Timeline;
+// });
 
 function WelcomeBanner({config}) {
   const key = `gramene-${config.name}-${config.version}-alerted`;
@@ -30,6 +39,7 @@ function WelcomeBanner({config}) {
         {config.description}
       </Alert>
       <Collapse in={ show === "yes" }>
+        <div>
         <Carousel interval={5000} fade={true}>
           {config.slides.map((slide, idx) =>
             <Carousel.Item key={idx} style={{ backgroundColor: '#557b74'}}>
@@ -55,6 +65,7 @@ function WelcomeBanner({config}) {
             </Carousel.Item>
           )}
         </Carousel>
+        </div>
       </Collapse>
     </>
   )
@@ -198,17 +209,11 @@ const Welcome = props => (
           }
         </Col>
         <Col xxl={3} xl={3} lg={3}>
-          {props.configuration.showFeed && <NewsFeed/>}
-          {props.configuration.showTweets && <Timeline
-            dataSource={{
-              sourceType: 'profile',
-              screenName: 'GrameneDatabase'
-            }}
-            options={{
-              height: '400px',
-              width: '405px'
-            }}
-          />}
+          <div>{props.configuration.showFeed && <NewsFeed/>}</div>
+          <div>{props.configuration.showTweets &&
+            <a className="twitter-timeline" data-theme="light" data-dnt="true" data-height="600"
+               href="https://twitter.com/GrameneDatabase?ref_src=twsrc%5Etfw"/>
+          }</div>
         </Col>
         <Col xxl={2} xl={1} lg={0}/>
       </Row>

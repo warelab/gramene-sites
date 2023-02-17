@@ -5,17 +5,17 @@
     <title>Gramene Oryza</title>
     <script>
       window.gramene = {};
-      gramene.defaultServer = 'https://data.gramene.org/oryza_v4/swagger';
+      gramene.defaultServer = 'https://data.gramene.org/oryza_v5/swagger';
     </script>
-    <script async src="../src/static/gramene-dalliance/dalliance-all.js"></script>
-    <script async src="https://plantreactome.gramene.org/DiagramJs/diagram/diagram.nocache.js"></script>
+    <script async defer src="../src/static/gramene-dalliance/dalliance-all.js"></script>
+    <script async defer src="https://plantreactome.gramene.org/DiagramJs/diagram/diagram.nocache.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <meta name="description" content="Comparative plant genomics focused on rice crop varieties">
     <meta name="google" content="nositelinkssearchbox">
     <meta name="robots" content="noimageindex, noarchive">
     <link rel="stylesheet" type="text/css" href="../src/static/style.css">
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1624628-12"></script>
+    <script async defer src="https://www.googletagmanager.com/gtag/js?id=UA-1624628-12"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -39,6 +39,10 @@
     <link rel="icon" type="image/png" href="../src/static/icons/favicon-16x16.png" sizes="16x16">
 </head>
 <body>
+<!--<div id="fb-root"></div>-->
+<!--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0" nonce="ifLPZOdm"></script>-->
+<!--<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+
 <div id="gramene"></div>
 <script type="module" src="../src/gramene.js"></script>
 <script>

@@ -12,7 +12,7 @@ body {
 .search-suggestions {
     background: white;
     position: fixed;
-    top: 125px;
+    top: 90px;
     left: 0;
     width: 100%;
     max-height: 600px;
@@ -56,4 +56,10 @@ body {
 
 .gramene-tool {
 
+}
+
+.gramene-navbar {
+    --bs-navbar-padding-y: 0!important;
+    --bs-navbar-brand-padding-y: 0!important;
+    --bs-navbar-brand-margin-end: 0.5rem!important;
 }

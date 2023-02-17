@@ -171,15 +171,14 @@ const SearchMenu = props => (
 )
 
 const NewsCmp = ({configuration}) => (
-  <div style={{paddingBottom: '100px'}}>
     <MDView
       org='warelab'
       repo='release-notes'
       path={subsite}
       heading='News'
       date={configuration.date}
+      offset={160}
     />
-  </div>
 )
 const News = connect(
   'selectConfiguration',
@@ -221,9 +220,9 @@ const Guides = connect(
 
 const GrameneMenuCmp = ({configuration}) => (
   <Navbar bg="light" expand="lg" sticky='top'>
-    <div style={{width: '100%', borderBottomColor: '#c7c7c7', borderBottomStyle: 'solid'}}>
-      <Navbar className="header" bg="light" expand="lg">
-        <Navbar.Brand>
+    <div style={{width: '100%', borderBottomColor: '#c7c7c7', borderBottomStyle: 'solid', marginLeft: '15px', marginRight: '15px'}}>
+      <Navbar className="gramene-navbar" bg="light" expand="lg">
+        <Navbar.Brand className="gramene-navbar">
           <a href="/">
             <img src={`static/images/${subsite}_logo.svg`}
                  height={80}
