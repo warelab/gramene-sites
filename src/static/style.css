@@ -63,3 +63,7 @@ body {
     --bs-navbar-brand-padding-y: 0!important;
     --bs-navbar-brand-margin-end: 0.5rem!important;
 }
+
+.tooltip {
+    --bs-tooltip-max-width: 400px!important;
+}
