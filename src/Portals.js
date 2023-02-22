@@ -64,6 +64,12 @@ const tools = {
     drupalLink: "ftp-download",
     imgSrc: "static/images/welcome/download.png"
   },
+  ftp: {
+    title: "Bulk Downloads",
+    description: "FTP download of our data",
+    link: "ftp",
+    imgSrc: "static/images/welcome/download.png"
+  },
   archive: {
     title: "Archive",
     description: "Legacy tools and data (markers, Cyc pathways, etc)",
@@ -90,7 +96,7 @@ const tools = {
   }
 };
 
-const GrameneTool = ({title, description, imgSrc, link, drupalLink, ensemblPath, isExternal, ensemblURL}) => {
+const GrameneTool = ({title, description, imgSrc, link, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
   let external;
   if (isExternal) {
     external = <small title="This link opens a page from an external site"><FiExternalLink/></small>;
@@ -123,6 +129,9 @@ const GrameneTool = ({title, description, imgSrc, link, drupalLink, ensemblPath,
         </NavLink>
       )
     }
+    if (link === 'ftp') {
+      link = `https://ftp.gramene.org/${id}/${version}`
+    }
   }
   return (
     <Col onClick={() => window.location.href = link}>
@@ -141,7 +150,7 @@ const GrameneTool = ({title, description, imgSrc, link, drupalLink, ensemblPath,
   );
 };
 
-const GrameneToolLink = ({title, description, imgSrc, link, drupalLink, ensemblPath, isExternal, ensemblURL}) => {
+const GrameneToolLink = ({title, description, imgSrc, link, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
   let external;
   if (isExternal) {
     external = <small title="This link opens a page from an external site"><FiExternalLink/></small>;
@@ -152,6 +161,11 @@ const GrameneToolLink = ({title, description, imgSrc, link, drupalLink, ensemblP
     }
     if (ensemblPath) {
       link = ensemblURL + ensemblPath;
+    }
+  }
+  else {
+    if (link === 'ftp') {
+      link = `https://ftp.gramene.org/${id}/${version}`
     }
   }
   return <NavDropdown.Item href={link}><img style={{width: "32px"}} src={imgSrc}/>&nbsp;&nbsp;{title}</NavDropdown.Item>
@@ -179,7 +193,7 @@ const PortalsCmp = props => (
       :
       <Row xs={1} md={2} className="g-4">
         {props.configuration.portals.map((portal, idx) =>
-          <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL}/>
+          <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL} {...props.configuration}/>
         )}
       </Row>
     }
@@ -196,7 +210,7 @@ const PortalsDropdownCmp = ({configuration}) => {
     return (
       <NavDropdown id={'portals-dropdown'} title={'Links'} className={"dropup"}>
         { configuration.portals2.map((portal, idx) =>
-          <GrameneToolLink {...tools[portal]} key={idx} ensemblURL={configuration.ensemblURL}/>
+          <GrameneToolLink {...tools[portal]} key={idx} ensemblURL={configuration.ensemblURL} {...configuration}/>
         )}
       </NavDropdown>
     )
