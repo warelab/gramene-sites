@@ -193,7 +193,7 @@ const PortalsCmp = props => (
       :
       <Row xs={1} md={2} className="g-4">
         {props.configuration.portals.map((portal, idx) =>
-          <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL} {...props.configuration}/>
+          <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL} id={props.configuration.id} version={props.configuration.version}/>
         )}
       </Row>
     }
@@ -210,7 +210,7 @@ const PortalsDropdownCmp = ({configuration}) => {
     return (
       <NavDropdown id={'portals-dropdown'} title={'Links'} className={"dropup"}>
         { configuration.portals2.map((portal, idx) =>
-          <GrameneToolLink {...tools[portal]} key={idx} ensemblURL={configuration.ensemblURL} {...configuration}/>
+          <GrameneToolLink {...tools[portal]} key={idx} ensemblURL={configuration.ensemblURL} id={configuration.id} version={configuration.version}/>
         )}
       </NavDropdown>
     )

@@ -24,7 +24,7 @@
     "formik": "^3.0.0-next.8",
     "gramene-alerts": "^1.0.2",
     "gramene-mdview": "^2.0.6",
-    "gramene-search": "^1.2.55",
+    "gramene-search": "^1.2.56",
     "loadjs": "^4.2.0",
     "lodash": "^4.17.21",
     "money-clip": "^3.0.5",
