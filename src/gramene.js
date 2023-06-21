@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactGA from 'react-ga'
 import {Provider, connect} from 'redux-bundler-react'
 import {render} from 'react-dom'
 import {composeBundles, createCacheBundle} from "redux-bundler";
@@ -320,6 +321,8 @@ cache.getAll().then(initialData => {
     console.log('starting with locally cached data:', initialData)
   }
   const store = getStore(initialData);
+  const config = store.selectConfiguration();
+  ReactGA.initialize(config.ga);
   let element = document.getElementById('gramene');
   element && render(Gramene(store), element);
 });

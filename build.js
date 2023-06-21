@@ -29,7 +29,7 @@ const mode = args.mode || "production";
     mode: mode,
     defaultTargetOptions: {
       distDir: dest,
-      shouldScopeHoist: false,
+      shouldScopeHoist: false,//mode === 'production',
       publicUrl: deploy === 'dev' ? `/${site}/${version}` : '/'
     },
     env: {

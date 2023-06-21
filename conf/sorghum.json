@@ -1,29 +1,23 @@
 {
   "id": "sorghum",
   "name": "Sorghumbase",
-  "version": "v5",
+  "version": "v6",
   "description": "Genomic resources for the sorghum research community",
   "url": "https://www.sorghumbase.org",
   "ensemblURL": "https://ensembl-dev.sorghumbase.org",
   "ensemblSite": "https://ensembl-dev.sorghumbase.org",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-87",
-  "grameneData": "https://data.sorghumbase.org/sorghum_v5",
+  "grameneData": "https://data.sorghumbase.org/sorghum_v6",
   "targetTaxonId": 4588,
   "curation": {
-    "url": "http://curate.gramene.org/uncc_test1?since=4479&gene=",
+    "url": "http://curate.gramene.org/sorghum_v6?since=4479&gene=",
     "taxa": {
-      "45580014": 1,
-      "45580015": 1,
-      "45580003": 1,
-      "1000651496": 1,
-      "1000656001": 1,
-      "1000655996": 1,
-      "1000561071": 1,
-      "4558": 1
+      "4558": 1,
+      "4558001": 1
     }
   },
   "alertText": "Click the search icon in the menu bar or type / to search",
-  "portals": ['browser','blast','pansites'],
+  "portals": ['browser','blast','pansites','curated'],
   "portals2": ['pansites','browser','reactome','climtools','blast','atlas','trackhub'],
   "showInMenu": true,
   "showNews": true,
