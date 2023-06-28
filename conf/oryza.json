@@ -1,15 +1,15 @@
 {
   "id": "oryza",
   "name": "Gramene Oryza",
-  "version": "v6",
+  "version": "v7",
   "description": "Comparative plant genomics focused on rice varieties",
   "url": "https://oryza.gramene.org",
   "ensemblURL": "https://oryza-ensembl.gramene.org",
   "ensemblSite": "https://oryza-ensembl.gramene.org",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-87",
-  "grameneData": "https://data.gramene.org/oryza_v5",
+  "grameneData": "https://data.gramene.org/oryza_v7",
   "curation": {
-    "url": "http://curate.gramene.org/oryza_v5?since=4479&gene=",
+    "url": "https://curate.gramene.org/oryza_v7?since=4479&gene=",
     "taxa": {
       "39947": "Oryza sativa Japonica",
       "65489": "oryza_barthii",
@@ -42,13 +42,13 @@
     }
   },
   "targetTaxonId": 39946,
-  "portals": ['browser','blast','pansites','curated'],
-  "portals2": ['pansites','browser','reactome','blast','atlas','trackhub'],
+  "portals": ['browser','blast','pansites','curated','climtools'],
+  "portals2": ['pansites','browser','reactome','blast','climtools','atlas','trackhub'],
   "showInMenu": true,
   "showNews": true,
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
-  "date": "2023-01-16",
+  "date": "2023-07-09",
   "slides": []
 }
