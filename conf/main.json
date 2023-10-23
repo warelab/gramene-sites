@@ -2,21 +2,43 @@
   "id": "main",
   "ga": "G-ZTEQBFCRXZ",
   "name": "Gramene",
-  "version": "v66",
+  "version": "v68",
   "description": "Comparative plant genomics for crops and model organisms",
   "url": "https://www.gramene.org",
-  "ensemblURL": "https://ensembl.gramene.org",
-  "ensemblSite": "https://ensembl.gramene.org",
-  "ensemblRest": "https://data.gramene.org/ensembl66",
-  "grameneData": "https://data.gramene.org/v66",
+  "ensemblURL": "https://ensembl-dev.gramene.org",
+  "ensemblSite": "https://ensembl-dev.gramene.org",
+  "ensemblRest": "https://data.gramene.org/ensembl68",
+  "grameneData": "https://data.gramene.org/v68",
   "targetTaxonId": 3702,
-  "portals": ['browser','reactome','pansites','blast','climtools','atlas','mart','tools','downloads','archive'],
+  "portals": ['browser','reactome','pansites','curated','blast','climtools','atlas','mart','tools','archive'],
   "portals2": ['pansites','browser','reactome','climtools','blast','mart','tools','atlas','trackhub','outreach','downloads','archive'],
   "showInMenu": true,
   "showNews": true,
   "showGuides": false,
   "showFeed": true,
   "showTweets": true,
-  "date": "2023-01-02",
-  "slides": []
+  "date": "2023-10-23",
+  "slides": [],
+  "panSite" : {
+    "sorghum_bicolor" : {
+      "url": "https://sorghumbase.org/genes?idList=",
+      "name": "SorghumBase",
+      "svg": "./static/images/sorghum_logo.svg"
+    },
+    vitis_vinifera : {
+      url: "https://vitis.gramene.org?idList=",
+      name: "Gramene Grapevine",
+      svg: "./static/images/grapevine_logo.svg"
+    },
+    oryza_sativa : {
+      url: "https://oryza.gramene.org?idList=",
+      name: "Gramene Oryza",
+      svg: "./static/images/oryza_logo.svg"
+    },
+    zea_mays : {
+      url: "https://maize-pangenome.gramene.org?idList=",
+      name: "Gramene Maize",
+      svg: "./static/images/maize_logo.svg"
+    }
+  }
 }

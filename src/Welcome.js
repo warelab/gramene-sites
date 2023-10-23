@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import { Portals } from './Portals'
 import closest from 'component-closest';
 import '../styles/welcome.less'
-import { TwitterTimelineEmbed } from 'react-twitter-embed'
+// import { TwitterTimelineEmbed } from 'react-twitter-embed'
 // var loadjs = require('loadjs');
 // loadjs(['https://platform.twitter.com/widgets.js'], 'twitter');
 //
@@ -210,14 +210,10 @@ const Welcome = props => (
           }
         </Col>
         <Col xxl={3} xl={3} lg={3}>
-          <div>{props.configuration.showFeed && <NewsFeed/>}</div>
-          <div>{props.configuration.showTweets &&
-            <TwitterTimelineEmbed
-              sourceType="url"
-              url="https://twitter.com/GrameneDatabase?ref_src=twsrc%5Etfw"
-              options={{ height:600 }}
-              scriptAsync={true}
-            />
+          <div>{ props.configuration.showFeed && <NewsFeed/> }</div>
+          <div>{ props.configuration.showTweets &&
+            <a className="twitter-timeline" data-height="500" data-dnt="true"
+               href="https://twitter.com/GrameneDatabase?ref_src=twsrc%5Etfw">Tweets by GrameneDatabase</a>
           }</div>
         </Col>
         <Col xxl={2} xl={1} lg={0}/>
