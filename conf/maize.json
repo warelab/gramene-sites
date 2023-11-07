@@ -58,6 +58,23 @@
       "4577027":"Zea maysw22"
     }
   },
+  "panSite" : {
+    "sorghum_bicolor" : {
+      "url": "https://sorghumbase.org/genes?idList=",
+      "name": "SorghumBase",
+      "svg": "./static/images/sorghum_logo.svg"
+    },
+    vitis_vinifera : {
+      url: "https://vitis.gramene.org?idList=",
+      name: "Gramene Grapevine",
+      svg: "./static/images/grapevine_logo.svg"
+    },
+    oryza_sativa : {
+      url: "https://oryza.gramene.org?idList=",
+      name: "Gramene Oryza",
+      svg: "./static/images/oryza_logo.svg"
+    }
+  },
   "slides": [
     {
       "img": "static/images/welcome/maize/NAM.png",

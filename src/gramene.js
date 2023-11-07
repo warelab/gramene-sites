@@ -5,7 +5,7 @@ import {render} from 'react-dom'
 import {composeBundles, createCacheBundle} from "redux-bundler";
 import {getConfiguredCache} from 'money-clip';
 import {DebounceInput} from 'react-debounce-input'
-import {Alert, Navbar, Nav, NavDropdown, Tab, Row, Col, FormControl, InputGroup, Button} from 'react-bootstrap'
+import {Navbar, Nav, NavDropdown, InputGroup, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Status, Filters, Results, Views, suggestions as GrameneSuggestions, bundles} from 'gramene-search';
 import Feedback from './Feedback';
@@ -83,19 +83,23 @@ const Alerter = connect(
   AlertCmp
 );
 
-const SearchViews = props => (
+const SearchViewsCmp = props => (
   <div className="row no-margin no-padding" style={{backgroundColor: "#fff"}}>
     <div className="col-md-2 no-padding">
       <div className="gramene-sidebar">
         <Status/>
         <Filters/>
-        {/*<Views/>*/}
+        {props.configuration.showViews && <Views/>}
       </div>
     </div>
     <div className="col-md-10" style={{paddingBottom: '100px'}}>
       <Results/>
     </div>
   </div>
+);
+const SearchViews = connect(
+  'selectConfiguration',
+  SearchViewsCmp
 );
 
 const MainViewCmp = props => {
@@ -246,17 +250,11 @@ const GrameneMenuCmp = ({configuration}) => (
               Genome browser
             </Nav.Link>
             { configuration.showNews && <NavLink className="nav-link" to="/news">News</NavLink> }
-            {/*<NavLink className="nav-link" to="/genomes">Genomes</NavLink>*/}
             { configuration.showGuides && <NavLink className="nav-link" to="/guides">Guides</NavLink> }
             <NavLink className="nav-link" to={() => ({
               pathname: '/feedback',
               state: {search: document.location.href}
             })}>Feedback</NavLink>
-            {/*<NavDropdown id={"gramene-sites"} title={"Gramene Sites"}>*/}
-            {/*  {panSites.filter(site => site.id !== subsite && site.showInMenu).map((site, idx) =>*/}
-            {/*    <NavDropdown.Item key={idx} href={site.url}>{site.name}</NavDropdown.Item>*/}
-            {/*  )}*/}
-            {/*</NavDropdown>*/}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -285,7 +283,6 @@ const Footer = props => (
             )}
           </NavDropdown>
         </Nav>
-        <hr/>
         <StaticSocialButtons/>
       </Navbar>
     </div>
@@ -302,7 +299,6 @@ const Gramene = (store) => (
         <Switch>
           <Route path="/feedback" component={Feedback}/>
           <Route path="/news" component={News}/>
-          {/*<Route path="/genomes" component={Genomes} />*/}
           <Route path="/guides" component={Guides}/>
           <Route path="/pansites" component={Welcome}/>
           <Route path="/node/:nid" component={Welcome}/>

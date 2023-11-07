@@ -24,5 +24,22 @@
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
-  "slides": []
+  "slides": [],
+  "panSite" : {
+    vitis_vinifera : {
+      url: "https://vitis.gramene.org?idList=",
+      name: "Gramene Grapevine",
+      svg: "./static/images/grapevine_logo.svg"
+    },
+    oryza_sativa : {
+      url: "https://oryza.gramene.org?idList=",
+      name: "Gramene Oryza",
+      svg: "./static/images/oryza_logo.svg"
+    },
+    zea_maysb73 : {
+      url: "https://maize-pangenome.gramene.org?idList=",
+      name: "Gramene Maize",
+      svg: "./static/images/maize_logo.svg"
+    }
+  }
 }

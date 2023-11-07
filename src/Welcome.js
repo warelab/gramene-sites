@@ -169,7 +169,7 @@ const NewsFeedCmp = props => {
     return (
       <div style={{backgroundColor:'white', padding:'0px', marginBottom:'20px', borderRadius:'5px'}}>
         <h4 style={{padding:'10px',marginBottom:'0px'}}>Latest News</h4>
-        <ul className={"posts list-unstyled"} style={{overflow: 'auto', minHeight: "250px", height: "265px", padding: "0px", marginBottom: '0px'
+        <ul className={"posts list-unstyled"} style={{overflow: 'auto', minHeight: "550px", height: "565px", padding: "0px", marginBottom: '0px'
         ,borderBottomStyle:'solid', borderBottomColor:'#e3e8ec', borderBottomWidth:'thin',borderTopStyle:'solid',borderTopColor:'#e3e8ec',borderTopWidth:'thin'}}>
           {props.drupalFeed.map((post, idx) =>
             <li key={idx} style={{padding:"10px"}}>
@@ -211,10 +211,10 @@ const Welcome = props => (
         </Col>
         <Col xxl={3} xl={3} lg={3}>
           <div>{ props.configuration.showFeed && <NewsFeed/> }</div>
-          <div>{ props.configuration.showTweets &&
-            <a className="twitter-timeline" data-height="500" data-dnt="true"
-               href="https://twitter.com/GrameneDatabase?ref_src=twsrc%5Etfw">Tweets by GrameneDatabase</a>
-          }</div>
+          {/*<div>{ props.configuration.showTweets &&*/}
+          {/*  <a className="twitter-timeline" data-height="500" data-dnt="true"*/}
+          {/*     href="https://twitter.com/GrameneDatabase?ref_src=twsrc%5Etfw">Tweets by GrameneDatabase</a>*/}
+          {/*}</div>*/}
         </Col>
         <Col xxl={2} xl={1} lg={0}/>
       </Row>
