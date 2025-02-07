@@ -1,13 +1,14 @@
 {
   "id": "maize",
   "name": "Gramene Maize",
-  "version": "v3",
+  "version": "v4",
+  "ga": "G-Y7ZYG1R8QT",
   "description": "Comparative plant genomics focused on maize varieties",
   "url": "https://maize-pangenome.gramene.org",
   "ensemblURL": "https://maize-pangenome-ensembl.gramene.org",
   "ensemblSite": "https://maize-pangenome-ensembl.gramene.org",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-87",
-  "grameneData": "https://data.gramene.org/maize_v3",
+  "grameneData": "https://data.gramene.org/maize_v4",
   "targetTaxonId": 4577,
   "portals": ['browser','blast','pansites','curated','ftp'],
   "portals2": ['pansites','browser','reactome','blast','atlas','trackhub','ftp'],
@@ -16,9 +17,9 @@
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
-  "date": "2023-03-30",
+  "date": "2024-03-30",
   "curation": {
-    "url": "http://curate.gramene.org/maize_v3?since=4479&gene=",
+    "url": "http://curate.gramene.org/maize_v4?since=4479&gene=",
     "taxa": {
       "4577":"Zea mays B73 v5",
       "45770000":"Zea mays B73 v4",
@@ -57,6 +58,16 @@
       "4577030":"Zea maysph207",
       "4577027":"Zea maysw22"
     }
+  },
+  details: {
+    sequences: true,
+    VEP: false,
+    location: true,
+    expression: true,
+    homology: true,
+    pathways: true,
+    pubs: true,
+    xrefs: true
   },
   "panSite" : {
     "sorghum_bicolor" : {

@@ -18,7 +18,8 @@ const tools = {
     title: "Plant Reactome",
     description: "Browse and analyze metabolic and regulatory pathways",
     link: "//plantreactome.gramene.org",
-    imgSrc: "static/images/welcome/plantReactome.svg"
+    imgSrc: "static/images/welcome/plantReactome.svg",
+    isExternal: true
   },
   tools: {
     title: "Ensembl Tools",
@@ -78,9 +79,21 @@ const tools = {
   },
   climtools: {
     title: "CLIMtools",
-    description: "Environment x Genome x Phenotype Associations in A. thaliana",
+    description: "Environment x Genome x Phenotype Associations",
     link: "https://www.gramene.org/CLIMtools",
     imgSrc: "static/images/welcome/climtools.png"
+  },
+  oryzaclimtools: {
+    title: "CLIMtools",
+    description: "Environment x Genome x Phenotype Associations",
+    link: "https://www.gramene.org/CLIMtools/oryza_v1.0",
+    imgSrc: "static/images/welcome/climtools.png"
+  },
+  oryzadownloads: {
+    title: "Bulk Downloads",
+    description: "FTP download of our data",
+    link: "https://ftp.gramene.org/oryza/release-current/",
+    imgSrc: "static/images/welcome/download.png"
   },
   pansites: {
     title: "Plant Pan Genomes",
@@ -93,13 +106,20 @@ const tools = {
     description: "Genes described in the literature",
     link: "?fq_field=capabilities&fq_value=pubs&category=Curated&name=publication",
     imgSrc: "static/images/welcome/curated.png"
+  },
+  tutorials: {
+    title: "Video Tutorials",
+    description: "Site features, explained!",
+    link: "https://www.youtube.com/@sorghumbase9338",
+    imgSrc: "static/images/welcome/tutorials.png",
+    isExternal: true
   }
 };
 
-const GrameneTool = ({title, description, imgSrc, link, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
+const GrameneTool = ({title, description, imgSrc, imgSrc2, link, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
   let external;
   if (isExternal) {
-    external = <small title="This link opens a page from an external site"><FiExternalLink/></small>;
+    external = <small title="This link opens a page from an external site" style={{float:'right'}}><FiExternalLink/></small>;
   }
   if (!link) {
     if (drupalLink) {
@@ -134,7 +154,7 @@ const GrameneTool = ({title, description, imgSrc, link, drupalLink, ensemblPath,
     }
   }
   return (
-    <Col onClick={() => window.location.href = link}>
+    <Col onClick={() => isExternal ? window.open(link, '_blank') : window.location.href = link}>
       <Row className="gramene-tool">
         <Col md="auto">
           <img style={{width: "96px"}} src={imgSrc} alt={title}/>
@@ -191,7 +211,7 @@ const PortalsCmp = props => (
         )}
       </Row>
       :
-      <Row xs={1} md={2} className="g-4">
+      <Row xs={1} md={2} xxl={3} className="g-4">
         {props.configuration.portals.map((portal, idx) =>
           <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL} id={props.configuration.id} version={props.configuration.version}/>
         )}
@@ -222,3 +242,31 @@ export const PortalsDropdown = connect(
   PortalsDropdownCmp
 );
 
+const ExamplesCmp = props => {
+  return (
+    <div className="examples-wrapper">
+      <h3>Examples</h3>
+      <Row xs={1} md={2} xl={2} className="g-4">
+        {props.configuration.examples.map((example, idx) =>
+          <Col key={idx} onClick={() => window.location.href = example.link}>
+            <Row className="gramene-example">
+              <Col md="auto">
+                <img src={example.imgSrc} alt={example.title}/>
+              </Col>
+              <Col>
+                <h5>
+                  {example.title}
+                </h5>
+                <p className="gramene-example-desc">{example.description}</p>
+              </Col>
+            </Row>
+          </Col>
+        )}
+      </Row>
+    </div>
+  )
+};
+export const Examples = connect(
+  'selectConfiguration',
+  ExamplesCmp
+);

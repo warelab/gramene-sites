@@ -55,6 +55,7 @@ const config = {
     dispatch({type: 'GRAMENE_HELP_TOGGLED', payload: null})
   },
   selectGrameneAPI: state => state.config.grameneData,
+  selectEnsemblAPI: state => state.config.ensemblRest,
   selectTargetTaxonId: state => state.config.targetTaxonId,
   selectCuration: state => state.config.curation,
   selectConfiguration: state => state.config
@@ -69,12 +70,12 @@ const getStore = composeBundles(
 
 const AlertCmp = ({configuration}) => (
   <div className={"col-md-12 no-padding"}>
-    <Alerts
+    { !configuration.hideAlerts && <Alerts
       org='warelab'
       repo='release-notes'
       path='alerts'
       site={configuration.id}
-    />
+    /> }
   </div>
 );
 
@@ -85,8 +86,8 @@ const Alerter = connect(
 
 const SearchViewsCmp = props => (
   <div className="row no-margin no-padding" style={{backgroundColor: "#fff"}}>
-    <div className="col-md-2 no-padding">
-      <div className="gramene-sidebar">
+    <div className="col-md-2 no-margin no-padding">
+      <div className="gramene-sidebar" style={{width:"16.5%"}}>
         <Status/>
         <Filters/>
         {props.configuration.showViews && <Views/>}
@@ -319,6 +320,24 @@ cache.getAll().then(initialData => {
   const store = getStore(initialData);
   const config = store.selectConfiguration();
   ReactGA.initialize(config.ga);
+
+  if (initialData.hasOwnProperty('grameneMaps')) {
+    // check for hidden genomes
+    let notHidden = {};
+    let haveHidden = false;
+    Object.values(initialData.grameneMaps.data).forEach(m => {
+      if (m.hidden) {
+        haveHidden=true;
+      }
+      else {
+        notHidden[m.taxon_id]=true;
+      }
+    })
+    if (haveHidden) {
+      store.doInitializeGrameneGenomes(notHidden)
+    }
+  }
+
   let element = document.getElementById('gramene');
   element && render(Gramene(store), element);
 });

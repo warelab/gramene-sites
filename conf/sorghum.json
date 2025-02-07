@@ -25,6 +25,16 @@
   "showFeed": true,
   "showTweets": true,
   "slides": [],
+  details: {
+    sequences: true,
+    VEP: true,
+    location: true,
+    expression: true,
+    homology: true,
+    pathways: true,
+    pubs: true,
+    xrefs: true
+  },
   "panSite" : {
     vitis_vinifera : {
       url: "https://vitis.gramene.org?idList=",

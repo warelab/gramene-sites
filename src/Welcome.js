@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from 'redux-bundler-react'
 import {Alert, Container, Row, Col, Card, Button, Collapse, Carousel} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import { Portals } from './Portals'
+import { Portals, Examples } from './Portals'
 import closest from 'component-closest';
 import '../styles/welcome.less'
 // import { TwitterTimelineEmbed } from 'react-twitter-embed'
@@ -197,26 +197,24 @@ const NewsFeed = connect(
 
 const Welcome = props => (
   <div>
-    <Container fluid style={{padding: '40px'}}>
-      <Row style={{paddingBottom:'50px'}} lg={12} xl={12} md={12}>
-        <Col xxl={1} xl={1} lg={0}>
-        </Col>
-        <Col xxl={6} xl={7} lg={9}>
+    <Container fluid style={{paddingLeft: '20px', paddingRight: '20px', paddingBottom: '80px', paddingTop: '0px'}}>
+      <Row style={{paddingBottom:'50px'}} lg={12} xl={12} xxl={12} md={12}>
+        <Col xxl={10} xl={9} lg={9}>
           {/*<AlertDismissibleExample config={props.configuration}/>*/}
           <WelcomeBanner config={props.configuration}/>
           {props.match && (props.match.params.stub || props.match.params.nid)
             ? <Drupal stub={props.match.params.stub} nid={props.match.params.nid}/>
             : <Portals location={props.location}/>
           }
+          {props.configuration.examples && <Examples/>}
         </Col>
-        <Col xxl={3} xl={3} lg={3}>
+        <Col xxl={2} xl={3} lg={3}>
           <div>{ props.configuration.showFeed && <NewsFeed/> }</div>
           {/*<div>{ props.configuration.showTweets &&*/}
           {/*  <a className="twitter-timeline" data-height="500" data-dnt="true"*/}
           {/*     href="https://twitter.com/GrameneDatabase?ref_src=twsrc%5Etfw">Tweets by GrameneDatabase</a>*/}
           {/*}</div>*/}
         </Col>
-        <Col xxl={2} xl={1} lg={0}/>
       </Row>
     </Container>
   </div>

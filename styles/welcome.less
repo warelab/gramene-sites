@@ -1,7 +1,10 @@
 @gramene-tool-height: 96px;
 @gramene-xs-tool-height: 64px;
+@gramene-example-height: @gramene-tool-height * 2.5;
+@gramene-xs-example-height: @gramene-xs-tool-height * 2.5;
 @gramene-offblack: #060606;
 @gramene-yellow: #f3e790;
+@gramene-green: #9bbf6d;
 
 @screen-xs-max: 766px;
 @screen-sm-max: 949px;
@@ -61,6 +64,63 @@
 
       img {
         width: @gramene-tool-height;
+      }
+    }
+  }
+}
+.examples-wrapper {
+
+  .gramene-example {
+    transition: all 0.15s ease-in-out;
+    padding: 10px 15px;
+    cursor:pointer;
+  }
+
+  .gramene-example:hover {
+    transform: scale(1.02) translate3d(0, 0, 0);
+    background-color: lighten(@gramene-green, 15%);
+  }
+
+  .gramene-example-desc {
+    color: lighten(@gramene-offblack, 44%);
+  }
+
+  @media (max-width: @screen-xs-max) {
+    .gramene-example-text {
+      .gramene-example-desc {
+        font-size: smaller;
+      }
+    }
+  }
+
+  @media (max-width: @screen-sm-max) {
+    .gramene-example {
+      min-height: @gramene-xs-example-height + 2 * @padding-large-vertical;
+      //max-height: @gramene-xs-tool-height + 2 * @padding-large-vertical;
+
+      .gramene-example-text {
+        min-height: @gramene-xs-example-height;
+      }
+
+      img {
+        height: @gramene-xs-example-height;
+      }
+    }
+  }
+
+  @media (min-width: @screen-md-min) {
+    .gramene-example {
+      min-height: @gramene-example-height + 2 * @padding-large-vertical;
+      max-height: @gramene-example-height + 2 * @padding-large-vertical;
+      min-width: 500px;
+      max-width: 700px;
+
+      .gramene-example-text {
+        height: @gramene-example-height;
+      }
+
+      img {
+        height: @gramene-example-height;
       }
     }
   }

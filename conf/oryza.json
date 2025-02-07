@@ -1,29 +1,52 @@
 {
   "id": "oryza",
   "name": "Gramene Oryza",
-  "version": "v7",
+  "version": "v8",
   "description": "Comparative plant genomics focused on rice varieties",
   "url": "https://oryza.gramene.org",
   "ensemblURL": "https://oryza-ensembl.gramene.org",
   "ensemblSite": "https://oryza-ensembl.gramene.org",
-  "ensemblRest": "https://data.gramene.org/pansite-ensembl-87",
-  "grameneData": "https://data.gramene.org/oryza_v7",
+  "ensemblRest": "https://data.gramene.org/pansite-ensembl-108",
+  "grameneData": "https://data.gramene.org/oryza_v8",
   "curation": {
     "url": "http://curate.gramene.org/oryza_v7?since=4577&gene=",
     "taxa": {
-      "39947": "Oryza sativa Japonica"
+      "39947013": "Oryza sativa Japonica"
     }
   },
   "targetTaxonId": 39946,
-  "portals": ['browser','blast','pansites','curated','climtools'],
-  "portals2": ['pansites','browser','reactome','blast','climtools','atlas','trackhub'],
+  "portals": ['browser','reactome','atlas','blast','pansites','curated','oryzaclimtools','tutorials','oryzadownloads'],
+  "portals2": ['pansites','browser','reactome','blast','oryzaclimtools','atlas','tutorials','oryzadownloads'],
   "showInMenu": true,
   "showNews": true,
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
-  "date": "2023-07-09",
+  "date": "2024-08-09",
+  "examples": [
+    {
+      "title": 'GS3 Variant Image',
+      "description": "Explore genetic variation and alt-allele consequences from the Variant Effect Predictor (VEP).",
+      "imgSrc": "static/images/welcome/oryza/GS3_Variant_Image.png",
+      "link": 'https://oryza-ensembl.gramene.org/Oryza_sativa/Gene/Variation_Gene/Image?db=core;g=Os03g0407400'
+    },
+    {
+      "title": "GS3 Pathway Diagram",
+      "description": "Curated seed development pathway \"Regulation of seed size\" at Plant Reactome.",
+      "imgSrc": "static/images/welcome/oryza/GS3_Pathway_Diagram.png",
+      "link": 'https://plantreactome.gramene.org/PathwayBrowser/#/R-OSA-9035605'
+    }],
   "slides": [],
+  details: {
+    sequences: true,
+    VEP: true,
+    location: true,
+    expression: true,
+    homology: true,
+    pathways: true,
+    pubs: true,
+    xrefs: true
+  },
   "panSite" : {
     "sorghum_bicolor" : {
       "url": "https://sorghumbase.org/genes?idList=",

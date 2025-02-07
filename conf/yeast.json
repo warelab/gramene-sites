@@ -17,5 +17,15 @@
   "showTweets": false,
   "showInMenu": false,
   "date": "2022-03-30",
-  "slides": []
+  "slides": [],
+  details: {
+    sequences: true,
+    VEP: false,
+    location: true,
+    expression: false,
+    homology: true,
+    pathways: false,
+    pubs: false,
+    xrefs: false
+  }
 }
