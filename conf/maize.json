@@ -1,67 +1,46 @@
 {
   "id": "maize",
   "name": "Gramene Maize",
-  "version": "v4",
+  "version": "v5",
   "ga": "G-Y7ZYG1R8QT",
   "description": "Comparative plant genomics focused on maize varieties",
   "url": "https://maize-pangenome.gramene.org",
   "ensemblURL": "https://maize-pangenome-ensembl.gramene.org",
   "ensemblSite": "https://maize-pangenome-ensembl.gramene.org",
-  "ensemblRest": "https://data.gramene.org/pansite-ensembl-87",
-  "grameneData": "https://data.gramene.org/maize_v4",
+  "ensemblRest": "https://data.gramene.org/pansite-ensembl-108",
+  "grameneData": "https://data.gramene.org/maize_v5",
   "targetTaxonId": 4577,
-  "portals": ['browser','blast','pansites','curated','ftp'],
-  "portals2": ['pansites','browser','reactome','blast','atlas','trackhub','ftp'],
+  "portals": ['browser','reactome','atlas','blast','pansites','curated','maizedownloads','tutorials','maizegdb'],
+  "portals2": ['pansites','browser','reactome','blast','atlas','tutorials','maizedownloads'],
   "showInMenu": true,
   "showNews": true,
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
-  "date": "2024-03-30",
-  "curation": {
-    "url": "http://curate.gramene.org/maize_v4?since=4479&gene=",
-    "taxa": {
-      "4577":"Zea mays B73 v5",
-      "45770000":"Zea mays B73 v4",
-      "45770001":"Zea mays B73 v3",
-      "4577001":"Zea mays b97",
-      "4577002":"Zea mays cml103",
-      "4577003":"Zea mays cml228",
-      "4577004":"Zea mays cml247",
-      "4577005":"Zea mays cml277",
-      "4577006":"Zea mays cml322",
-      "4577007":"Zea mays cml333",
-      "4577008":"Zea mays cml52",
-      "4577009":"Zea mays cml69",
-      "4577010":"Zea mays hp301",
-      "4577011":"Zea mays il14h",
-      "4577012":"Zea mays ki11",
-      "4577013":"Zea mays ki3",
-      "4577014":"Zea mays ky21",
-      "4577015":"Zea mays m162w",
-      "4577016":"Zea mays m37w",
-      "4577017":"Zea mays mo18w",
-      "4577018":"Zea mays ms71",
-      "4577019":"Zea mays nc350",
-      "4577020":"Zea mays nc358",
-      "4577021":"Zea mays oh43",
-      "4577022":"Zea mays oh7b",
-      "4577023":"Zea mays p39",
-      "4577024":"Zea mays tx303",
-      "4577025":"Zea mays tzi8",
-      "4577031":"Zea maysdk105",
-      "4577032":"Zea maysep1",
-      "4577033":"Zea maysf7",
-      "4577034":"Zea mayspe0075",
-      "4577028":"Zea maysa188",
-      "4577029":"Zea maysmo17",
-      "4577030":"Zea maysph207",
-      "4577027":"Zea maysw22"
+  "date": "2025-03-03",
+  "examples": [
+    {
+      "title": 'lox9 Variant Image',
+      "description": "Explore genetic variation and alt-allele consequences from the Variant Effect Predictor (VEP).",
+      "imgSrc": "static/images/welcome/maize/lox9_Variant_Image.png",
+      "link": 'https://maize-pangenome-ensembl.gramene.org/Zea_maysb73/Gene/Variation_Gene/Image?db=core;g=Zm00001eb005920;r=1:16843538-16850405'
+    },
+    {
+      "title": "lox9 Pathway Diagram",
+      "description": "Jasmonic Acid Biosynthesis pathway at Plant Reactome.",
+      "imgSrc": "static/images/welcome/maize/lox9_Pathway_Diagram.png",
+      "link": 'https://plantreactome.gramene.org/PathwayBrowser/#/R-ZMA-1119332&SEL=R-ZMA-1119658'
+    },
+    {
+      "title": "MaizeCODE tracks",
+      "description": "Expression, Methylation, Acetylation, RAMPAGE, ChIP-seq tracks from  Cahn, J., Regulski, M., Lynn, J. et al. MaizeCODE reveals bi-directionally expressed enhancers that harbor molecular signatures of maize domestication. Nat Commun 15, 10854 (2024). https://doi.org/10.1038/s41467-024-55195-w",
+      "imgSrc": "static/images/welcome/maize/maizeCODE.png",
+      "link": "https://maize-pangenome-ensembl.gramene.org/Zea_maysb73/Location/View?db=;g=Zm00001eb054440;r=1:272330147-272333065;t=Zm00001eb054440_T001"
     }
-  },
+  ],
   details: {
     sequences: true,
-    VEP: false,
+    VEP: true,
     location: true,
     expression: true,
     homology: true,
@@ -86,7 +65,8 @@
       svg: "./static/images/oryza_logo.svg"
     }
   },
-  "slides": [
+  "slides": [],
+  "oldslides": [
     {
       "img": "static/images/welcome/maize/NAM.png",
       "label": "NAM founder inbreds",

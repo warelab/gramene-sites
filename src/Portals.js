@@ -95,6 +95,19 @@ const tools = {
     link: "https://ftp.gramene.org/oryza/release-current/",
     imgSrc: "static/images/welcome/download.png"
   },
+  maizedownloads: {
+    title: "Bulk Downloads",
+    description: "FTP download of our data",
+    link: "https://ftp.gramene.org/maize/release-current/",
+    imgSrc: "static/images/welcome/download.png"
+  },
+  maizegdb: {
+    title: "MaizeGDB",
+    description: "Maize Genetics and Genomics Database",
+    link: "https://maizegdb.org/",
+    imgSrc: "static/images/welcome/maize/maizegdb.png",
+    isExternal: true
+  },
   pansites: {
     title: "Plant Pan Genomes",
     description: "Gramene-powered sites focused on specific crops",
