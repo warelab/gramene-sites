@@ -64,6 +64,17 @@ body {
     --bs-navbar-brand-margin-end: 0.5rem!important;
 }
 
+/* Sidebar: offset sticky position so it clears the sticky navbar (~98px tall).
+   Child combinator gives higher specificity than gramene-search's base rule.
+   Scoped to non-mobile so it doesn't fight the mobile max-height: none reset. */
+@media (min-width: 768px) {
+    .search-views-layout > .gramene-sidebar,
+    .search-views-layout > .sorghumbase-sidebar {
+        top: 98px;
+        max-height: calc(100vh - 98px);
+    }
+}
+
 .tooltip {
     --bs-tooltip-max-width: 400px!important;
 }

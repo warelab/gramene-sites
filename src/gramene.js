@@ -85,15 +85,13 @@ const Alerter = connect(
 );
 
 const SearchViewsCmp = props => (
-  <div className="row no-margin no-padding" style={{backgroundColor: "#fff"}}>
-    <div className="col-md-2 no-margin no-padding">
-      <div className="gramene-sidebar" style={{width:"16.5%"}}>
-        <Status/>
-        <Filters/>
-        {props.configuration.showViews && <Views/>}
-      </div>
+  <div className="no-margin no-padding search-views-layout" style={{backgroundColor: "#fff"}}>
+    <div className="gramene-sidebar">
+      <Status/>
+      <Filters/>
+      {props.configuration.showViews && <Views/>}
     </div>
-    <div className="col-md-10" style={{paddingBottom: '100px'}}>
+    <div className="search-views-content" style={{paddingBottom: '100px'}}>
       <Results/>
     </div>
   </div>
@@ -303,6 +301,7 @@ const Gramene = (store) => (
           <Route path="/guides" component={Guides}/>
           <Route path="/pansites" component={Welcome}/>
           <Route path="/node/:nid" component={Welcome}/>
+          <Route path="/videotutorials" component={Welcome}/>
           <Route path="/:stub" component={Welcome}/>
           <Route path="/" component={MainView}/>
         </Switch>
