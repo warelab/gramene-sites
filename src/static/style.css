@@ -12,13 +12,14 @@ body {
 .search-suggestions {
     background: white;
     position: fixed;
-    top: 90px;
+    top: 98px;
     left: 0;
     width: 100%;
     max-height: 600px;
     overflow-y: scroll;
     border-bottom: solid;
-    z-index: 5;
+    /* Must be below sticky-top navbar (1020) but above all page content */
+    z-index: 1019;
 }
 .search-suggestions .nav-link.disabled {
     color: #6c757d;
@@ -65,14 +66,14 @@ body {
 }
 
 /* Sidebar: offset sticky position so it clears the sticky navbar (~98px tall).
-   Child combinator gives higher specificity than gramene-search's base rule.
-   Scoped to non-mobile so it doesn't fight the mobile max-height: none reset. */
-@media (min-width: 768px) {
-    .search-views-layout > .gramene-sidebar,
-    .search-views-layout > .sorghumbase-sidebar {
-        top: 98px;
-        max-height: calc(100vh - 98px);
-    }
+   Child combinator gives higher specificity than gramene-search's base rule,
+   which otherwise resets to position:static on mobile. */
+.search-views-layout > .gramene-sidebar,
+.search-views-layout > .sorghumbase-sidebar {
+    position: sticky;
+    top: 98px;
+    max-height: calc(100vh - 98px);
+    overflow-y: auto;
 }
 
 .tooltip {
