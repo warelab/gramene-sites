@@ -167,7 +167,7 @@ const Suggestions = connect(
 );
 
 const SearchMenu = props => (
-  <div id="searchbar-parent" style={{width: '400px', alignSelf:'center'}}>
+  <div id="searchbar-parent" className="navbar-search">
     <div id="searchbar">
       <SearchBar/>
     </div>
@@ -223,7 +223,7 @@ const Guides = connect(
 );
 
 const GrameneMenuCmp = ({configuration}) => (
-  <Navbar bg="light" expand="lg" sticky='top'>
+  <Navbar bg="light" expand="lg" sticky='top' className="gramene-navbar-outer">
     <div style={{width: '100%', borderBottomColor: '#c7c7c7', borderBottomStyle: 'solid', marginLeft: '15px', marginRight: '15px'}}>
       <Navbar className="gramene-navbar" bg="light" expand="lg">
         <Navbar.Brand className="gramene-navbar">
@@ -233,15 +233,15 @@ const GrameneMenuCmp = ({configuration}) => (
             />
           </a>
         </Navbar.Brand>
+        <Switch>
+          <Route exact path="/" component={SearchMenu}/>
+          <Route>
+            <NavLink className="nav-link" to="/">Search</NavLink>
+          </Route>
+        </Switch>
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Switch>
-              <Route exact path="/" component={SearchMenu}/>
-              <Route>
-                <NavLink className="nav-link" to="/">Search</NavLink>
-              </Route>
-            </Switch>
             <Nav.Link href={initialState.ensemblSite}>
               <img style={{height: '25px', verticalAlign: 'bottom'}}
                    src={`static/images/e_bang.png`}

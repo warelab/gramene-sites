@@ -7,19 +7,19 @@ body {
     font-size: small;
 }
 .mdview h2 {
-    scroll-margin-top: 120px;
+    scroll-margin-top: 100px;
 }
 .search-suggestions {
     background: white;
     position: fixed;
-    top: 98px;
+    top: 84px;
     left: 0;
     width: 100%;
     max-height: 600px;
     overflow-y: scroll;
     border-bottom: solid;
-    /* Must be below sticky-top navbar (1020) but above all page content */
-    z-index: 1019;
+    /* Must be above sticky-top navbar (1020) so suggestions aren't hidden behind menu */
+    z-index: 1021;
 }
 .search-suggestions .nav-link.disabled {
     color: #6c757d;
@@ -59,21 +59,50 @@ body {
 
 }
 
+/* Search bar: inline in navbar on wide screens */
+.navbar-search {
+    flex: 1 1 auto;
+    max-width: 400px;
+    align-self: center;
+}
+
 .gramene-navbar {
     --bs-navbar-padding-y: 0!important;
     --bs-navbar-brand-padding-y: 0!important;
     --bs-navbar-brand-margin-end: 0.5rem!important;
 }
 
-/* Sidebar: offset sticky position so it clears the sticky navbar (~98px tall).
+/* On narrow screens: search bar stays in the same row, logo shrinks */
+@media (max-width: 991.98px) {
+    .gramene-navbar .navbar-brand img {
+        height: 40px !important;
+    }
+    .navbar-search {
+        flex: 1 1 0;
+        max-width: none;
+        min-width: 0;
+        padding: 0 4px;
+    }
+    .search-suggestions {
+        top: 52px;
+    }
+    .search-views-layout > .gramene-sidebar,
+    .search-views-layout > .sorghumbase-sidebar {
+        top: 52px;
+        max-height: calc(100vh - 52px);
+    }
+}
+
+/* Sidebar: offset sticky position so it clears the sticky navbar.
    Child combinator gives higher specificity than gramene-search's base rule,
    which otherwise resets to position:static on mobile. */
 .search-views-layout > .gramene-sidebar,
 .search-views-layout > .sorghumbase-sidebar {
     position: sticky;
-    top: 98px;
-    max-height: calc(100vh - 98px);
+    top: 84px;
+    max-height: calc(100vh - 84px);
     overflow-y: auto;
+    z-index: 10; /* must exceed stacking contexts created by results content (viz transforms, etc.) */
 }
 
 .tooltip {
