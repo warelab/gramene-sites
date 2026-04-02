@@ -1,11 +1,10 @@
 import React from "react";
 import {connect} from "redux-bundler-react";
-import {ListGroup, Row, Col, Card, NavDropdown, Tabs, Tab} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Row, Col, NavDropdown} from "react-bootstrap";
 import {FiExternalLink} from 'react-icons/fi'
 import panSites from '../conf';
 import {NavLink} from 'react-router-dom';
-
+import VideoGallery from "gramene-videos";
 
 const tools = {
   browser: {
@@ -45,6 +44,13 @@ const tools = {
     description: "An advanced genomic query interface powered by BioMart",
     ensemblPath: "/biomart/martview",
     imgSrc: "static/images/welcome/Biomart250.png"
+  },
+  EG_mart: {
+    title: "Ensembl Plants Mart",
+    description: "An advanced genomic query interface powered by BioMart",
+    link: "https://plants.ensembl.org/biomart/martview",
+    imgSrc: "static/images/welcome/Biomart250.png",
+    isExternal: true
   },
   trackhub: {
     title: "Track Hub Registry",
@@ -86,13 +92,13 @@ const tools = {
   oryzaclimtools: {
     title: "CLIMtools",
     description: "Environment x Genome x Phenotype Associations",
-    link: "https://www.gramene.org/CLIMtools/oryza_v1.0",
+    link: "https://gramene.org/CLIMtools/oryza_19K-RGP/",
     imgSrc: "static/images/welcome/climtools.png"
   },
   oryzadownloads: {
     title: "Bulk Downloads",
     description: "FTP download of our data",
-    link: "https://ftp.gramene.org/oryza/release-current/",
+    link: "https://ftp.gramene.org/oryza/19K-RGP/",
     imgSrc: "static/images/welcome/download.png"
   },
   maizedownloads: {
@@ -126,6 +132,12 @@ const tools = {
     link: "https://www.youtube.com/@sorghumbase9338",
     imgSrc: "static/images/welcome/tutorials.png",
     isExternal: true
+  },
+  videotutorials: {
+    title: "Video Tutorials",
+    description: "Site features, explained!",
+    link: 'videotutorials',
+    imgSrc: "static/images/welcome/tutorials.png"
   }
 };
 
@@ -207,6 +219,7 @@ const GrameneToolLink = ({title, description, imgSrc, link, drupalLink, ensemblP
 const PortalsCmp = props => (
   <div className="tools-wrapper">
     {props.location && props.location.pathname === '/pansites' && <h3>Plant Pan Genome sites</h3>}
+    {props.location && props.location.pathname === '/videotutorials' && <h3>Tutorial Videos</h3>}
     {props.location && props.location.pathname === '/pansites' ?
       <Row xs={1} md={2} className="g-4">
         {panSites.filter(site => site.id !== props.configuration.id && site.showInMenu).map((site, idx) =>
@@ -224,11 +237,14 @@ const PortalsCmp = props => (
         )}
       </Row>
       :
-      <Row xs={1} md={2} xxl={3} className="g-4">
-        {props.configuration.portals.map((portal, idx) =>
-          <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL} id={props.configuration.id} version={props.configuration.version}/>
-        )}
-      </Row>
+      <div>{props.location && props.location.pathname === '/videotutorials' ? <VideoGallery playlistIds={props.configuration.playlistIds}/> :
+        <Row xs={1} md={2} xxl={3} className="g-4">
+          {props.configuration.portals.map((portal, idx) =>
+              <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL}
+                           id={props.configuration.id} version={props.configuration.version}/>
+          )}
+        </Row>
+      }</div>
     }
   </div>
 );

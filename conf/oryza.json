@@ -1,13 +1,13 @@
 {
   "id": "oryza",
   "name": "Gramene Oryza",
-  "version": "v8",
+  "version": "v9",
   "description": "Comparative plant genomics focused on rice varieties",
   "url": "https://oryza.gramene.org",
-  "ensemblURL": "https://oryza-ensembl.gramene.org",
-  "ensemblSite": "https://oryza-ensembl.gramene.org",
+  "ensemblURL": "http://oryza-ensembl-dev.gramene.org",
+  "ensemblSite": "http://oryza-ensembl-dev.gramene.org",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-108",
-  "grameneData": "https://data.gramene.org/oryza_v8",
+  "grameneData": "https://data.gramene.org/oryza_v9",
   "curation": {
     "url": "http://curate.gramene.org/oryza_v7?since=4577&gene=",
     "taxa": {
@@ -22,7 +22,7 @@
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
-  "date": "2024-08-09",
+  "date": "2026-08-09",
   "examples": [
     {
       "title": 'GS3 Variant Image',
@@ -49,17 +49,17 @@
   },
   "panSite" : {
     "sorghum_bicolor" : {
-      "url": "https://sorghumbase.org/genes?idList=",
+      "url": "https://sorghumbase.org/genes",
       "name": "SorghumBase",
       "svg": "./static/images/sorghum_logo.svg"
     },
     vitis_vinifera : {
-      url: "https://vitis.gramene.org?idList=",
+      url: "https://vitis.gramene.org",
       name: "Gramene Grapevine",
       svg: "./static/images/grapevine_logo.svg"
     },
     zea_maysb73 : {
-      url: "https://maize-pangenome.gramene.org?idList=",
+      url: "https://maize-pangenome.gramene.org",
       name: "Gramene Maize",
       svg: "./static/images/maize_logo.svg"
     }

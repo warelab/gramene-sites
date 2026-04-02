@@ -2,15 +2,15 @@
   "id": "main",
   "ga": "G-ZTEQBFCRXZ",
   "name": "Gramene",
-  "version": "v68",
+  "version": "v69",
   "description": "Comparative plant genomics for crops and model organisms",
   "url": "https://www.gramene.org",
   "ensemblURL": "https://ensembl.gramene.org",
   "ensemblSite": "https://ensembl.gramene.org",
-  "ensemblRest": "https://data.gramene.org/ensembl68",
-  "grameneData": "https://data.gramene.org/v68",
+  "ensemblRest": "https://data.gramene.org/ensembl69",
+  "grameneData": "https://data.gramene.org/v69",
   "targetTaxonId": 3702,
-  "portals": ['browser','reactome','pansites','curated','blast','climtools','atlas','mart','tools','archive'],
+  "portals": ['browser','reactome','pansites','tools','climtools','curated','blast','atlas','videotutorials','mart'],
   "portals2": ['pansites','browser','reactome','climtools','blast','mart','tools','atlas','trackhub','outreach','downloads','archive'],
   "showInMenu": true,
   "showNews": true,
@@ -19,7 +19,8 @@
   "showTweets": true,
   "showViews": false,
   "hideAlerts": false,
-  "date": "2023-10-23",
+  "date": "2025-10-23",
+  "playlistIds": ["PLqQHG-yuRY1-z7-KKYe-BDL-lriaocrbZ"],
   "slides": [],
   details: {
     sequences: true,
@@ -33,25 +34,25 @@
   },
   "panSite" : {
     "sorghum_bicolor" : {
-      "url": "https://sorghumbase.org/genes?idList=",
+      "url": "https://sorghumbase.org/genes",
       "name": "SorghumBase",
       "svg": "./static/images/sorghum_logo.svg",
       "api": "https://data.sorghumbase.org/sorghum_v7"
     },
     vitis_vinifera : {
-      url: "https://vitis.gramene.org?idList=",
+      url: "https://vitis.gramene.org",
       name: "Gramene Grapevine",
       svg: "./static/images/grapevine_logo.svg",
       api: "https://data.gramene.org/grapevine_v4"
     },
     oryza_sativa : {
-      url: "https://oryza.gramene.org?idList=",
+      url: "https://oryza.gramene.org",
       name: "Gramene Oryza",
       svg: "./static/images/oryza_logo.svg",
       api: "https://data.gramene.org/oryza_v7"
     },
     zea_mays : {
-      url: "https://maize-pangenome.gramene.org?idList=",
+      url: "https://maize-pangenome.gramene.org",
       name: "Gramene Maize",
       svg: "./static/images/maize_logo.svg",
       api: "https://data.gramene.org/maize_v4"

@@ -50,17 +50,17 @@
   },
   "panSite" : {
     "sorghum_bicolor" : {
-      "url": "https://sorghumbase.org/genes?idList=",
+      "url": "https://sorghumbase.org/genes",
       "name": "SorghumBase",
       "svg": "./static/images/sorghum_logo.svg"
     },
     vitis_vinifera : {
-      url: "https://vitis.gramene.org?idList=",
+      url: "https://vitis.gramene.org",
       name: "Gramene Grapevine",
       svg: "./static/images/grapevine_logo.svg"
     },
     oryza_sativa : {
-      url: "https://oryza.gramene.org?idList=",
+      url: "https://oryza.gramene.org",
       name: "Gramene Oryza",
       svg: "./static/images/oryza_logo.svg"
     }

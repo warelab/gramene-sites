@@ -22,6 +22,7 @@ function WelcomeBanner({config}) {
   const [hide, setShow] = React.useState(localStorage.getItem(key) || '');
   const show = hide === "yes" ? "no" : "yes";
   const haveSlides = config.slides.length > 0;
+  const description = config.description_continued ? config.description + config.description_continued : config.description;
   return (
     <>
       <Alert variant="success">
@@ -37,9 +38,9 @@ function WelcomeBanner({config}) {
           >{show === "no" ? "Show" : "Hide"} Slideshow</Button>
           }
         </Alert.Heading>
-        {config.description}
+        <div dangerouslySetInnerHTML={{ __html: description }}/>
       </Alert>
-      <Collapse in={ show === "yes" }>
+      <Collapse in={show === "yes"}>
         <div>
         <Carousel interval={5000} fade={true}>
           {config.slides.map((slide, idx) =>
@@ -150,7 +151,10 @@ class DrupalPage extends React.Component {
     }
     if (nid) {
       const src = `/ww?nid=${+nid}`;
-      return <iframe src={src} frameBorder="0" width="100%" height="650px" ref={this.iframeRef} onLoad={this.initListener.bind(this)}>
+      return <iframe src={src}
+                     ref={this.iframeRef}
+                     style={{ width: '100%', height: '650px', maxHeight: '80vh' }}
+                     onLoad={this.initListener.bind(this)}>
         <p>browser doesn't support iframes</p>
       </iframe>
     }
