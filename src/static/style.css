@@ -86,23 +86,33 @@ body {
     .search-suggestions {
         top: 52px;
     }
+}
+
+/* Sidebar: offset sticky position so it clears the sticky navbar.
+   Only applies on wide screens where sidebar is a side column.
+   On mobile (≤767px) gramene-search sets position:static and the
+   sidebar stacks at the top — don't override that. */
+@media (min-width: 768px) {
+    .search-views-layout > .gramene-sidebar,
+    .search-views-layout > .sorghumbase-sidebar {
+        position: sticky;
+        overflow-y: auto;
+        z-index: 10;
+    }
+}
+@media (min-width: 992px) {
+    .search-views-layout > .gramene-sidebar,
+    .search-views-layout > .sorghumbase-sidebar {
+        top: 84px;
+        max-height: calc(100vh - 84px);
+    }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
     .search-views-layout > .gramene-sidebar,
     .search-views-layout > .sorghumbase-sidebar {
         top: 52px;
         max-height: calc(100vh - 52px);
     }
-}
-
-/* Sidebar: offset sticky position so it clears the sticky navbar.
-   Child combinator gives higher specificity than gramene-search's base rule,
-   which otherwise resets to position:static on mobile. */
-.search-views-layout > .gramene-sidebar,
-.search-views-layout > .sorghumbase-sidebar {
-    position: sticky;
-    top: 84px;
-    max-height: calc(100vh - 84px);
-    overflow-y: auto;
-    z-index: 10; /* must exceed stacking contexts created by results content (viz transforms, etc.) */
 }
 
 .tooltip {
