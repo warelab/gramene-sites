@@ -1,0 +1,101 @@
+{
+  "id": "oryza19k",
+  "name": "Gramene Oryza 19K-RGP",
+  "version": "v1",
+  "showRelease": false,
+  "logo": "static/images/oryza_logo.svg",
+  "description": "Comparative rice genomics and genetic variation in the 19K-RGP",
+  "url": "https://oryza19k.gramene.org",
+  "ensemblURL": "http://oryza-ensembl-dev.gramene.org",
+  "ensemblSite": "http://oryza-ensembl-dev.gramene.org",
+  "ensemblRest": "https://data.gramene.org/pansite-ensembl-108",
+  "grameneData": "https://data.gramene.org/oryza_v9",
+  "targetTaxonId": 39946,
+  "portals": ['browser','reactome','atlas','blast','pansites','curated','oryzaclimtools','videotutorials','oryzadownloads'],
+  "portals2": ['pansites','browser','reactome','blast','oryzaclimtools','atlas','videotutorials','oryzadownloads'],
+  "showInMenu": true,
+  "showNews": true,
+  "showGuides": true,
+  "auth": true,
+  "showFeed": false,
+  "showTweets": false,
+  "date": "2026-08-09",
+  "examples": [
+    {
+      "title": 'GS3 Variant Image',
+      "description": "Explore genetic variation and alt-allele consequences from the Variant Effect Predictor (VEP).",
+      "imgSrc": "static/images/welcome/oryza/GS3_Variant_Image.png",
+      "link": 'https://oryza-ensembl.gramene.org/Oryza_sativa/Gene/Variation_Gene/Image?db=core;g=Os03g0407400'
+    },
+    {
+      "title": "GS3 Pathway Diagram",
+      "description": "Curated seed development pathway \"Regulation of seed size\" at Plant Reactome.",
+      "imgSrc": "static/images/welcome/oryza/GS3_Pathway_Diagram.png",
+      "link": 'https://plantreactome.gramene.org/PathwayBrowser/#/R-OSA-9035605'
+    }],
+  "slides": [
+    {
+      "img": "static/images/oryza19k/slide1.png",
+      "label": "Oryza 19K-RGP",
+      "text": "Genetic variation data generated from more than nineteen thousand rice accessions."
+    },
+    {
+      "img": "static/images/oryza19k/slide2.png",
+      "label": "Reference genomes",
+      "text": "Variants have been called on five representative rice varieties with high‑quality genome assemblies."
+    },
+    {
+      "img": "static/images/oryza19k/slide3.png",
+      "label": "Variant Effect Prediction (VEP)",
+      "text": "Whenever a variant overlaps a gene, the system classifies the likely effect of the alternate allele on transcripts or encoded protein products. Particularly important are deleterious protein‑altering variants—such as premature stop codons, frameshift mutations, and disrupted splice sites. These predicted loss‑of‑function alleles are indexed and easily searchable, allowing users to rapidly identify germplasm lines carrying impactful mutations in any gene of interest."
+    }
+  ],
+  details: {
+    sequences: true,
+    VEP: true,
+    location: true,
+    expression: true,
+    homology: true,
+    pathways: true,
+    pubs: true,
+    xrefs: true
+  },
+  "playlistIds": [
+    'PLqQHG-yuRY1_-qa95pkBDRGNuVFKHq2CD'  // SB new list
+  ],
+  "curation": {
+    "url": "http://curate.gramene.org/sorghum_v10?since=4479&gene=",
+    "taxa": {
+    }
+  },
+  showViews: true,
+  views: {
+    userLists: 'off',
+    expression: 'disabled',
+    export: 'off',
+    taxonomy: 'hidden',
+    taxTree: 'on',
+    list: 'on',
+    help: 'off',
+    attribs: 'disabled',
+    exprViz: 'off',
+    ontologyEnrichment: 'off'
+  },
+  "panSite" : {
+    "sorghum_bicolor" : {
+      "url": "https://sorghumbase.org/genes",
+      "name": "SorghumBase",
+      "svg": "./static/images/sorghum_logo.svg"
+    },
+    vitis_vinifera : {
+      url: "https://vitis.gramene.org",
+      name: "Gramene Grapevine",
+      svg: "./static/images/grapevine_logo.svg"
+    },
+    zea_maysb73 : {
+      url: "https://maize-pangenome.gramene.org",
+      name: "Gramene Maize",
+      svg: "./static/images/maize_logo.svg"
+    }
+  }
+}

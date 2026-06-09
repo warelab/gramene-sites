@@ -27,7 +27,7 @@ function WelcomeBanner({config}) {
     <>
       <Alert variant="success">
         <Alert.Heading>
-          Welcome to {config.name} <span style={{fontSize:"smaller"}}><Link to="/News">release {config.version.replace('v','')}</Link></span>
+          Welcome to {config.name} {config.showRelease !== false && <span style={{fontSize:"smaller"}}><Link to="/News">release {config.version.replace('v','')}</Link></span>}
           {haveSlides && <Button onClick={() => {
             setShow(show);
             localStorage.setItem(key, show)

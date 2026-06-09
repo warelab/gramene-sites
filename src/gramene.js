@@ -1,13 +1,14 @@
+import './suppressDevWarnings'
 import React from 'react'
 import ReactGA from 'react-ga'
 import {Provider, connect} from 'redux-bundler-react'
-import {render} from 'react-dom'
+import {createRoot} from 'react-dom/client'
 import {composeBundles, createCacheBundle} from "redux-bundler";
 import {getConfiguredCache} from 'money-clip';
 import {DebounceInput} from 'react-debounce-input'
 import {Navbar, Nav, NavDropdown, InputGroup, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Status, Filters, Results, Views, suggestions as GrameneSuggestions, bundles} from 'gramene-search';
+import {Status, Filters, Results, Views, Auth, suggestions as GrameneSuggestions, bundles} from 'gramene-search';
 import Feedback from './Feedback';
 import Welcome from './Welcome';
 import { PortalsDropdown } from './Portals'
@@ -90,6 +91,7 @@ const SearchViewsCmp = props => (
       <Status/>
       <Filters/>
       {props.configuration.showViews && <Views/>}
+      <Auth/>
     </div>
     <div className="search-views-content" style={{paddingBottom: '100px'}}>
       <Results/>
@@ -228,7 +230,7 @@ const GrameneMenuCmp = ({configuration}) => (
       <Navbar className="gramene-navbar" bg="light" expand="lg">
         <Navbar.Brand className="gramene-navbar">
           <a href="/">
-            <img src={`static/images/${subsite}_logo.svg`}
+            <img src={configuration.logo || `static/images/${subsite}_logo.svg`}
                  height={80}
             />
           </a>
@@ -338,5 +340,7 @@ cache.getAll().then(initialData => {
   }
 
   let element = document.getElementById('gramene');
-  element && render(Gramene(store), element);
+  if (element) {
+    createRoot(element).render(Gramene(store));
+  }
 });

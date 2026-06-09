@@ -92,7 +92,7 @@ const tools = {
   oryzaclimtools: {
     title: "CLIMtools",
     description: "Environment x Genome x Phenotype Associations",
-    link: "https://gramene.org/CLIMtools/oryza_19K-RGP/",
+    link: "https://www.gramene.org/CLIMtools/oryza_19K-RGP/",
     imgSrc: "static/images/welcome/climtools.png"
   },
   oryzadownloads: {
