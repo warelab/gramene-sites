@@ -23,7 +23,7 @@ import {
   Route,
   NavLink
 } from "react-router-dom";
-import MDView from 'gramene-mdview';
+import GithubDocs from 'gramene-githubdocs';
 import Alerts from 'gramene-alerts';
 import {keyBy} from 'lodash';
 
@@ -177,11 +177,12 @@ const SearchMenu = props => (
 )
 
 const NewsCmp = ({configuration}) => (
-    <MDView
+    <GithubDocs
       org='warelab'
       repo='release-notes'
       path={subsite}
       heading='News'
+      sort='date'
       date={configuration.date}
       offset={160}
     />
@@ -193,11 +194,12 @@ const News = connect(
 
 const GenomesCmp = ({configuration}) => (
   <div style={{paddingBottom: '100px'}}>
-    <MDView
+    <GithubDocs
       org='warelab'
       repo='release-notes'
       path={subsite + '-genomes'}
       heading='Genomes'
+      sort='date'
       date={configuration.date}
     />
   </div>
@@ -209,11 +211,12 @@ const Genomes = connect(
 
 const GuidesCmp = ({configuration}) => (
   <div style={{paddingBottom: '100px'}}>
-    <MDView
+    <GithubDocs
       org='warelab'
       repo='release-notes'
       path={subsite + '-guides'}
       heading='Guides'
+      sort='date'
       ifEmpty='A user guide is being developed.'
       date={configuration.date}
     />
@@ -223,6 +226,24 @@ const Guides = connect(
   'selectConfiguration',
   GuidesCmp
 );
+
+// Config-driven sections (e.g. oryza19k's Start here / Platforms / Workflows /
+// API / Resources / Cite). Each `sections` entry { label, route, path, repo? }
+// is served from a GitHub repo dir via GithubDocs; subdirectories become nav
+// levels. Returns a route component for the given section.
+const SectionDocs = (section) => () => (
+  <div style={{paddingBottom: '100px'}}>
+    <GithubDocs
+      org='warelab'
+      repo={section.repo || 'oryza-19k-rgp'}
+      path={section.path}
+      branch='main'
+      heading={section.label}
+      offset={160}
+      ifEmpty={`${section.label} content is coming soon.`}
+    />
+  </div>
+)
 
 const GrameneMenuCmp = ({configuration}) => (
   <Navbar bg="light" expand="lg" sticky='top' className="gramene-navbar-outer">
@@ -244,18 +265,24 @@ const GrameneMenuCmp = ({configuration}) => (
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href={initialState.ensemblSite}>
-              <img style={{height: '25px', verticalAlign: 'bottom'}}
-                   src={`static/images/e_bang.png`}
-                   alt={"ensembl"}/>
-              Genome browser
-            </Nav.Link>
-            { configuration.showNews && <NavLink className="nav-link" to="/news">News</NavLink> }
-            { configuration.showGuides && <NavLink className="nav-link" to="/guides">Guides</NavLink> }
-            <NavLink className="nav-link" to={() => ({
-              pathname: '/feedback',
-              state: {search: document.location.href}
-            })}>Feedback</NavLink>
+            { configuration.sections
+              ? configuration.sections.map((s, i) =>
+                  <NavLink key={i} className="nav-link" to={s.route}>{s.label}</NavLink>)
+              : <>
+                  <Nav.Link href={initialState.ensemblSite}>
+                    <img style={{height: '25px', verticalAlign: 'bottom'}}
+                         src={`static/images/e_bang.png`}
+                         alt={"ensembl"}/>
+                    Genome browser
+                  </Nav.Link>
+                  { configuration.showNews && <NavLink className="nav-link" to="/news">News</NavLink> }
+                  { configuration.showGuides && <NavLink className="nav-link" to="/guides">Guides</NavLink> }
+                  <NavLink className="nav-link" to={() => ({
+                    pathname: '/feedback',
+                    state: {search: document.location.href}
+                  })}>Feedback</NavLink>
+                </>
+            }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -301,6 +328,8 @@ const Gramene = (store) => (
           <Route path="/feedback" component={Feedback}/>
           <Route path="/news" component={News}/>
           <Route path="/guides" component={Guides}/>
+          {(initialState.sections || []).map((s, i) =>
+            <Route key={i} path={s.route} component={SectionDocs(s)}/>)}
           <Route path="/pansites" component={Welcome}/>
           <Route path="/node/:nid" component={Welcome}/>
           <Route path="/videotutorials" component={Welcome}/>

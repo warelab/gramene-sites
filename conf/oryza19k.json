@@ -20,6 +20,14 @@
   "showFeed": false,
   "showTweets": false,
   "date": "2026-08-09",
+  "sections": [
+    { "label": "Start here", "route": "/start", "repo": "oryza-19k-rgp", "path": "Start here" },
+    { "label": "Platforms", "route": "/platforms", "repo": "oryza-19k-rgp", "path": "Platforms" },
+    { "label": "Workflows", "route": "/workflows", "repo": "oryza-19k-rgp", "path": "Workflows" },
+    { "label": "API", "route": "/api", "repo": "oryza-19k-rgp", "path": "API" },
+    { "label": "Resources", "route": "/resources", "repo": "oryza-19k-rgp", "path": "Resources" },
+    { "label": "Cite", "route": "/cite", "repo": "oryza-19k-rgp", "path": "Cite" }
+  ],
   "examples": [
     {
       "title": 'GS3 Variant Image',
