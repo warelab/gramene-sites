@@ -21,6 +21,7 @@
   "showTweets": true,
   "showViews": true,
   "tour": true,
+  "enable_tbrowse_expression_zone": true,
   "hideAlerts": false,
   "date": "2026-12-01",
   "playlistIds": ["PLqQHG-yuRY1-z7-KKYe-BDL-lriaocrbZ"],
