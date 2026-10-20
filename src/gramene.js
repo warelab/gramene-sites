@@ -8,7 +8,8 @@ import {getConfiguredCache} from 'money-clip';
 import {DebounceInput} from 'react-debounce-input'
 import {Navbar, Nav, NavDropdown, InputGroup, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Status, Filters, Results, Views, Auth, suggestions as GrameneSuggestions, bundles} from 'gramene-search';
+import {Status, Filters, Facets, Results, Views, Auth, suggestions as GrameneSuggestions, bundles} from 'gramene-search';
+import {SiteTour} from './tour/SiteTour';
 import Feedback from './Feedback';
 import Welcome from './Welcome';
 import { PortalsDropdown } from './Portals'
@@ -90,6 +91,7 @@ const SearchViewsCmp = props => (
     <div className="gramene-sidebar">
       <Status/>
       <Filters/>
+      <Facets/>
       {props.configuration.showViews && <Views/>}
       <Auth/>
     </div>
@@ -324,6 +326,8 @@ const Gramene = (store) => (
         <GrameneMenu/>
         <Alerter/>
         <Route exact path="/" component={Suggestions}/>
+        {/* The tour drives the search bar, so it lives where the search bar does. */}
+        <Route exact path="/" component={SiteTour}/>
         <Switch>
           <Route path="/feedback" component={Feedback}/>
           <Route path="/news" component={News}/>

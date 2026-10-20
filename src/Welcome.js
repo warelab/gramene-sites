@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from 'redux-bundler-react'
 import {Alert, Container, Row, Col, Card, Button, Collapse, Carousel} from 'react-bootstrap'
+import {SiteTourContents} from './tour/SiteTour'
 import {Link} from 'react-router-dom'
 import { Portals, Examples } from './Portals'
 import closest from 'component-closest';
@@ -206,6 +207,8 @@ const Welcome = props => (
         <Col xxl={10} xl={9} lg={9}>
           {/*<AlertDismissibleExample config={props.configuration}/>*/}
           <WelcomeBanner config={props.configuration}/>
+          {/* Home only: "/" renders <Welcome/> with no location. */}
+          {!props.location && <SiteTourContents/>}
           {props.match && (props.match.params.stub || props.match.params.nid)
             ? <Drupal stub={props.match.params.stub} nid={props.match.params.nid}/>
             : <Portals location={props.location}/>

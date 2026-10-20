@@ -118,3 +118,8 @@ body {
 .tooltip {
     --bs-tooltip-max-width: 400px!important;
 }
+/* Guided tour contents (gramene-search-tour), in the site's accent colour */
+.gene-search-tour-toc {
+    --gene-search-tour-accent: #198754;
+    margin-top: 1rem;
+}
