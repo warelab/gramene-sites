@@ -18,6 +18,8 @@ import HelpModal from './HelpModal';
 import panSites from '../conf';
 import UIbundle from './bundles/UIbundle';
 import drupalBundles from './bundles/Drupal';
+import newsBundles from './bundles/news';
+import {PostsPage, PostPage} from './News';
 import {
   BrowserRouter,
   Switch,
@@ -64,7 +66,7 @@ const config = {
 };
 
 const getStore = composeBundles(
-  ...bundles, ...drupalBundles,
+  ...bundles, ...drupalBundles, ...newsBundles,
   UIbundle,
   config,
   createCacheBundle(cache.set)
@@ -332,6 +334,8 @@ const Gramene = (store) => (
           <Route path="/feedback" component={Feedback}/>
           <Route path="/news" component={News}/>
           <Route path="/guides" component={Guides}/>
+          <Route path="/posts" component={PostsPage}/>
+          <Route path="/post/:slug" component={PostPage}/>
           {(initialState.sections || []).map((s, i) =>
             <Route key={i} path={s.route} component={SectionDocs(s)}/>)}
           <Route path="/pansites" component={Welcome}/>

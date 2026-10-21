@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from 'redux-bundler-react'
 import {Alert, Container, Row, Col, Card, Button, Collapse, Carousel} from 'react-bootstrap'
 import {SiteTourContents} from './tour/SiteTour'
+import {NewsFeed} from './News'
 import {Link} from 'react-router-dom'
 import { Portals, Examples } from './Portals'
 import closest from 'component-closest';
@@ -167,37 +168,6 @@ const Drupal = connect(
   'selectConfiguration',
   'selectDrupalAliases',
   DrupalPage
-);
-
-const NewsFeedCmp = props => {
-  if (props.drupalFeed) {
-    return (
-      <div style={{backgroundColor:'white', padding:'0px', marginBottom:'20px', borderRadius:'5px'}}>
-        <h4 style={{padding:'10px',marginBottom:'0px'}}>Latest News</h4>
-        <ul className={"posts list-unstyled"} style={{overflow: 'auto', minHeight: "550px", height: "565px", padding: "0px", marginBottom: '0px'
-        ,borderBottomStyle:'solid', borderBottomColor:'#e3e8ec', borderBottomWidth:'thin',borderTopStyle:'solid',borderTopColor:'#e3e8ec',borderTopWidth:'thin'}}>
-          {props.drupalFeed.map((post, idx) =>
-            <li key={idx} style={{padding:"10px"}}>
-              <Link
-                to={post.link._text.replace(/.*news\.gramene\.org/, '')}>
-                {post.title._text}
-              </Link><br/>
-              <span>{post.pubDate._text.replace(/\s\d\d:\d\d:\d\d.*/, '')}</span>
-            </li>
-          )}
-        </ul>
-        <div style={{padding:"10px",fontSize:"small"}}>
-          Read more at <a href="//news.gramene.org/blog">Gramene news</a>
-        </div>
-      </div>
-    )
-  } else {
-    return null;
-  }
-}
-const NewsFeed = connect(
-  'selectDrupalFeed',
-  NewsFeedCmp
 );
 
 const Welcome = props => (
