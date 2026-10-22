@@ -138,10 +138,17 @@ const tools = {
     description: "Site features, explained!",
     link: 'videotutorials',
     imgSrc: "static/images/welcome/tutorials.png"
+  },
+  // Shown only on sites with `tour: true` (see PortalsCmp).
+  tour: {
+    title: "Guided Tour",
+    description: "Learn the gene search step by step, on a real search",
+    route: "/tour",
+    imgSrc: "static/images/welcome/tour.svg"
   }
 };
 
-const GrameneTool = ({title, description, imgSrc, imgSrc2, link, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
+const GrameneTool = ({title, description, imgSrc, imgSrc2, link, route, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
   let external;
   if (isExternal) {
     external = <small title="This link opens a page from an external site" style={{float:'right'}}><FiExternalLink/></small>;
@@ -154,29 +161,31 @@ const GrameneTool = ({title, description, imgSrc, imgSrc2, link, drupalLink, ens
       link = ensemblURL + ensemblPath;
     }
   }
-  else {
-    if (link === 'pansites') {
-      return (
-        <NavLink to="/pansites" style={{textDecoration:'none'}}>
-          <Col>
-            <Row className="gramene-tool">
-              <Col md="auto">
-                <img style={{width: "96px"}} src={imgSrc} alt={title}/>
-              </Col>
-              <Col>
-                <h5 style={{color:'#212529'}}>
-                  {title}{external}
-                </h5>
-                <p className="gramene-tool-desc">{description}</p>
-              </Col>
-            </Row>
-          </Col>
-        </NavLink>
-      )
-    }
-    if (link === 'ftp') {
-      link = `https://ftp.gramene.org/${id}/${version}`
-    }
+  else if (link === 'pansites') {
+    route = '/pansites';
+  }
+  // In-app pages are router links rather than full page loads.
+  if (route) {
+    return (
+      <NavLink to={route} style={{textDecoration:'none'}}>
+        <Col>
+          <Row className="gramene-tool">
+            <Col md="auto">
+              <img style={{width: "96px"}} src={imgSrc} alt={title}/>
+            </Col>
+            <Col>
+              <h5 style={{color:'#212529'}}>
+                {title}{external}
+              </h5>
+              <p className="gramene-tool-desc">{description}</p>
+            </Col>
+          </Row>
+        </Col>
+      </NavLink>
+    )
+  }
+  if (link === 'ftp') {
+    link = `https://ftp.gramene.org/${id}/${version}`
   }
   return (
     <Col onClick={() => isExternal ? window.open(link, '_blank') : window.location.href = link}>
@@ -239,7 +248,7 @@ const PortalsCmp = props => (
       :
       <div>{props.location && props.location.pathname === '/videotutorials' ? <VideoGallery playlistIds={props.configuration.playlistIds}/> :
         <Row xs={1} md={2} xxl={3} className="g-4">
-          {props.configuration.portals.map((portal, idx) =>
+          {props.configuration.portals.filter(portal => portal !== 'tour' || props.configuration.tour).map((portal, idx) =>
               <GrameneTool {...tools[portal]} key={idx} ensemblURL={props.configuration.ensemblURL}
                            id={props.configuration.id} version={props.configuration.version}/>
           )}

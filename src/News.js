@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'redux-bundler-react'
 import {Link} from 'react-router-dom'
-import {Container, Spinner} from 'react-bootstrap'
+import {Container, Row, Col, Spinner} from 'react-bootstrap'
 
 // News from the grameneNews bundle (bundles/news.js): the home page's
 // "Latest News" sidebar, the /posts list and a /post/:slug page. Titles,
@@ -79,21 +79,32 @@ export const PostsPage = connect(
   PostsPageCmp
 );
 
+// A post beside the Latest News sidebar, laid out like the home page's
+// columns so the sidebar stays put as visitors move between posts.
 const PostPageCmp = props => {
   const posts = useNews(props);
   const slug = props.match.params.slug;
   const post = posts && posts.find(p => p.slug === slug);
   return (
-    <Container style={{paddingTop: '20px', paddingBottom: '100px', maxWidth: '900px'}}>
-      {!posts && <Spinner animation="border" size="sm"/>}
-      {posts && !post && <p>That news post was not found. <Link to="/posts">All news</Link></p>}
-      {post && <article className="gramene-news-post">
-        <h2 dangerouslySetInnerHTML={html(post.title)}/>
-        <div style={{color: '#6c757d', marginBottom: '16px'}}>{formatDate(post.date)}</div>
-        {post.featuredUrl && <img src={post.featuredUrl} alt="" style={{maxWidth: '100%', marginBottom: '16px'}}/>}
-        <div className="gramene-news-content" dangerouslySetInnerHTML={html(post.content)}/>
-        <p style={{marginTop: '24px'}}><Link to="/posts">All news</Link></p>
-      </article>}
+    <Container fluid style={{paddingLeft: '20px', paddingRight: '20px', paddingTop: '20px', paddingBottom: '100px'}}>
+      <Row>
+        <Col xxl={10} xl={9} lg={9}>
+          <div style={{maxWidth: '900px'}}>
+            {!posts && <Spinner animation="border" size="sm"/>}
+            {posts && !post && <p>That news post was not found. <Link to="/posts">All news</Link></p>}
+            {post && <article className="gramene-news-post">
+              <h2 dangerouslySetInnerHTML={html(post.title)}/>
+              <div style={{color: '#6c757d', marginBottom: '16px'}}>{formatDate(post.date)}</div>
+              {post.featuredUrl && <img src={post.featuredUrl} alt="" style={{maxWidth: '100%', marginBottom: '16px'}}/>}
+              <div className="gramene-news-content" dangerouslySetInnerHTML={html(post.content)}/>
+              <p style={{marginTop: '24px'}}><Link to="/posts">All news</Link></p>
+            </article>}
+          </div>
+        </Col>
+        <Col xxl={2} xl={3} lg={3}>
+          {props.configuration.showFeed && <NewsFeed/>}
+        </Col>
+      </Row>
     </Container>
   );
 };
@@ -101,6 +112,7 @@ const PostPageCmp = props => {
 export const PostPage = connect(
   'selectGrameneNews',
   'selectSiteNews',
+  'selectConfiguration',
   'doFetchGrameneNews',
   PostPageCmp
 );

@@ -11,7 +11,7 @@
   "grameneData": "https://data.gramene.org/v70",
   "atlasUrl": 'https://data.gramene.org/v70/gxa/',
   "targetTaxonId": 3702,
-  "portals": ['browser','reactome','pansites','tools','climtools','curated','blast','atlas','videotutorials','mart'],
+  "portals": ['browser','reactome','pansites','tools','climtools','curated','blast','atlas','videotutorials','tour','mart'],
   "portals2": ['pansites','browser','reactome','climtools','blast','mart','tools','atlas','trackhub','outreach','downloads','archive'],
   "showInMenu": true,
   "showNews": true,

@@ -9,7 +9,7 @@ import {DebounceInput} from 'react-debounce-input'
 import {Navbar, Nav, NavDropdown, InputGroup, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Status, Filters, Facets, Results, Views, Auth, suggestions as GrameneSuggestions, bundles} from 'gramene-search';
-import {SiteTour} from './tour/SiteTour';
+import {SiteTour, TourPage} from './tour/SiteTour';
 import Feedback from './Feedback';
 import Welcome from './Welcome';
 import { PortalsDropdown } from './Portals'
@@ -32,6 +32,9 @@ import {keyBy} from 'lodash';
 
 const subsite = process.env.SUBSITE;
 const baseURL = process.env.DEPLOY === 'dev' ? `/${subsite}/${process.env.VERSION}` : `/`;
+// Root for static assets referenced from components. A bare relative path
+// ("static/...") breaks on nested routes such as /post/:slug.
+const assetBase = baseURL.endsWith('/') ? baseURL : `${baseURL}/`;
 const panSiteIdx = keyBy(panSites, 'id');
 const initialState = Object.assign({helpIsOn: false, linkSet: 'Portals'}, panSiteIdx[subsite]);
 
@@ -255,7 +258,7 @@ const GrameneMenuCmp = ({configuration}) => (
       <Navbar className="gramene-navbar" bg="light" expand="lg">
         <Navbar.Brand className="gramene-navbar">
           <a href="/">
-            <img src={configuration.logo || `static/images/${subsite}_logo.svg`}
+            <img src={configuration.logo || `${assetBase}static/images/${subsite}_logo.svg`}
                  height={80}
             />
           </a>
@@ -275,12 +278,13 @@ const GrameneMenuCmp = ({configuration}) => (
               : <>
                   <Nav.Link href={initialState.ensemblSite}>
                     <img style={{height: '25px', verticalAlign: 'bottom'}}
-                         src={`static/images/e_bang.png`}
+                         src={`${assetBase}static/images/e_bang.png`}
                          alt={"ensembl"}/>
                     Genome browser
                   </Nav.Link>
                   { configuration.showNews && <NavLink className="nav-link" to="/news">News</NavLink> }
                   { configuration.showGuides && <NavLink className="nav-link" to="/guides">Guides</NavLink> }
+                  { configuration.tour && <NavLink className="nav-link" to="/tour">Tour</NavLink> }
                   <NavLink className="nav-link" to={() => ({
                     pathname: '/feedback',
                     state: {search: document.location.href}
@@ -334,6 +338,7 @@ const Gramene = (store) => (
           <Route path="/feedback" component={Feedback}/>
           <Route path="/news" component={News}/>
           <Route path="/guides" component={Guides}/>
+          <Route path="/tour" component={TourPage}/>
           <Route path="/posts" component={PostsPage}/>
           <Route path="/post/:slug" component={PostPage}/>
           {(initialState.sections || []).map((s, i) =>
