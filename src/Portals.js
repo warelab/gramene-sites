@@ -62,13 +62,13 @@ const tools = {
   outreach: {
     title: "Outreach and Training",
     description: "Education resources and webinars",
-    drupalLink: "outreach",
+    route: "/outreach",
     imgSrc: "static/images/welcome/noun_553934.png"
   },
   downloads: {
     title: "Bulk Downloads",
     description: "FTP download of our data",
-    drupalLink: "ftp-download",
+    route: "/ftp-download",
     imgSrc: "static/images/welcome/download.png"
   },
   ftp: {
@@ -80,7 +80,7 @@ const tools = {
   archive: {
     title: "Archive",
     description: "Legacy tools and data (markers, Cyc pathways, etc)",
-    drupalLink: "archive",
+    route: "/archive",
     imgSrc: "static/images/welcome/archive.jpg"
   },
   climtools: {
@@ -204,7 +204,7 @@ const GrameneTool = ({title, description, imgSrc, imgSrc2, link, route, drupalLi
   );
 };
 
-const GrameneToolLink = ({title, description, imgSrc, link, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
+const GrameneToolLink = ({title, description, imgSrc, link, route, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
   let external;
   if (isExternal) {
     external = <small title="This link opens a page from an external site"><FiExternalLink/></small>;
@@ -221,6 +221,9 @@ const GrameneToolLink = ({title, description, imgSrc, link, drupalLink, ensemblP
     if (link === 'ftp') {
       link = `https://ftp.gramene.org/${id}/${version}`
     }
+  }
+  if (route) {
+    return <NavDropdown.Item as={NavLink} to={route}><img style={{width: "32px"}} src={imgSrc}/>&nbsp;&nbsp;{title}</NavDropdown.Item>
   }
   return <NavDropdown.Item href={link}><img style={{width: "32px"}} src={imgSrc}/>&nbsp;&nbsp;{title}</NavDropdown.Item>
 };

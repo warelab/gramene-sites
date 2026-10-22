@@ -10,6 +10,7 @@ import {Navbar, Nav, NavDropdown, InputGroup, Button} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Status, Filters, Facets, Results, Views, Auth, suggestions as GrameneSuggestions, bundles} from 'gramene-search';
 import {SiteTour, TourPage} from './tour/SiteTour';
+import {StaticPage, STATIC_PAGES} from './StaticPage';
 import Feedback from './Feedback';
 import Welcome from './Welcome';
 import { PortalsDropdown } from './Portals'
@@ -346,6 +347,9 @@ const Gramene = (store) => (
           <Route path="/pansites" component={Welcome}/>
           <Route path="/node/:nid" component={Welcome}/>
           <Route path="/videotutorials" component={Welcome}/>
+          {/* Pages moved from news.gramene.org; after the config sections so a
+              site's own section (oryza19k's /cite) wins. */}
+          <Route path={`/:page(${STATIC_PAGES.join('|')})`} component={StaticPage}/>
           <Route path="/:stub" component={Welcome}/>
           <Route path="/" component={MainView}/>
         </Switch>
