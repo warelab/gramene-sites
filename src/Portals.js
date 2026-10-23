@@ -66,8 +66,8 @@ const tools = {
     imgSrc: "static/images/welcome/noun_553934.png"
   },
   downloads: {
-    title: "Bulk Downloads",
-    description: "FTP download of our data",
+    title: "Bulk Data Access",
+    description: "FTP downloads and the data API",
     route: "/ftp-download",
     imgSrc: "static/images/welcome/download.png"
   },

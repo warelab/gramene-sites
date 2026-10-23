@@ -1,9 +1,10 @@
 <!--
-  "Bulk Data Download": served at /ftp-download beside the Latest News sidebar (src/StaticPage.js).
+  "Bulk Data Access": served at /ftp-download beside the Latest News sidebar (src/StaticPage.js).
   Moved from news.gramene.org node 297. The page is fetched at runtime, so
-  edits go live without a rebuild.
+  edits go live without a rebuild. {{grameneData}} is replaced with the
+  site's data API (config grameneData, e.g. https://data.gramene.org/v70).
 -->
-<h2>Bulk Data Download</h2>
+<h2>Bulk Data Access</h2>
 <h3><a href="http://ftp.gramene.org/CURRENT_RELEASE/" target="_blank" rel="noopener"><strong>Gramene FTP site</strong></a></h3>
 
 <p>In addition to data produced in collaboration with Ensembl Plants (see below), Gramene provides legacy data from the <a href="http://ftp.gramene.org/pub/gramene/maizesequence.org/" target="_blank" rel="noopener">MaizeSequence.Org</a> website, and in-house developed BioCyc pathway databases.</p>
@@ -20,3 +21,7 @@
 <li>Gene annotations (GTF and GFF3)</li>
 <li>Variation data (GVF and VCF)</li>
 </ul>
+
+<h3><a href="{{grameneData}}/docs/?url={{grameneDataPath}}/swagger" target="_blank" rel="noopener"><strong>Gramene data API</strong></a></h3>
+
+<p>The REST API behind this site's searches serves genes, gene trees, genome maps, taxonomy, ontologies (GO, PO, TO), protein domains, pathways, QTLs, germplasm and expression data for the current release as JSON. Its interactive Swagger documentation lists every endpoint and parameter and lets you try queries in the browser.</p>
