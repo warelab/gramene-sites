@@ -26,7 +26,7 @@
     "formik": "^3.0.0-next.8",
     "gramene-alerts": "^1.0.2",
     "gramene-githubdocs": "^1.8.0",
-    "gramene-search": "^2.38.2",
+    "gramene-search": "^2.39.0",
     "gramene-search-tour": "file:vendor/gramene-search-tour-0.1.0.tgz",
     "gramene-videos": "^1.0.5",
     "lightningcss": "^1.30.2",
