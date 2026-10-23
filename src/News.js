@@ -52,10 +52,30 @@ export const NewsFeed = connect(
   NewsFeedCmp
 );
 
+// Page content beside the Latest News sidebar, in the home page's column
+// layout, so the sidebar stays put as visitors move between these pages.
+const NewsSidebarLayoutCmp = ({configuration, children}) => (
+  <Container fluid style={{paddingLeft: '20px', paddingRight: '20px', paddingTop: '20px', paddingBottom: '100px'}}>
+    <Row>
+      <Col xxl={10} xl={9} lg={9}>
+        <div style={{maxWidth: '900px'}}>{children}</div>
+      </Col>
+      <Col xxl={2} xl={3} lg={3}>
+        {configuration.showFeed && <NewsFeed/>}
+      </Col>
+    </Row>
+  </Container>
+);
+
+export const NewsSidebarLayout = connect(
+  'selectConfiguration',
+  NewsSidebarLayoutCmp
+);
+
 const PostsPageCmp = props => {
   const posts = useNews(props);
   return (
-    <Container style={{paddingTop: '20px', paddingBottom: '100px', maxWidth: '900px'}}>
+    <NewsSidebarLayout>
       <h3>News</h3>
       {!posts && <Spinner animation="border" size="sm"/>}
       {posts && posts.length === 0 && <p>No news yet.</p>}
@@ -68,7 +88,7 @@ const PostsPageCmp = props => {
           <div className="gramene-news-excerpt" dangerouslySetInnerHTML={html(post.excerpt)}/>
         </div>
       )}
-    </Container>
+    </NewsSidebarLayout>
   );
 };
 
@@ -79,40 +99,28 @@ export const PostsPage = connect(
   PostsPageCmp
 );
 
-// A post beside the Latest News sidebar, laid out like the home page's
-// columns so the sidebar stays put as visitors move between posts.
 const PostPageCmp = props => {
   const posts = useNews(props);
   const slug = props.match.params.slug;
   const post = posts && posts.find(p => p.slug === slug);
   return (
-    <Container fluid style={{paddingLeft: '20px', paddingRight: '20px', paddingTop: '20px', paddingBottom: '100px'}}>
-      <Row>
-        <Col xxl={10} xl={9} lg={9}>
-          <div style={{maxWidth: '900px'}}>
-            {!posts && <Spinner animation="border" size="sm"/>}
-            {posts && !post && <p>That news post was not found. <Link to="/posts">All news</Link></p>}
-            {post && <article className="gramene-news-post">
-              <h2 dangerouslySetInnerHTML={html(post.title)}/>
-              <div style={{color: '#6c757d', marginBottom: '16px'}}>{formatDate(post.date)}</div>
-              {post.featuredUrl && <img src={post.featuredUrl} alt="" style={{maxWidth: '100%', marginBottom: '16px'}}/>}
-              <div className="gramene-news-content" dangerouslySetInnerHTML={html(post.content)}/>
-              <p style={{marginTop: '24px'}}><Link to="/posts">All news</Link></p>
-            </article>}
-          </div>
-        </Col>
-        <Col xxl={2} xl={3} lg={3}>
-          {props.configuration.showFeed && <NewsFeed/>}
-        </Col>
-      </Row>
-    </Container>
+    <NewsSidebarLayout>
+      {!posts && <Spinner animation="border" size="sm"/>}
+      {posts && !post && <p>That news post was not found. <Link to="/posts">All news</Link></p>}
+      {post && <article className="gramene-news-post">
+        <h2 dangerouslySetInnerHTML={html(post.title)}/>
+        <div style={{color: '#6c757d', marginBottom: '16px'}}>{formatDate(post.date)}</div>
+        {post.featuredUrl && <img src={post.featuredUrl} alt="" style={{maxWidth: '100%', marginBottom: '16px'}}/>}
+        <div className="gramene-news-content" dangerouslySetInnerHTML={html(post.content)}/>
+        <p style={{marginTop: '24px'}}><Link to="/posts">All news</Link></p>
+      </article>}
+    </NewsSidebarLayout>
   );
 };
 
 export const PostPage = connect(
   'selectGrameneNews',
   'selectSiteNews',
-  'selectConfiguration',
   'doFetchGrameneNews',
   PostPageCmp
 );

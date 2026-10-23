@@ -1,15 +1,27 @@
 import React from 'react'
 import {connect} from 'redux-bundler-react'
-import {Container, Row, Col, Spinner} from 'react-bootstrap'
-import {NewsFeed} from './News'
+import {Spinner} from 'react-bootstrap'
+import {NewsSidebarLayout} from './News'
 
 // Static pages moved from news.gramene.org. Each is an HTML fragment in
 // src/static/pages/<name>.html, fetched at runtime (src/static ships with
 // every build), shown beside the Latest News sidebar at /<name>.
+// {{grameneData}} in a page becomes the site's data API base
+// (config grameneData) and {{grameneDataPath}} its path, so links to the
+// current release's API need no edit at each release.
 export const STATIC_PAGES = ['cite', 'outreach', 'ftp-download', 'archive'];
 
 const subsite = process.env.SUBSITE;
 const assetBase = process.env.DEPLOY === 'dev' ? `/${subsite}/${process.env.VERSION}/` : '/';
+
+const fillPlaceholders = (html, config) => {
+  const api = (config.grameneData || '').replace(/\/$/, '');
+  let path = '';
+  try { path = new URL(api).pathname.replace(/\/$/, ''); } catch (e) { /* no API configured */ }
+  return html
+    .replace(/\{\{grameneData\}\}/g, api)
+    .replace(/\{\{grameneDataPath\}\}/g, path);
+};
 
 const StaticPageCmp = ({match, configuration}) => {
   const page = match.params.page;
@@ -36,20 +48,13 @@ const StaticPageCmp = ({match, configuration}) => {
 
   const current = loaded.page === page ? loaded : {};
   return (
-    <Container fluid style={{paddingLeft: '20px', paddingRight: '20px', paddingTop: '20px', paddingBottom: '100px'}}>
-      <Row>
-        <Col xxl={10} xl={9} lg={9}>
-          <div className="gramene-static-page" style={{maxWidth: '900px'}}>
-            {!current.html && !current.error && <Spinner animation="border" size="sm"/>}
-            {current.error && <p>This page could not be loaded ({current.error}).</p>}
-            {current.html && <div dangerouslySetInnerHTML={{__html: current.html}}/>}
-          </div>
-        </Col>
-        <Col xxl={2} xl={3} lg={3}>
-          {configuration.showFeed && <NewsFeed/>}
-        </Col>
-      </Row>
-    </Container>
+    <NewsSidebarLayout>
+      <div className="gramene-static-page">
+        {!current.html && !current.error && <Spinner animation="border" size="sm"/>}
+        {current.error && <p>This page could not be loaded ({current.error}).</p>}
+        {current.html && <div dangerouslySetInnerHTML={{__html: fillPlaceholders(current.html, configuration)}}/>}
+      </div>
+    </NewsSidebarLayout>
   );
 };
 
