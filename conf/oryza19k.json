@@ -10,6 +10,10 @@
   "ensemblSite": "http://oryza-ensembl-dev.gramene.org",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-108",
   "grameneData": "https://data.gramene.org/oryza_v9",
+  "atlasUrl": 'https://data.gramene.org/v70/gxa/',
+  // The gene Expression tab's studies come from v70, as on Gramene Maize; it
+  // shares the anchor genomes' gene ids with oryza_v9.
+  "expressionApi": 'https://data.gramene.org/v70',
   "targetTaxonId": 39946,
   "portals": ['browser','reactome','atlas','blast','pansites','curated','oryzaclimtools','videotutorials','oryzadownloads'],
   "portals2": ['pansites','browser','reactome','blast','oryzaclimtools','atlas','videotutorials','oryzadownloads'],
