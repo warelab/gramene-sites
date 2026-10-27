@@ -1,13 +1,17 @@
 {
   "id": "oryza",
   "name": "Gramene Oryza",
-  "version": "v9",
+  "version": "v8",
   "description": "Comparative plant genomics focused on rice varieties",
   "url": "https://oryza.gramene.org",
   "ensemblURL": "http://oryza-ensembl-dev.gramene.org",
   "ensemblSite": "http://oryza-ensembl-dev.gramene.org",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-108",
-  "grameneData": "https://data.gramene.org/oryza_v9",
+  "grameneData": "https://data.gramene.org/oryza_v8",
+  "atlasUrl": 'https://data.gramene.org/v70/gxa/',
+  // oryza_v8 has no expression studies per gene; v70 has them for the anchor
+  // genomes the two share (same gene ids), for the gene Expression tab.
+  "expressionApi": 'https://data.gramene.org/v70',
   "curation": {
     "url": "http://curate.gramene.org/oryza_v7?since=4577&gene=",
     "taxa": {
@@ -22,7 +26,23 @@
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
+  "showViews": true,
   "date": "2026-08-09",
+  // The oryza_v8 API predates the newer views (gene lists, expression
+  // attributes, exporter, enrichment), so they stay hidden until it is rebuilt.
+  views: {
+    userLists: 'hidden',
+    expression: 'disabled',
+    export: 'hidden',
+    taxonomy: 'hidden',
+    taxTree: 'on',
+    attrTable: 'hidden',
+    list: 'on',
+    help: 'off',
+    attribs: 'hidden',
+    exprViz: 'hidden',
+    ontologyEnrichment: 'hidden'
+  },
   "examples": [
     {
       "title": 'GS3 Variant Image',
