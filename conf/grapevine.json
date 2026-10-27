@@ -9,6 +9,11 @@
   "ensemblSite": "https://vitis-ensembl.gramene.org",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-87",
   "grameneData": "https://data.gramene.org/grapevine_v4",
+  "atlasUrl": 'https://data.gramene.org/v70/gxa/',
+  // The gene Expression tab's studies come from v70, as on Gramene Maize. v70's
+  // grape genome has new gene ids, so the per-gene lookup finds nothing and the
+  // heatmap is drawn from the atlas, which knows the 12X VIT_ ids.
+  "expressionApi": 'https://data.gramene.org/v70',
   "curation": {
     "url": "http://curate.gramene.org/grapevine_v4?since=71275&gene=",
     "taxa": {
@@ -24,7 +29,23 @@
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
+  "showViews": true,
   "date": "2024-01-13",
+  // The grapevine_v4 API predates the newer views (gene lists, expression
+  // attributes, exporter, enrichment), so they stay hidden until it is rebuilt.
+  views: {
+    userLists: 'hidden',
+    expression: 'disabled',
+    export: 'hidden',
+    taxonomy: 'hidden',
+    taxTree: 'on',
+    attrTable: 'hidden',
+    list: 'on',
+    help: 'off',
+    attribs: 'hidden',
+    exprViz: 'hidden',
+    ontologyEnrichment: 'hidden'
+  },
   "slides": [],
   details: {
     sequences: true,
