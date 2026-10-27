@@ -7,6 +7,8 @@
     "maize": "npm run tidy && SUBSITE=maize parcel --reporter @parcel/reporter-bundle-analyzer html/maize.html",
     "grapevine": "npm run tidy && SUBSITE=grapevine parcel html/grapevine.html",
     "main": "npm run tidy && SUBSITE=main parcel html/main.html",
+    "main69": "npm run tidy && SUBSITE=main RELEASE=69 parcel html/main.html",
+    "main70": "npm run tidy && SUBSITE=main RELEASE=70 parcel html/main.html",
     "sorghum": "npm run tidy && SUBSITE=sorghum parcel html/sorghum.html",
     "oryza": "npm run tidy && SUBSITE=oryza parcel html/oryza.html",
     "oryza19k": "npm run tidy && SUBSITE=oryza19k parcel html/oryza19k.html",

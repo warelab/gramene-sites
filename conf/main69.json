@@ -1,0 +1,83 @@
+{
+  "id": "main",
+  "ga": "G-ZTEQBFCRXZ",
+  "name": "GramenePlants",
+  "version": "v69",
+  "description": "Comparative plant genomics for crops and model organisms",
+  "url": "https://www.gramene.org",
+  "ensemblURL": "https://ensembl.gramene.org",
+  "ensemblSite": "https://ensembl.gramene.org",
+  "ensemblRest": "https://data.gramene.org/ensembl69",
+  "grameneData": "https://data.gramene.org/v69",
+  "newsApi": "https://www.sorghumbase.org",
+  // v69 indexes expressed_in_gxa_attr_ss itself, so the Expression tab takes
+  // its studies from grameneData; only the atlas service lives on v70.
+  "atlasUrl": 'https://data.gramene.org/v70/gxa/',
+  "targetTaxonId": 3702,
+  "portals": ['browser','reactome','pansites','tools','climtools','curated','blast','atlas','videotutorials','tour','mart'],
+  "portals2": ['pansites','browser','reactome','climtools','blast','mart','tools','atlas','trackhub','outreach','downloads','archive'],
+  "showInMenu": true,
+  "showNews": true,
+  "showGuides": false,
+  "showFeed": true,
+  "auth": true,
+  "showTweets": true,
+  "showViews": true,
+  "tour": false,
+  "enable_tbrowse_expression_zone": false,
+  "hideAlerts": false,
+  "date": "2026-05-28",
+  "playlistIds": ["PLqQHG-yuRY1-z7-KKYe-BDL-lriaocrbZ"],
+  "slides": [],
+  // v69 has no gene_lists, saved_views or expression_attributes endpoints,
+  // so the views that need them stay hidden (as on maize/oryza/grapevine).
+  views: {
+    userLists: 'hidden',
+    expression: 'disabled',
+    export: 'hidden',
+    taxonomy: 'hidden',
+    taxTree: 'on',
+    attrTable: 'hidden',
+    list: 'on',
+    help: 'off',
+    attribs: 'hidden',
+    exprViz: 'hidden',
+    ontologyEnrichment: 'hidden'
+  },
+  details: {
+    sequences: true,
+    VEP: false,
+    location: true,
+    expression: true,
+    homology: true,
+    pathways: true,
+    pubs: true,
+    xrefs: true
+  },
+  "panSite" : {
+    "sorghum_bicolor" : {
+      "url": "https://sorghumbase.org/genes",
+      "name": "SorghumBase",
+      "svg": "./static/images/sorghum_logo.svg",
+      "api": "https://data.sorghumbase.org/sorghum_v7"
+    },
+    vitis_vinifera : {
+      url: "https://vitis.gramene.org",
+      name: "Gramene Grapevine",
+      svg: "./static/images/grapevine_logo.svg",
+      api: "https://data.gramene.org/grapevine_v4"
+    },
+    oryza_sativa : {
+      url: "https://oryza.gramene.org",
+      name: "Gramene Oryza",
+      svg: "./static/images/oryza_logo.svg",
+      api: "https://data.gramene.org/oryza_v7"
+    },
+    zea_mays : {
+      url: "https://maize-pangenome.gramene.org",
+      name: "Gramene Maize",
+      svg: "./static/images/maize_logo.svg",
+      api: "https://data.gramene.org/maize_v4"
+    }
+  }
+}
