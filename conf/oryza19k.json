@@ -1,10 +1,10 @@
 {
   "id": "oryza19k",
-  "name": "Gramene Oryza 19K-RGP",
+  "name": "Oryza 19K Rice Genome Project",
   "version": "v1",
   "showRelease": false,
   "logo": "static/images/oryza_logo.svg",
-  "description": "Comparative rice genomics and genetic variation in the 19K-RGP",
+  "description": "Explore comparative genomics of rice varieties and genetic variation in the 19K-RGP on five reference genomes",
   "url": "https://oryza19k.gramene.org",
   "ensemblURL": "http://oryza-ensembl-dev.gramene.org",
   "ensemblSite": "http://oryza-ensembl-dev.gramene.org",
@@ -21,12 +21,31 @@
   "showTweets": false,
   "date": "2026-08-09",
   "sections": [
-    { "label": "Start here", "route": "/start", "repo": "oryza-19k-rgp", "path": "Start here" },
-    { "label": "Platforms", "route": "/platforms", "repo": "oryza-19k-rgp", "path": "Platforms" },
-    { "label": "Workflows", "route": "/workflows", "repo": "oryza-19k-rgp", "path": "Workflows" },
-    { "label": "API", "route": "/api", "repo": "oryza-19k-rgp", "path": "API" },
-    { "label": "Resources", "route": "/resources", "repo": "oryza-19k-rgp", "path": "Resources" },
+    { "label": "Platforms", "route": "/platforms", "repo": "oryza-19k-rgp", "path": "Platforms", "expand": true },
     { "label": "Cite", "route": "/cite", "repo": "oryza-19k-rgp", "path": "Cite" }
+  ],
+  "welcomeDoc": { "repo": "oryza-19k-rgp", "path": "Start here/02-ataglance.md", "branch": "main" },
+  "theme": "dark",
+  "splitHome": true,
+  "brand": { "name": "Gramene", "sub": "ORYZA 19K-RGP" },
+  "portalsHeading": "Gramene Portals",
+  "hero": {
+    "eyebrow": "Rice comparative genomics",
+    "graphic": "rice-stalk",
+    "links": [
+      { "label": "SNP-Seek", "url": "/platforms?doc=Platforms%2F01-SNP-Seek%20v3.md" },
+      { "label": "Gramene", "url": "/platforms?doc=Platforms%2F02-GrameneOryza.md" },
+      { "label": "CLIMtools", "url": "/platforms?doc=Platforms%2F03-Oryza%20CLIMtools.md" },
+      { "label": "19K SNPs Map", "url": "/platforms?doc=Platforms%2F04-19K%20SNPs%20Map.md" }
+    ]
+  },
+  "atAGlance": [
+    { "value": "19,035", "label": "rice genomes", "accent": "green" },
+    { "value": "9,309", "label": "newly sequenced", "accent": "green" },
+    { "value": "5", "label": "platinum references", "accent": "green" },
+    { "value": "~57M", "label": "variants", "accent": "gold" },
+    { "value": "2.02M", "label": "high-effect regulatory variants", "accent": "gold" },
+    { "value": "138", "label": "AlphaFold3 models", "accent": "green" }
   ],
   "examples": [
     {

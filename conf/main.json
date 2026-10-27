@@ -9,6 +9,7 @@
   "ensemblSite": "https://ensembl.gramene.org",
   "ensemblRest": "https://data.gramene.org/ensembl70",
   "grameneData": "https://data.gramene.org/v70",
+  "newsApi": "https://www.sorghumbase.org",
   "atlasUrl": 'https://data.gramene.org/v70/gxa/',
   "targetTaxonId": 3702,
   "portals": ['browser','reactome','pansites','tools','climtools','curated','blast','atlas','videotutorials','tour','mart'],

@@ -182,3 +182,114 @@
     }
   }
 }
+
+/* ---- oryza19k-only homepage treatment ----
+   These rules are scoped to class names that are only emitted by Welcome.js
+   when the active config defines `hero` / `atAGlance` (currently oryza19k),
+   so they have no effect on the other subsites that share this stylesheet. */
+@oryza19k-green: #4a7a3a;
+@oryza19k-gold: #c9a227;
+@oryza19k-stat-bg: #f4f6ee;
+@oryza19k-text: #2f4a1f;
+
+.oryza19k-hero {
+  position: relative;
+  overflow: hidden;
+
+  .oryza19k-hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: @oryza19k-green;
+    margin-bottom: 4px;
+  }
+
+  .oryza19k-hero-graphic {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: auto;
+    pointer-events: none;
+    opacity: 0.95;
+  }
+
+  @media (min-width: @screen-md-min) {
+    padding-left: 190px;
+  }
+
+  @media (max-width: @screen-xs-max) {
+    .oryza19k-hero-graphic { display: none; }
+    padding-left: 16px;
+  }
+}
+
+.oryza19k-glance {
+  background: #fff;
+  border: 1px solid #e3e8ec;
+  border-radius: 6px;
+  padding: 18px 20px;
+  // Fill the column height (matches the slideshow beside it) and centre the
+  // title + stat grid together so the two columns stay balanced.
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .oryza19k-glance-title {
+    margin: 0 0 14px;
+    font-size: 1.1rem;
+    flex: 0 0 auto;
+  }
+
+  // Tidy two-up grid by default; three-up beside the slideshow (3 x 2 panel).
+  // margin: auto 0 vertically centres the grid in the leftover panel height.
+  .oryza19k-glance-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  @media (min-width: @screen-md-min) {
+    .oryza19k-glance-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    // When the slideshow is hidden the card spans the full width, so give it
+    // more columns and let the tiles breathe across the row.
+    &.oryza19k-glance-full .oryza19k-glance-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+
+  .oryza19k-stat {
+    background: @oryza19k-stat-bg;
+    border-radius: 6px;
+    padding: 14px 14px;
+    border-left: 3px solid @gramene-green;
+    transition: all 0.15s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 78px;
+  }
+
+  .oryza19k-stat:hover {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+
+  .oryza19k-stat-green { border-left-color: @gramene-green; }
+  .oryza19k-stat-gold  { border-left-color: @oryza19k-gold; }
+
+  .oryza19k-stat-value {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: @oryza19k-text;
+    line-height: 1.1;
+  }
+
+  .oryza19k-stat-label {
+    font-size: 0.82rem;
+    color: #5f6e52;
+    margin-top: 3px;
+  }
+}

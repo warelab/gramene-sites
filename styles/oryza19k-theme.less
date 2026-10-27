@@ -1,0 +1,414 @@
+// Dark theme for the oryza19k build only.
+//
+// Everything here is scoped under `.oryza19k-theme`, a class applied to the app
+// root <div> in gramene.js ONLY when the active config sets `"theme": "dark"`
+// (currently just oryza19k.json). The other subsites that share this bundle
+// never get the class, so none of these rules affect them.
+//
+// Colours are driven by CSS custom properties so the palette can be switched at
+// runtime: ThemedRoot adds a `palette-<id>` class alongside `.oryza19k-theme`
+// and the .palette-* blocks at the bottom override the variables. !important is
+// used in places to beat react-bootstrap defaults and a few inline styles in
+// the shared shell (navbar/footer borders, carousel item background).
+
+.oryza19k-theme {
+  // ---- default palette (Rice Paddy) ----
+  --o19-bg: #1b1d18;
+  --o19-tile: #24271f;
+  --o19-tile-hi: #2c3027;
+  --o19-border: #3a3f33;
+  --o19-text: #e7ebdf;
+  --o19-text-dim: #a7b099;
+  --o19-surface-2: #1f221b;
+  --o19-code-bg: #15170f;
+  --o19-hero-bg: #e6f0d8;
+  --o19-hero-title: #2f4a1f;
+  --o19-hero-eye: #5d7a3f;
+  --o19-hero-text: #46603a;
+  --o19-hero-btn-bg: #fbfdf7;
+  --o19-hero-btn-border: #bcd0a4;
+  --o19-accent: #3f6b2e;
+  --o19-accent-hi: #4a7e36;
+  --o19-gold: #c9a227;
+  --o19-brand-name: #7ba456;
+  --o19-doc-link: #86b85f;
+  --o19-emphasis: #ffffff;  // hover/active nav text (flips dark in light mode)
+
+  background: var(--o19-bg);
+  min-height: 100vh;
+  color: var(--o19-text);
+
+  // ---- Header / navbar ------------------------------------------------------
+  .gramene-navbar-outer,
+  .gramene-navbar-outer .navbar,
+  .navbar.gramene-navbar {
+    background-color: var(--o19-bg) !important;
+  }
+  .navbar.gramene-navbar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .gramene-section-heading {
+    color: var(--o19-text) !important;
+    font-weight: 500;
+  }
+  .gramene-navbar-outer > div {
+    border-bottom-color: var(--o19-border) !important;
+  }
+  .navbar .nav-link {
+    color: var(--o19-text) !important;
+  }
+  .navbar .nav-link:hover {
+    color: var(--o19-emphasis) !important;
+  }
+  .navbar .nav-link.active {
+    color: var(--o19-emphasis) !important;
+    border-bottom: 2px solid var(--o19-accent-hi);
+  }
+
+  // navbar dropdowns (Platforms menu, theme selector)
+  .navbar .dropdown-menu {
+    background-color: var(--o19-tile);
+    border: 1px solid var(--o19-border);
+  }
+  .navbar .dropdown-item {
+    color: var(--o19-text);
+  }
+  .navbar .dropdown-item:hover,
+  .navbar .dropdown-item:focus,
+  .navbar .dropdown-item.active {
+    background-color: var(--o19-tile-hi);
+    color: var(--o19-emphasis);
+  }
+
+  // colour swatch shown beside each theme name in the selector
+  .oryza19k-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin-right: 8px;
+    vertical-align: -1px;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+  }
+
+  // light / dark mode toggle switch (sits beside the palette dropdown)
+  .o19-mode-switch {
+    position: relative;
+    width: 52px;
+    height: 26px;
+    border-radius: 13px;
+    border: 1px solid var(--o19-border);
+    background: var(--o19-tile);
+    margin-right: 14px;
+    padding: 0;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  .o19-mode-knob {
+    position: absolute;
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--o19-accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: left 0.15s ease;
+  }
+  .o19-mode-dark .o19-mode-knob { left: 3px; }
+  .o19-mode-light .o19-mode-knob { left: 29px; }
+
+  // text brand ("ORYZA 19K-RGP")
+  .oryza19k-brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 6px 0;
+  }
+  .oryza19k-brand-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--o19-brand-name);
+    line-height: 1;
+  }
+  .oryza19k-brand-sub {
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    color: var(--o19-gold);
+  }
+  .oryza19k-brand--solo .oryza19k-brand-sub {
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+  }
+
+  // search box
+  #search-input.form-control {
+    background-color: var(--o19-tile);
+    color: var(--o19-text);
+    border-color: var(--o19-border);
+  }
+  #search-input.form-control::placeholder {
+    color: var(--o19-text-dim);
+  }
+
+  // ---- Headings on dark -----------------------------------------------------
+  h3, h4 { color: var(--o19-text); }
+
+  // ---- Hero -----------------------------------------------------------------
+  .alert-success.oryza19k-hero {
+    background-color: var(--o19-hero-bg) !important;
+    border: none !important;
+    border-radius: 12px;
+    color: var(--o19-hero-title) !important;
+    padding: 26px 28px;
+  }
+  @media (min-width: 950px) {
+    .alert-success.oryza19k-hero { padding-left: 200px; }
+  }
+  .oryza19k-hero .oryza19k-hero-eyebrow { color: var(--o19-hero-eye); }
+  .oryza19k-hero .alert-heading { color: var(--o19-hero-title) !important; }
+  .oryza19k-hero a { color: var(--o19-hero-title); }
+  .oryza19k-hero > div[class], .oryza19k-hero > div { color: var(--o19-hero-text); }
+
+  .oryza19k-hero-actions {
+    margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .oryza19k-hero-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    background: var(--o19-hero-btn-bg);
+    color: var(--o19-hero-title);
+    border: 1px solid var(--o19-hero-btn-border);
+    transition: all 0.15s ease-in-out;
+  }
+  .oryza19k-hero-btn:hover {
+    text-decoration: none;
+    transform: translateY(-1px);
+    // invert: dark fill with light text
+    background: var(--o19-hero-title);
+    color: var(--o19-hero-btn-bg);
+    border-color: var(--o19-hero-title);
+  }
+  .oryza19k-hero-btn-primary {
+    background: var(--o19-accent);
+    color: #fff;
+    border-color: var(--o19-accent);
+  }
+  .oryza19k-hero-btn-primary:hover {
+    background: var(--o19-accent-hi);
+    color: #fff;
+  }
+
+  // ---- At a glance ----------------------------------------------------------
+  .oryza19k-glance {
+    background: transparent;
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+  .oryza19k-glance-title { color: var(--o19-text-dim); }
+
+  // ---- Slideshow ------------------------------------------------------------
+  .welcome-slideshow-col .carousel-item {
+    background-color: var(--o19-bg) !important;
+  }
+
+  // ---- Portals --------------------------------------------------------------
+  .tools-wrapper .gramene-tool {
+    background: var(--o19-tile);
+    border: 1px solid var(--o19-border);
+    border-radius: 12px;
+    margin-bottom: 4px;
+  }
+  .tools-wrapper .gramene-tool:hover {
+    background: var(--o19-tile-hi);
+    transform: translateY(-1px);
+  }
+  .tools-wrapper .gramene-tool h5 { color: var(--o19-text) !important; }
+  .tools-wrapper .gramene-tool .gramene-tool-desc { color: var(--o19-text-dim) !important; }
+  .tools-wrapper .gramene-tool img {
+    width: 46px !important;
+    height: 46px;
+    object-fit: contain;
+    background: var(--o19-hero-bg);
+    border-radius: 10px;
+    padding: 7px;
+  }
+
+  // ---- Examples -------------------------------------------------------------
+  .examples-wrapper .gramene-example h5 { color: var(--o19-text) !important; }
+  .examples-wrapper .gramene-example .gramene-example-desc { color: var(--o19-text-dim) !important; }
+  .examples-wrapper .gramene-example:hover { background-color: var(--o19-tile-hi); border-radius: 12px; }
+
+  // ---- Footer ---------------------------------------------------------------
+  .navbar.fixed-bottom {
+    background-color: var(--o19-bg) !important;
+  }
+  .navbar.fixed-bottom > div {
+    border-top-color: var(--o19-border) !important;
+  }
+  .navbar.fixed-bottom .nav-link,
+  .navbar.fixed-bottom .dropdown-toggle {
+    color: var(--o19-text) !important;
+  }
+
+  // ---- GithubDocs pages (Platforms / Cite / News / Guides) ------------------
+  .ghdocs {
+    --ghd-paddy: var(--o19-doc-link);
+    --ghd-ink: var(--o19-text);
+    --ghd-muted: var(--o19-text-dim);
+    --ghd-border: var(--o19-border);
+    --ghd-surface: var(--o19-tile);
+    --ghd-sidebar-bg: var(--o19-surface-2);
+    --ghd-active-bg: var(--o19-tile-hi);
+  }
+  .ghdocs-markdown pre,
+  .ghdocs-markdown pre code {
+    background: var(--o19-code-bg);
+    border-color: var(--o19-border);
+    color: var(--o19-text);
+  }
+  .ghdocs-markdown :not(pre) > code {
+    background: var(--o19-tile-hi);
+    color: var(--o19-text);
+  }
+  .ghdocs-markdown tbody tr:nth-child(even) {
+    background: var(--o19-surface-2);
+  }
+}
+
+// ---- Alternate palettes -----------------------------------------------------
+// Each overrides the custom properties; ThemedRoot picks the active one via the
+// `palette-<id>` class. palette-paddy uses the defaults above (no overrides).
+.oryza19k-theme.palette-midnight {
+  --o19-bg: #14181f;
+  --o19-tile: #1d2430;
+  --o19-tile-hi: #27303f;
+  --o19-border: #353f4f;
+  --o19-text: #e6ebf2;
+  --o19-text-dim: #9aa6b8;
+  --o19-surface-2: #1a2029;
+  --o19-code-bg: #0e131b;
+  --o19-hero-bg: #dde8f5;
+  --o19-hero-title: #1c3a5e;
+  --o19-hero-eye: #41648c;
+  --o19-hero-text: #2e4d72;
+  --o19-hero-btn-bg: #f4f8fd;
+  --o19-hero-btn-border: #aac6e4;
+  --o19-accent: #2f5e94;
+  --o19-accent-hi: #3a72b0;
+  --o19-gold: #5fb0d6;
+  --o19-brand-name: #6f9fd0;
+  --o19-doc-link: #6fb0e0;
+}
+.oryza19k-theme.palette-terracotta {
+  --o19-bg: #1f1916;
+  --o19-tile: #2a221d;
+  --o19-tile-hi: #352a23;
+  --o19-border: #463a30;
+  --o19-text: #f0e7df;
+  --o19-text-dim: #b8a896;
+  --o19-surface-2: #241d18;
+  --o19-code-bg: #181210;
+  --o19-hero-bg: #f5e7d8;
+  --o19-hero-title: #5a2f1a;
+  --o19-hero-eye: #8a5a38;
+  --o19-hero-text: #6e4527;
+  --o19-hero-btn-bg: #fdf6ee;
+  --o19-hero-btn-border: #e0c2a4;
+  --o19-accent: #b3502a;
+  --o19-accent-hi: #cb6038;
+  --o19-gold: #db9a3a;
+  --o19-brand-name: #d08a5a;
+  --o19-doc-link: #e0915f;
+}
+.oryza19k-theme.palette-plum {
+  --o19-bg: #1a161f;
+  --o19-tile: #251f2d;
+  --o19-tile-hi: #2f2839;
+  --o19-border: #3f3550;
+  --o19-text: #ece6f2;
+  --o19-text-dim: #aa9cc0;
+  --o19-surface-2: #1f1a26;
+  --o19-code-bg: #130f18;
+  --o19-hero-bg: #ece3f5;
+  --o19-hero-title: #3a2c5e;
+  --o19-hero-eye: #6a5a8f;
+  --o19-hero-text: #4d3e72;
+  --o19-hero-btn-bg: #f8f4fd;
+  --o19-hero-btn-border: #cdbce6;
+  --o19-accent: #6a4fb0;
+  --o19-accent-hi: #7d61c8;
+  --o19-gold: #b08fe0;
+  --o19-brand-name: #a98fd6;
+  --o19-doc-link: #b79fe6;
+}
+.oryza19k-theme.palette-slate {
+  --o19-bg: #181a1b;
+  --o19-tile: #232627;
+  --o19-tile-hi: #2d3133;
+  --o19-border: #3a3f40;
+  --o19-text: #e8ebec;
+  --o19-text-dim: #a3acae;
+  --o19-surface-2: #1b1f1f;
+  --o19-code-bg: #0e1111;
+  --o19-hero-bg: #e7ecec;
+  --o19-hero-title: #25302f;
+  --o19-hero-eye: #50615f;
+  --o19-hero-text: #3a4a48;
+  --o19-hero-btn-bg: #f5f8f8;
+  --o19-hero-btn-border: #b6cac6;
+  --o19-accent: #2f8f7f;
+  --o19-accent-hi: #38a895;
+  --o19-gold: #6fb8ad;
+  --o19-brand-name: #6fae9f;
+  --o19-doc-link: #6fc0b0;
+}
+
+// ---- Light mode -------------------------------------------------------------
+// Flips the neutral surfaces to light while keeping each palette's accent hue.
+// Placed after the palettes so the link/brand overrides win the cascade. The
+// accent/hero hues are inherited from whichever palette-* class is also active.
+.oryza19k-theme.mode-light {
+  --o19-bg: #eaeee6;
+  --o19-tile: #ffffff;
+  --o19-tile-hi: #eef1ea;
+  --o19-border: #d4dacb;
+  --o19-text: #20241c;
+  --o19-text-dim: #5c6354;
+  --o19-surface-2: #f1f4ed;
+  --o19-code-bg: #eef1e9;
+  --o19-emphasis: #14160f;
+  // bright-on-dark hues are low contrast on light surfaces; use the accent
+  --o19-gold: var(--o19-accent);
+  --o19-doc-link: var(--o19-accent);
+  --o19-brand-name: var(--o19-accent);
+
+  // give the (now light) hero panel a hairline so it reads against the page
+  .alert-success.oryza19k-hero {
+    border: 1px solid var(--o19-border) !important;
+  }
+}
+
+// The /gramene route opts OUT of the dark theme: keep the original light Gramene
+// styling but ensure the (dark) page <body> is covered with a light surface.
+.oryza19k-light {
+  background: #ffffff;
+  min-height: 100vh;
+}
+.gramene-portals-heading {
+  margin: 8px 0 16px;
+}

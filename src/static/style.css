@@ -72,6 +72,58 @@ body {
     --bs-navbar-brand-margin-end: 0.5rem!important;
 }
 
+/* Expanded section: heading + inline doc links, each underlined
+   (e.g. Platforms  SNP-Seek v3  GrameneOryza  Oryza CLIMtools) */
+.gramene-section-menu {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+}
+/* "Platforms" reads as a section heading, not a clickable link */
+.gramene-section-heading {
+    font-weight: 700;
+    color: #495057;
+    padding: 0.5rem 0.4rem;
+    white-space: nowrap;
+    cursor: default;
+    border-bottom: 1px solid #adb5bd;
+}
+.gramene-section-menu .nav-link {
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    border-bottom: 1px solid #adb5bd;
+}
+/* Inline items collapse via a 0fr -> 1fr grid column: auto-sizes to content,
+   and the toggle still works where animating grid columns isn't supported. */
+.gramene-section-items {
+    display: grid;
+    grid-template-columns: 1fr;            /* expanded by default (interior pages) */
+    transition: grid-template-columns 0.3s ease;
+}
+.gramene-section-items-inner {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0;
+    gap: 0.35rem;
+}
+/* Homepage: collapsed by default, expand on hover. Gated to hover-capable
+   pointers so touch devices (no hover) keep the items visible. After the
+   pointer leaves, the list stays open for 5s before collapsing (a delay on the
+   collapse transition); hovering again within that window cancels the hide. */
+@media (hover: hover) {
+    .gramene-section-menu.is-collapsible .gramene-section-items {
+        grid-template-columns: 0fr;
+        transition-delay: 5s;       /* hold open 5s after un-hover */
+    }
+    .gramene-section-menu.is-collapsible:hover .gramene-section-items {
+        grid-template-columns: 1fr;
+        transition-delay: 0s;       /* expand immediately on hover */
+    }
+}
+
 /* On narrow screens: search bar stays in the same row, logo shrinks */
 @media (max-width: 991.98px) {
     .gramene-navbar .navbar-brand img {
