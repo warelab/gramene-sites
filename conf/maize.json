@@ -9,6 +9,10 @@
   "ensemblSite": "https://maize-pangenome-ensembl.gramene.org",
   "ensemblRest": "https://data.gramene.org/pansite-ensembl-108",
   "grameneData": "https://data.gramene.org/maize_v5",
+  "atlasUrl": 'https://data.gramene.org/v70/gxa/',
+  // maize_v5 has no expression studies per gene; v70 has them for the anchor
+  // genomes the two share (same gene ids), for the gene Expression tab.
+  "expressionApi": 'https://data.gramene.org/v70',
   "targetTaxonId": 4577,
   "portals": ['browser','reactome','atlas','blast','pansites','curated','maizedownloads','tutorials','maizegdb'],
   "portals2": ['pansites','browser','reactome','blast','atlas','tutorials','maizedownloads'],
@@ -17,7 +21,23 @@
   "showGuides": true,
   "showFeed": true,
   "showTweets": true,
+  "showViews": true,
   "date": "2025-03-03",
+  // The maize_v5 API predates the newer views (gene lists, expression
+  // attributes, exporter, enrichment), so they stay hidden until it is rebuilt.
+  views: {
+    userLists: 'hidden',
+    expression: 'disabled',
+    export: 'hidden',
+    taxonomy: 'hidden',
+    taxTree: 'on',
+    attrTable: 'hidden',
+    list: 'on',
+    help: 'off',
+    attribs: 'hidden',
+    exprViz: 'hidden',
+    ontologyEnrichment: 'hidden'
+  },
   "examples": [
     {
       "title": 'lox9 Variant Image',
