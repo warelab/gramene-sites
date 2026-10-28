@@ -3,7 +3,10 @@ const fs = require('fs');
 const ParcelCore = require("@parcel/core");
 const {default: Parcel} = ParcelCore;
 
-const sites = ['main', 'maize', 'grapevine', 'sorghum', 'oryza', 'yeast'];
+const sites = ['main', 'main69', 'main70', 'maize', 'grapevine', 'sorghum', 'oryza', 'yeast'];
+// main69 / main70 build the main subsite from a frozen release config
+// (conf/main69.json, conf/main70.json — see RELEASE in conf/index.js).
+const releaseSites = {main69: '69', main70: '70'};
 
 const parser = new ArgumentParser({
   description: "build a gramene site"
@@ -20,23 +23,26 @@ if (!sites.includes(site)) {
   console.error(`INVALID SITE NAME: "${site}"\nChoose one of these: ${sites.join(', ')}`);
 }
 const mode = args.mode || "production";
+const release = releaseSites[site];
+const subsite = release ? 'main' : site;
 
 (async () => {
-  const dest = `${deploy}/${site}/${version}`;
+  const dest = `${deploy}/${subsite}/${version}`;
   let bundler = new Parcel({
-    entries: `html/${site}.html`,
+    entries: `html/${subsite}.html`,
     defaultConfig: '@parcel/config-default',
     mode: mode,
     defaultTargetOptions: {
       distDir: dest,
       shouldScopeHoist: false,//mode === 'production',
-      publicUrl: deploy === 'dev' ? `/${site}/${version}` : '/'
+      publicUrl: deploy === 'dev' ? `/${subsite}/${version}` : '/'
     },
     env: {
       NODE_ENV: mode,
-      SUBSITE: site,
+      SUBSITE: subsite,
       VERSION: version,
-      DEPLOY: deploy
+      DEPLOY: deploy,
+      ...(release && {RELEASE: release})
     }
   });
 
@@ -46,8 +52,8 @@ const mode = args.mode || "production";
     console.log("bundleGraph.getBundles()");
     let bundles = bundleGraph.getBundles();
     console.log(`✨ Built ${bundles.length} bundles in ${buildTime}ms!`);
-    fs.rename(`${dest}/${site}.html`, `${dest}/index.html`, () => {
-      console.log(`Renamed ${dest}/${site}.html ${dest}/index.html`);
+    fs.rename(`${dest}/${subsite}.html`, `${dest}/index.html`, () => {
+      console.log(`Renamed ${dest}/${subsite}.html ${dest}/index.html`);
     });
     fs.copyFile('.htaccess', `${dest}/.htaccess`, () => {
       console.log(`copied .htaccess into ${dest}/`)
