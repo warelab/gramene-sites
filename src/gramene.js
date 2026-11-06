@@ -19,7 +19,6 @@ import StaticSocialButtons from './StaticSocialButtons';
 import HelpModal from './HelpModal';
 import panSites from '../conf';
 import UIbundle from './bundles/UIbundle';
-import drupalBundles from './bundles/Drupal';
 import newsBundles from './bundles/news';
 import {PostsPage, PostPage} from './News';
 import {
@@ -142,7 +141,7 @@ const config = {
 };
 
 const getStore = composeBundles(
-  ...bundles, ...drupalBundles, ...newsBundles,
+  ...bundles, ...newsBundles,
   UIbundle,
   config,
   createCacheBundle(cache.set)
@@ -569,12 +568,10 @@ const Gramene = (store) => (
             <Route key={i} path={s.route} component={SectionDocs(s)}/>)}
           {splitHome && <Route path="/gramene" component={GrameneMain}/>}
           <Route path="/pansites" component={splitHome ? PortalsSubPage : Welcome}/>
-          <Route path="/node/:nid" component={Welcome}/>
           <Route path="/videotutorials" component={splitHome ? PortalsSubPage : Welcome}/>
           {/* Pages moved from news.gramene.org; after the config sections so a
               site's own section (oryza19k's /cite) wins. */}
           <Route path={`/:page(${STATIC_PAGES.join('|')})`} component={StaticPage}/>
-          <Route path="/:stub" component={Welcome}/>
           <Route path="/" component={splitHome ? OryzaHome : MainView}/>
         </Switch>
         <RoutedFooter/>

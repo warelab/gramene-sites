@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom'
 import { Portals, Examples } from './Portals'
 import { GithubDoc } from 'gramene-githubdocs'
 import italicizeOryza from './italicizeOryza'
-import closest from 'component-closest';
 import '../styles/welcome.less'
 // import { TwitterTimelineEmbed } from 'react-twitter-embed'
 // var loadjs = require('loadjs');
@@ -180,87 +179,13 @@ function AlertDismissibleExample({config}) {
   return null; //<Button onClick={() => setShow(true)}>Show Alert</Button>;
 }
 
-class DrupalPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.iframeRef = React.createRef();
-    this.state = {
-    }
-  }
-
-  componentDidMount() {
-    window.scrollTo(0,0);
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    window.scrollTo(0,0);
-  }
-
-  initListener() {
-    let iframe = this.iframeRef.current;
-    let iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-    if (typeof iframeDoc.addEventListener !== "undefined") {
-      iframeDoc.addEventListener("click", this.iframeClickHandler.bind(this), true);
-    } else if (typeof iframeDoc.attachEvent !== "undefined") {
-      iframeDoc.attachEvent("onclick", this.iframeClickHandler.bind(this));
-    }
-  }
-
-  iframeClickHandler(e) {
-    let target = e.target;
-    target = closest(target, 'a');
-    let href = target.getAttribute('href');
-    let drupalLink;
-    let matches = href.match(/(node\/\d+)$/);
-    if (!matches) {
-      matches = href.match(/gramene\.org\/(.+)/);
-      if (matches && this.props.drupalAliases[matches[1]] && matches[1] ) {
-        drupalLink = matches[1];
-      }
-    }
-    else {
-      drupalLink = matches[1];
-    }
-    if (drupalLink) {
-      e.preventDefault();
-      window.history.pushState({},undefined, `/${drupalLink}`)
-    }
-  }
-
-  render() {
-    let nid = this.props.nid;
-    if (!nid && this.props.drupalAliases && this.props.stub) {
-      if (!this.props.drupalAliases[this.props.stub]) {
-        return <code>node for '{this.props.stub}' not found</code>
-      }
-      nid = JSON.stringify(this.props.drupalAliases[this.props.stub]).replace(/"/g, "");
-    }
-    if (nid) {
-      const src = `/ww?nid=${+nid}`;
-      return <iframe src={src}
-                     ref={this.iframeRef}
-                     style={{ width: '100%', height: '650px', maxHeight: '80vh' }}
-                     onLoad={this.initListener.bind(this)}>
-        <p>browser doesn't support iframes</p>
-      </iframe>
-    }
-    return null;
-  }
-}
-
-const Drupal = connect(
-  'selectConfiguration',
-  'selectDrupalAliases',
-  DrupalPage
-);
-
 // mode:
 //   'home'    -> oryza19k-specific landing (hero + at a glance + examples)
 //   'gramene' -> generic Gramene portals grid (served at /gramene, light theme)
-//   undefined -> legacy combined view (pansites / videotutorials / drupal stubs)
+//   undefined -> legacy combined view (pansites / videotutorials)
 const Welcome = props => {
   const cfg = props.configuration;
   const mode = props.mode;
-  const isDrupal = props.match && (props.match.params.stub || props.match.params.nid);
   const path = (props.location && props.location.pathname) || '';
   // /pansites and /videotutorials are Gramene portal sub-pages: Portals renders
   // its own heading and content for these, so skip the "Gramene Portals" header,
@@ -280,13 +205,10 @@ const Welcome = props => {
                 {cfg.examples && <Examples/>}
               </>)
           }
-          {mode === undefined && (isDrupal
-            ? <Drupal stub={props.match.params.stub} nid={props.match.params.nid}/>
-            : <>
-                <Portals location={props.location}/>
-                {cfg.examples && !isPortalSubPage && <Examples/>}
-              </>)
-          }
+          {mode === undefined && <>
+            <Portals location={props.location}/>
+            {cfg.examples && !isPortalSubPage && <Examples/>}
+          </>}
         </Col>
         <Col xxl={2} xl={3} lg={3}>
           <div>{ cfg.showFeed && <NewsFeed/> }</div>

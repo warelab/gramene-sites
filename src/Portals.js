@@ -148,15 +148,12 @@ const tools = {
   }
 };
 
-const GrameneTool = ({title, description, imgSrc, imgSrc2, link, route, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
+const GrameneTool = ({title, description, imgSrc, imgSrc2, link, route, ensemblPath, isExternal, ensemblURL, id, version}) => {
   let external;
   if (isExternal) {
     external = <small title="This link opens a page from an external site" style={{float:'right'}}><FiExternalLink/></small>;
   }
   if (!link) {
-    if (drupalLink) {
-      link = drupalLink;
-    }
     if (ensemblPath) {
       link = ensemblURL + ensemblPath;
     }
@@ -204,15 +201,12 @@ const GrameneTool = ({title, description, imgSrc, imgSrc2, link, route, drupalLi
   );
 };
 
-const GrameneToolLink = ({title, description, imgSrc, link, route, drupalLink, ensemblPath, isExternal, ensemblURL, id, version}) => {
+const GrameneToolLink = ({title, description, imgSrc, link, route, ensemblPath, isExternal, ensemblURL, id, version}) => {
   let external;
   if (isExternal) {
     external = <small title="This link opens a page from an external site"><FiExternalLink/></small>;
   }
   if (!link) {
-    if (drupalLink) {
-      link = drupalLink;
-    }
     if (ensemblPath) {
       link = ensemblURL + ensemblPath;
     }
