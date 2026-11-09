@@ -1,50 +1,52 @@
 {
   "id": "grapevine",
   "name": "Gramene Grapevine",
-  "version": "v4",
+  "version": "v5",
   "ga": "G-ZTEQBFCRXZ",
   "description": "Comparative plant genomics focused on grapevine varieties",
   "url": "https://vitis.gramene.org",
   "ensemblURL": "https://vitis-ensembl.gramene.org",
   "ensemblSite": "https://vitis-ensembl.gramene.org",
-  "ensemblRest": "https://data.gramene.org/pansite-ensembl-87",
-  "grameneData": "https://data.gramene.org/grapevine_v4",
-  "atlasUrl": 'https://data.gramene.org/v70/gxa/',
-  // The gene Expression tab's studies come from v70, as on Gramene Maize. v70's
-  // grape genome has new gene ids, so the per-gene lookup finds nothing and the
-  // heatmap is drawn from the atlas, which knows the 12X VIT_ ids.
-  "expressionApi": 'https://data.gramene.org/v70',
-  "curation": {
+  "ensemblRest": "https://data.gramene.org/pansite-ensembl-115",
+  "grameneData": "https://data.gramene.org/grapevine_v5",
+  "atlasUrl": "https://data.gramene.org/grapevine_v5/gxa/",
+  "newsApi": "https://www.sorghumbase.org",
+  "xcuration": {
     "url": "http://curate.gramene.org/grapevine_v4?since=71275&gene=",
     "taxa": {
-      "29760020": 1,
-      "29760019": 1
+      "29760020": 0,
+      "29760019": 0
     }
   },
   "targetTaxonId": 29760020,
-  "portals": ['browser','blast','pansites','curated'],
-  "portals2": ['pansites','browser','reactome','climtools','atlas','trackhub'],
+  "portals": ['browser','reactome','pansites','tools','curated','blast','atlas','videotutorials','tour'],
+  "portals2": ['pansites','browser','reactome','blast','tools','atlas','trackhub','outreach','downloads','archive'],
   "showInMenu": true,
   "showNews": true,
-  "showGuides": true,
+  "showGuides": false,
   "showFeed": true,
+  "auth": true,
   "showTweets": true,
   "showViews": true,
-  "date": "2024-01-13",
+  "tour": true,
+  "enable_tbrowse_expression_zone": true,
+  "hideAlerts": false,
+  "date": "2026-12-01",
+  "playlistIds": ["PLqQHG-yuRY1-z7-KKYe-BDL-lriaocrbZ"],
   // The grapevine_v4 API predates the newer views (gene lists, expression
   // attributes, exporter, enrichment), so they stay hidden until it is rebuilt.
   views: {
-    userLists: 'hidden',
+    userLists: 'off',
     expression: 'disabled',
-    export: 'hidden',
+    export: 'off',
     taxonomy: 'hidden',
     taxTree: 'on',
-    attrTable: 'hidden',
+    attrTable: 'off',
     list: 'on',
     help: 'off',
     attribs: 'hidden',
-    exprViz: 'hidden',
-    ontologyEnrichment: 'hidden'
+    exprViz: 'off',
+    ontologyEnrichment: 'off'
   },
   "slides": [],
   details: {

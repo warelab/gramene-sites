@@ -54,26 +54,22 @@
     "sorghum_bicolor" : {
       "url": "https://sorghumbase.org/genes",
       "name": "SorghumBase",
-      "svg": "./static/images/sorghum_logo.svg",
-      "api": "https://data.sorghumbase.org/sorghum_v7"
+      "svg": "./static/images/sorghum_logo.svg"
     },
     vitis_vinifera : {
       url: "https://vitis.gramene.org",
       name: "Gramene Grapevine",
-      svg: "./static/images/grapevine_logo.svg",
-      api: "https://data.gramene.org/grapevine_v4"
+      svg: "./static/images/grapevine_logo.svg"
     },
     oryza_sativa : {
       url: "https://oryza.gramene.org",
       name: "Gramene Oryza",
-      svg: "./static/images/oryza_logo.svg",
-      api: "https://data.gramene.org/oryza_v7"
+      svg: "./static/images/oryza_logo.svg"
     },
     zea_mays : {
       url: "https://maize-pangenome.gramene.org",
       name: "Gramene Maize",
-      svg: "./static/images/maize_logo.svg",
-      api: "https://data.gramene.org/maize_v4"
+      svg: "./static/images/maize_logo.svg"
     }
   }
 }

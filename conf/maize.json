@@ -1,18 +1,17 @@
 {
   "id": "maize",
   "name": "Gramene Maize",
-  "version": "v5",
+  "version": "v6",
   "ga": "G-Y7ZYG1R8QT",
   "description": "Comparative plant genomics focused on maize varieties",
   "url": "https://maize-pangenome.gramene.org",
   "ensemblURL": "https://maize-pangenome-ensembl.gramene.org",
   "ensemblSite": "https://maize-pangenome-ensembl.gramene.org",
-  "ensemblRest": "https://data.gramene.org/pansite-ensembl-108",
-  "grameneData": "https://data.gramene.org/maize_v5",
-  "atlasUrl": 'https://data.gramene.org/v70/gxa/',
+  "ensemblRest": "https://data.gramene.org/pansite-ensembl-115",
+  "grameneData": "https://data.gramene.org/maize_v6",
+  "atlasUrl": 'https://data.gramene.org/maize_v6/gxa/',
   // maize_v5 has no expression studies per gene; v70 has them for the anchor
   // genomes the two share (same gene ids), for the gene Expression tab.
-  "expressionApi": 'https://data.gramene.org/v70',
   "targetTaxonId": 4577,
   "portals": ['browser','reactome','atlas','blast','pansites','curated','maizedownloads','tutorials','maizegdb'],
   "portals2": ['pansites','browser','reactome','blast','atlas','tutorials','maizedownloads'],
@@ -22,21 +21,20 @@
   "showFeed": true,
   "showTweets": true,
   "showViews": true,
+  "enable_tbrowse_expression_zone": true,
   "date": "2025-03-03",
-  // The maize_v5 API predates the newer views (gene lists, expression
-  // attributes, exporter, enrichment), so they stay hidden until it is rebuilt.
   views: {
-    userLists: 'hidden',
+    userLists: 'off',
     expression: 'disabled',
-    export: 'hidden',
+    export: 'off',
     taxonomy: 'hidden',
     taxTree: 'on',
-    attrTable: 'hidden',
+    attrTable: 'off',
     list: 'on',
     help: 'off',
     attribs: 'hidden',
-    exprViz: 'hidden',
-    ontologyEnrichment: 'hidden'
+    exprViz: 'off',
+    ontologyEnrichment: 'off'
   },
   "examples": [
     {
