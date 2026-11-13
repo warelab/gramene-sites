@@ -42,7 +42,7 @@ const tools = {
   mart: {
     title: "Gramene Mart",
     description: "An advanced genomic query interface powered by BioMart",
-    ensemblPath: "/biomart/martview",
+    link: "https://jun2026-plants.ensembl.org/biomart/martview",
     imgSrc: "static/images/welcome/Biomart250.png"
   },
   EG_mart: {
