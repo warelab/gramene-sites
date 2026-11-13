@@ -1,17 +1,14 @@
 {
   "id": "oryza",
   "name": "Gramene Oryza",
-  "version": "v8",
+  "version": "v9",
   "description": "Comparative plant genomics focused on rice varieties",
   "url": "https://oryza.gramene.org",
   "ensemblURL": "http://oryza-ensembl.gramene.org",
   "ensemblSite": "http://oryza-ensembl.gramene.org",
-  "ensemblRest": "https://data.gramene.org/pansite-ensembl-108",
-  "grameneData": "https://data.gramene.org/oryza_v8",
-  "atlasUrl": 'https://data.gramene.org/v70/gxa/',
-  // oryza_v8 has no expression studies per gene; v70 has them for the anchor
-  // genomes the two share (same gene ids), for the gene Expression tab.
-  "expressionApi": 'https://data.gramene.org/v70',
+  "ensemblRest": "https://data.gramene.org/pansite-ensembl-115",
+  "grameneData": "https://data.gramene.org/oryza_v9",
+  "atlasUrl": 'https://data.gramene.org/oryza_v9/gxa/',
   "curation": {
     "url": "http://curate.gramene.org/oryza_v7?since=4577&gene=",
     "taxa": {
@@ -19,29 +16,35 @@
     }
   },
   "targetTaxonId": 39946,
+  // Nipponbare carries three gene annotation sets on one taxon. Labels each
+  // result's species with its set until the API returns gene_build itself.
+  "geneBuilds": {
+    "oryza_sativa": "RAP",
+    "oryza_sativamsu": "MSU",
+    "oryza_sativacshl": "CSHL"
+  },
   "portals": ['browser','reactome','atlas','blast','pansites','curated','oryzaclimtools','tutorials','oryzadownloads'],
   "portals2": ['pansites','browser','reactome','blast','oryzaclimtools','atlas','tutorials','oryzadownloads'],
   "showInMenu": true,
   "showNews": true,
   "showGuides": true,
+  "enable_tbrowse_expression_zone": true,
   "showFeed": true,
   "showTweets": true,
   "showViews": true,
   "date": "2026-08-09",
-  // The oryza_v8 API predates the newer views (gene lists, expression
-  // attributes, exporter, enrichment), so they stay hidden until it is rebuilt.
   views: {
-    userLists: 'hidden',
+    userLists: 'off',
     expression: 'disabled',
-    export: 'hidden',
+    export: 'off',
     taxonomy: 'hidden',
     taxTree: 'on',
-    attrTable: 'hidden',
+    attrTable: 'off',
     list: 'on',
     help: 'off',
     attribs: 'hidden',
-    exprViz: 'hidden',
-    ontologyEnrichment: 'hidden'
+    exprViz: 'off',
+    ontologyEnrichment: 'off'
   },
   "examples": [
     {
