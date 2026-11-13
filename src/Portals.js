@@ -48,7 +48,7 @@ const tools = {
   EG_mart: {
     title: "Ensembl Plants Mart",
     description: "An advanced genomic query interface powered by BioMart",
-    link: "https://plants.ensembl.org/biomart/martview",
+    link: "https://jun2026-plants.ensembl.org/biomart/martview",
     imgSrc: "static/images/welcome/Biomart250.png",
     isExternal: true
   },
