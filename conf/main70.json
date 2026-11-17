@@ -16,7 +16,7 @@
   "portals2": ['pansites','browser','reactome','climtools','blast','mart','tools','atlas','trackhub','outreach','downloads','archive'],
   "showInMenu": true,
   "showNews": true,
-  "showGuides": false,
+  "showGuides": true,
   "showFeed": true,
   "auth": true,
   "showTweets": true,
