@@ -139,6 +139,14 @@ const tools = {
     link: 'videotutorials',
     imgSrc: "static/images/welcome/tutorials.png"
   },
+  // The AI Assistant Guide in release-notes/main-guides, opened directly in the
+  // Guides page.
+  aiguide: {
+    title: "Ask an AI Assistant",
+    description: "Connect to Gramene's MCP server to ask natural language questions",
+    route: "/guides?doc=" + encodeURIComponent("main-guides/AI Assistant Guide---2026-11-17.md"),
+    imgSrc: "static/images/welcome/ai-assistant.png"
+  },
   // Shown only on sites with `tour: true` (see PortalsCmp).
   tour: {
     title: "Guided Tour",
